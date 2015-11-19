@@ -79,7 +79,7 @@ public class GameView extends SurfaceView {
         //canvas.drawColor(Color.BLACK);
 
         //Drawing the background scaled
-        Bitmap background = BitmapFactory.decodeResource(getResources(), R.drawable.sky_back_layer);
+        Bitmap background = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         float scale = (float)background.getHeight()/(float)getHeight();
         int newWidth = Math.round(background.getWidth()/scale);
         int newHeight = Math.round(background.getHeight()/scale);
