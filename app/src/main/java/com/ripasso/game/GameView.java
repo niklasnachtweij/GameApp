@@ -98,22 +98,7 @@ public class GameView extends SurfaceView {
         hero_object.onDraw(canvas);
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
     //Listen for touch events
     @Override
