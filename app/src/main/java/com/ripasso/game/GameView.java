@@ -19,6 +19,7 @@ public class GameView extends SurfaceView {
     private long lastClick;
     private Bitmap bmpBlood;
     private HighScore score;
+    private Hero hero_object;
 
     public GameView(Context context) {
         super(context);
@@ -51,6 +52,7 @@ public class GameView extends SurfaceView {
         });
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
         score = new HighScore();
+
     }
 
     //Create and add Sprites to the Sprite arraylist.
@@ -67,6 +69,8 @@ public class GameView extends SurfaceView {
         sprites.add(createSprite(R.drawable.good4));
         sprites.add(createSprite(R.drawable.good5));
         sprites.add(createSprite(R.drawable.good6));
+
+        hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
     }
 
     private SpriteObj createSprite(int resouce) {
@@ -76,24 +80,8 @@ public class GameView extends SurfaceView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //canvas.drawColor(Color.BLACK);
-
-        //Drawing the background scaled
-        Bitmap background = BitmapFactory.decodeResource(getResources(), R.drawable.background);
-        float scale = (float)background.getHeight()/(float)getHeight();
-        int newWidth = Math.round(background.getWidth()/scale);
-        int newHeight = Math.round(background.getHeight()/scale);
-        Bitmap scaled = Bitmap.createScaledBitmap(background, newWidth, newHeight, true);
-        canvas.drawBitmap(scaled, 0, 0, null);
-
-        //Draw highscore
-        Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
-        paint.setStyle(Paint.Style.FILL);
-        paint.setTextSize(50);
-        String score_string = "Score: " + Integer.toString(score.getScore());
-        canvas.drawText(score_string,30,60, paint);
-
+        canvas.drawColor(Color.rgb(00, 44, 66));
+/*
         //Drawing the temp TSprite (Temporary Sprite)
         for (int i = temps.size() - 1; i >= 0; i--) {
             temps.get(i).onDraw(canvas);
@@ -102,11 +90,37 @@ public class GameView extends SurfaceView {
         for (SpriteObj sprite : sprites) {
             sprite.onDraw(canvas);
         }
+*/
+        hero_object.onDraw(canvas);
+
     }
 
     //Listen for touch events
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        //Make the Hero walk in different directions.
+        if(hero_object.getX() < event.getX() &&
+                event.getY() < hero_object.getY()+60 &&
+                event.getY() > hero_object.getY()-60){
+            hero_object.move(hero_object.EAST);
+
+        } else if(hero_object.getY() < event.getY() &&
+                event.getX() < hero_object.getX() + 60 &&
+                event.getX() > hero_object.getX() - 60){
+            hero_object.move(hero_object.SOUTH);
+
+        } else if(hero_object.getX() > event.getX() &&
+                event.getY() < hero_object.getY()+60 &&
+                event.getY() > hero_object.getY()-60){
+            hero_object.move(hero_object.WEST);
+
+        } else if(hero_object.getY() > event.getY() &&
+                event.getX() < hero_object.getX() + 60 &&
+                event.getX() > hero_object.getX() - 60){
+            hero_object.move(hero_object.NORTH);
+        }
+
         if (System.currentTimeMillis() - lastClick > 300) {
             lastClick = System.currentTimeMillis();
             float x = event.getX();
