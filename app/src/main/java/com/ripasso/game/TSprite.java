@@ -4,15 +4,13 @@ import java.util.List;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
-public class TempSprite {
-    private float x;
-    private float y;
+public class TSprite extends GameObject {
     private Bitmap bmp;
     private int life = 15;
-    private List<TempSprite> temps;
+    private List<TSprite> temps;
 
-    public TempSprite(List<TempSprite> temps, GameView gameView, float x,
-                      float y, Bitmap bmp) {
+    public TSprite(List<TSprite> temps, GameView gameView, float x,
+                   float y, Bitmap bmp) {
         this.x = Math.min(Math.max(x - bmp.getWidth() / 2, 0),
                 gameView.getWidth() - bmp.getWidth());
         this.y = Math.min(Math.max(y - bmp.getHeight() / 2, 0),
@@ -26,7 +24,7 @@ public class TempSprite {
         canvas.drawBitmap(bmp, x, y, null);
     }
 
-    private void update() {
+    protected void update() {
         if (--life < 1) {
             temps.remove(this);
         }

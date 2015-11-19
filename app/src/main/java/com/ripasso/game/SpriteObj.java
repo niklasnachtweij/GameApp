@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-public class Sprite {
+public class SpriteObj extends GameObject {
     // direction = 0 up, 1 left, 2 down, 3 right,
     // animation = 3 back, 1 left, 0 front, 2 right
     int[] DIRECTION_TO_ANIMATION_MAP = { 3, 1, 0, 2 };
@@ -14,15 +14,13 @@ public class Sprite {
     private static final int MAX_SPEED = 5;
     private GameView gameView;
     private Bitmap bmp;
-    private int x = 0;
-    private int y = 0;
     private int xSpeed;
     private int ySpeed;
     private int currentFrame = 0;
     private int width;
     private int height;
 
-    public Sprite(GameView gameView, Bitmap bmp) {
+    public SpriteObj(GameView gameView, Bitmap bmp) {
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;
         this.gameView = gameView;
@@ -35,7 +33,7 @@ public class Sprite {
         ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
     }
 
-    private void update() {
+    protected void update() {
         if (x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0) {
             xSpeed = -xSpeed;
         }
@@ -52,7 +50,7 @@ public class Sprite {
         int srcX = currentFrame * width;
         int srcY = getAnimationRow() * height;
         Rect src = new Rect(srcX, srcY, srcX + width, srcY + height);
-        Rect dst = new Rect(x, y, x + width, y + height);
+        Rect dst = new Rect((int) x, (int) y, (int)x + width, (int)y + height);
         canvas.drawBitmap(bmp, src, dst, null);
     }
 
