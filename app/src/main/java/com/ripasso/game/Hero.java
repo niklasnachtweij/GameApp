@@ -14,8 +14,8 @@ public class Hero extends GameObject {
     private static final int MAX_SPEED = 5;
     private GameView gameView;
     private Bitmap bmp;
-    private int xSpeed;
-    private int ySpeed;
+    private int xSpeed = 5;
+    private int ySpeed = 5;
     private int currentFrame = 0;
     private int width;
     private int height;
@@ -71,19 +71,28 @@ public class Hero extends GameObject {
         return x2 > x && x2 < x + width && y2 > y && y2 < y + height;
     }
 
+    //Not working correctly for the moment :)
+    private boolean checkBorders(){
+        if(x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0){
+            return false;
+        } else{
+            return true;
+        }
+    }
+
     public void move(int direction){
         if(direction>0 && direction <5){
             switch(direction){
-                case 1:
+                case NORTH:
                     y= y -(float) 5;
                     break;
-                case 2:
+                case SOUTH:
                     y= y + (float) 5;
                     break;
-                case 3:
+                case WEST:
                     x= x - (float) 5;
                     break;
-                case 4:
+                case EAST:
                     x= x + (float) 5;
                     break;
                 default:
