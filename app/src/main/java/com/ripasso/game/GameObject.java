@@ -4,6 +4,14 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 public abstract class GameObject {
+
+    protected float x;
+    protected float y;
+    protected Bitmap bmp;
+
+    public abstract void onDraw(Canvas canvas);
+    protected abstract void update();
+
     public float getX() {
         return x;
     }
@@ -20,19 +28,12 @@ public abstract class GameObject {
         this.y = y;
     }
 
-    public Bitmap getBmp() {
-        return bmp;
-    }
-
     public void setBmp(Bitmap bmp) {
         this.bmp = bmp;
     }
 
-    protected float x;
-    protected float y;
-    protected Bitmap bmp;
-
-    public abstract void onDraw(Canvas canvas);
-    protected abstract void update();
+    public Bitmap getBmp() {
+        return bmp;
+    }
 
 }

@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,6 +21,8 @@ public class GameView extends SurfaceView {
     private Bitmap bmpBlood;
     private HighScore score;
     private Hero hero_object;
+
+    private boolean moving = false;
 
     public GameView(Context context) {
         super(context);
@@ -34,7 +37,8 @@ public class GameView extends SurfaceView {
                     try {
                         gameLoopThread.join();
                         retry = false;
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                    }
                 }
             }
 
@@ -95,31 +99,47 @@ public class GameView extends SurfaceView {
 
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //Listen for touch events
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        //Make the Hero walk in different directions.
-        if(hero_object.getX() < event.getX() &&
-                event.getY() < hero_object.getY()+60 &&
-                event.getY() > hero_object.getY()-60){
-            hero_object.move(hero_object.EAST);
+                //Make the Hero walk in different directions.
+                if (hero_object.getX() < event.getX() &&
+                        event.getY() < hero_object.getY() + 60 &&
+                        event.getY() > hero_object.getY() - 60) {
+                    hero_object.move(hero_object.EAST);
 
-        } else if(hero_object.getY() < event.getY() &&
-                event.getX() < hero_object.getX() + 60 &&
-                event.getX() > hero_object.getX() - 60){
-            hero_object.move(hero_object.SOUTH);
+                } else if (hero_object.getY() < event.getY() &&
+                        event.getX() < hero_object.getX() + 60 &&
+                        event.getX() > hero_object.getX() - 60) {
+                    hero_object.move(hero_object.SOUTH);
 
-        } else if(hero_object.getX() > event.getX() &&
-                event.getY() < hero_object.getY()+60 &&
-                event.getY() > hero_object.getY()-60){
-            hero_object.move(hero_object.WEST);
+                } else if (hero_object.getX() > event.getX() &&
+                        event.getY() < hero_object.getY() + 60 &&
+                        event.getY() > hero_object.getY() - 60) {
+                    hero_object.move(hero_object.WEST);
 
-        } else if(hero_object.getY() > event.getY() &&
-                event.getX() < hero_object.getX() + 60 &&
-                event.getX() > hero_object.getX() - 60){
-            hero_object.move(hero_object.NORTH);
-        }
+                } else if (hero_object.getY() > event.getY() &&
+                        event.getX() < hero_object.getX() + 60 &&
+                        event.getX() > hero_object.getX() - 60) {
+                    hero_object.move(hero_object.NORTH);
+                }
 
         if (System.currentTimeMillis() - lastClick > 300) {
             lastClick = System.currentTimeMillis();
