@@ -17,12 +17,11 @@ public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
     private List<SpriteObj> sprites = new ArrayList<SpriteObj>();
     private List<TSprite> temps = new ArrayList<TSprite>();
+    private CollisionControl collision_controll = new CollisionControl();
     private long lastClick;
     private Bitmap bmpBlood;
     private HighScore score;
     private Hero hero_object;
-
-    private boolean moving = false;
 
     public GameView(Context context) {
         super(context);
@@ -64,16 +63,6 @@ public class GameView extends SurfaceView {
         sprites.add(createSprite(R.drawable.bad1));
         sprites.add(createSprite(R.drawable.bad2));
         sprites.add(createSprite(R.drawable.bad3));
-        sprites.add(createSprite(R.drawable.bad4));
-        sprites.add(createSprite(R.drawable.bad5));
-        sprites.add(createSprite(R.drawable.bad6));
-        sprites.add(createSprite(R.drawable.good1));
-        sprites.add(createSprite(R.drawable.good2));
-        sprites.add(createSprite(R.drawable.good3));
-        sprites.add(createSprite(R.drawable.good4));
-        sprites.add(createSprite(R.drawable.good5));
-        sprites.add(createSprite(R.drawable.good6));
-
         hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
     }
 
@@ -90,15 +79,16 @@ public class GameView extends SurfaceView {
         for (int i = temps.size() - 1; i >= 0; i--) {
             temps.get(i).onDraw(canvas);
         }
+*/
         //Drawing the Sprite objects
         for (SpriteObj sprite : sprites) {
             sprite.onDraw(canvas);
         }
-*/
+
         hero_object.onDraw(canvas);
 
     }
-    
+
 
     //Listen for touch events
     @Override
@@ -132,9 +122,18 @@ public class GameView extends SurfaceView {
             float y = event.getY();
             synchronized (getHolder()) {
                 for (int i = sprites.size() - 1; i >= 0; i--) {
+
                     SpriteObj sprite = sprites.get(i);
-                    if (sprite.isCollision(x, y)) {
+
+                    if(collision_controll.checkCollision(hero_object.getBounds(), sprite.getBounds())){
                         sprites.remove(sprite);
+                    }
+
+
+
+
+                    if (sprite.isCollision(x, y)) {
+                        //sprites.remove(sprite);
                         temps.add(new TSprite(temps, this, x, y, bmpBlood));
                         score.AddScore(1);//Add a score
                         break;

@@ -3,6 +3,7 @@ package com.ripasso.game;
 import java.util.List;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 
 public class TSprite extends GameObject {
     private Bitmap bmp;
@@ -19,6 +20,7 @@ public class TSprite extends GameObject {
         this.temps = temps;
     }
 
+
     public void onDraw(Canvas canvas) {
         update();
         canvas.drawBitmap(bmp, x, y, null);
@@ -29,4 +31,12 @@ public class TSprite extends GameObject {
             temps.remove(this);
         }
     }
+
+    @Override
+    public Rect getBounds(){
+        return new Rect(0,0,0,0);
+    }
+
+
+
 }

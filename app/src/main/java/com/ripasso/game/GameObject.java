@@ -2,6 +2,7 @@ package com.ripasso.game;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 
 public abstract class GameObject {
 
@@ -10,7 +11,8 @@ public abstract class GameObject {
     protected Bitmap bmp;
 
     public abstract void onDraw(Canvas canvas);
-    protected abstract void update();
+
+    public abstract Rect getBounds();
 
     public float getX() {
         return x;

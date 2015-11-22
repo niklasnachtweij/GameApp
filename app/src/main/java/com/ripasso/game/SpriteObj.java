@@ -60,6 +60,10 @@ public class SpriteObj extends GameObject {
         return DIRECTION_TO_ANIMATION_MAP[direction];
     }
 
+    public Rect getBounds(){
+        return new Rect((int) x, (int) y, (int)x+this.width, (int)y+this.height);
+    }
+
     public boolean isCollision(float x2, float y2) {
         return x2 > x && x2 < x + width && y2 > y && y2 < y + height;
     }

@@ -38,7 +38,6 @@ public class Hero extends GameObject {
         ySpeed = 0;
     }
 
-    @Override
     protected void update() {
         if (x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0) {
             xSpeed = -xSpeed;
@@ -71,13 +70,9 @@ public class Hero extends GameObject {
         return x2 > x && x2 < x + width && y2 > y && y2 < y + height;
     }
 
-    //Not working correctly for the moment :)
-    private boolean checkBorders(){
-        if(x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0){
-            return false;
-        } else{
-            return true;
-        }
+    @Override
+    public Rect getBounds(){
+        return new Rect((int) x, (int) y, (int)x+this.width, (int)y+this.height);
     }
 
     public void move(int direction){
