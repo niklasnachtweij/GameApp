@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -46,6 +47,7 @@ public class GameView extends SurfaceView {
                 createSprites();
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
+
             }
 
             @Override
@@ -57,6 +59,7 @@ public class GameView extends SurfaceView {
         score = new HighScore();
 
     }
+
 
     //Create and add Sprites to the Sprite arraylist.
     private void createSprites() {
@@ -74,12 +77,12 @@ public class GameView extends SurfaceView {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.rgb(00, 44, 66));
-/*
+
         //Drawing the temp TSprite (Temporary Sprite)
         for (int i = temps.size() - 1; i >= 0; i--) {
             temps.get(i).onDraw(canvas);
         }
-*/
+
         //Drawing the Sprite objects
         for (SpriteObj sprite : sprites) {
             sprite.onDraw(canvas);
@@ -87,6 +90,26 @@ public class GameView extends SurfaceView {
 
         hero_object.onDraw(canvas);
 
+        for (int i = sprites.size() - 1; i >= 0; i--) {
+
+            SpriteObj sprite = sprites.get(i);
+
+            if(collision_controll.checkCollision(hero_object.getBounds(), sprite.getBounds())){
+                temps.add(new TSprite(temps, this, sprite.getX(), sprite.getY(), bmpBlood));    //Add blood
+                sprites.remove(sprite);                                 //Remove the bad guy when it's hit by hero
+                sprites.add(createSprite(R.drawable.bad1));             //Add a new bad guy
+                score.AddScore(1);                                      //Increase score with 1
+                break;
+            }
+        }
+
+    }
+
+    //Stop the view in the Thread is not null.
+    public void StopView() {
+        if (gameLoopThread != null) {
+            gameLoopThread.setRunning(false);
+        }
     }
 
 
@@ -102,45 +125,42 @@ public class GameView extends SurfaceView {
 
                 } else if (hero_object.getY() < event.getY() &&
                         event.getX() < hero_object.getX() + 60 &&
-                        event.getX() > hero_object.getX() - 60) {
+                        event.getX() > hero_object.getX() &&
+                        hero_object.getY() >= this.getY()) {
                     hero_object.move(hero_object.SOUTH);
 
                 } else if (hero_object.getX() > event.getX() &&
                         event.getY() < hero_object.getY() + 60 &&
-                        event.getY() > hero_object.getY() - 60) {
+                        event.getY() > hero_object.getY() - 60 &&
+                        hero_object.getX() >= 0) {
                     hero_object.move(hero_object.WEST);
 
                 } else if (hero_object.getY() > event.getY() &&
                         event.getX() < hero_object.getX() + 60 &&
-                        event.getX() > hero_object.getX() - 60) {
+                        event.getX() > hero_object.getX() - 60){
                     hero_object.move(hero_object.NORTH);
                 }
-
+        /*
         if (System.currentTimeMillis() - lastClick > 300) {
             lastClick = System.currentTimeMillis();
             float x = event.getX();
             float y = event.getY();
             synchronized (getHolder()) {
-                for (int i = sprites.size() - 1; i >= 0; i--) {
 
+                for (int i = sprites.size() - 1; i >= 0; i--) {
                     SpriteObj sprite = sprites.get(i);
 
                     if(collision_controll.checkCollision(hero_object.getBounds(), sprite.getBounds())){
-                        sprites.remove(sprite);
-                    }
-
-
-
-
-                    if (sprite.isCollision(x, y)) {
-                        //sprites.remove(sprite);
-                        temps.add(new TSprite(temps, this, x, y, bmpBlood));
-                        score.AddScore(1);//Add a score
+                        temps.add(new TSprite(temps, this, hero_object.getX(), hero_object.getY(), bmpBlood));    //Add blood
+                        sprites.remove(sprite);                                 //Remove the bad guy when it's hit by hero
+                        sprites.add(createSprite(R.drawable.bad1));             //Add a new bad guy
+                        score.AddScore(1);                                      //Increase score with 1
                         break;
                     }
                 }
             }
         }
+        */
         return true;
     }
 }

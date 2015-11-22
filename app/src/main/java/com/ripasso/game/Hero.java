@@ -17,6 +17,15 @@ public class Hero extends GameObject {
     private int xSpeed = 5;
     private int ySpeed = 5;
     private int currentFrame = 0;
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     private int width;
     private int height;
     //Directions
