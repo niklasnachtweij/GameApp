@@ -28,7 +28,7 @@ public class SpriteObj extends GameObject {
 
         Random rnd = new Random();
         x = rnd.nextInt(gameView.getWidth() - width);
-        y = rnd.nextInt(gameView.getHeight() - height);
+        y = rnd.nextInt(gameView.getHeight()-200 - height);
         xSpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
         ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
     }
@@ -38,7 +38,7 @@ public class SpriteObj extends GameObject {
             xSpeed = -xSpeed;
         }
         x = x + xSpeed;
-        if (y >= gameView.getHeight() - height - ySpeed || y + ySpeed <= 0) {
+        if (y >= gameView.getHeight()-200 - height - ySpeed || y + ySpeed <= 0) {
             ySpeed = -ySpeed;
         }
         y = y + ySpeed;
