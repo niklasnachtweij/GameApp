@@ -11,7 +11,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.Shader;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
@@ -23,6 +25,7 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.ImageView;
 
 public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
@@ -104,14 +107,23 @@ public class GameView extends SurfaceView {
         hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
     }
 
-    private SpriteObj createSprite(int resouce) {
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(), resouce);
+    private SpriteObj createSprite(int resource) {
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
         return new SpriteObj(this, bmp);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.rgb(00, 44, 66));
+        /*  Was trying to paint tiles to a complete background, didn't work...
+            My guess it must be done to canvas, but DrawBitMap can't take a
+            BitMapDrawable as an argument
+
+        BitmapDrawable TileMe = new BitmapDrawable(BitmapFactory.decodeResource(getResources(), R.drawable.sprite_sheet));
+        TileMe.setTileModeX(Shader.TileMode.REPEAT);
+        TileMe.setTileModeY(Shader.TileMode.REPEAT);
+        canvas.DrawBitmap(TileMe, 0, 0, null);
+        */
 
         block.onDraw(canvas);
 
