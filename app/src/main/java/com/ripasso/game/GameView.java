@@ -130,7 +130,9 @@ public class GameView extends SurfaceView {
                 //Make the Hero walk in different directions.
                 if (hero_object.getX() < event.getX() &&
                         event.getY() < hero_object.getY() + 60 &&
-                        event.getY() > hero_object.getY() - 60) {
+                        event.getY() > hero_object.getY() - 60 &&
+                        (hero_object.getX() + hero_object.getWidth()) < (getWidth()-50)
+        ) {
                     hero_object.move(Direction.EAST);
 
                 } else if (hero_object.getY() < event.getY() &&
