@@ -64,6 +64,7 @@ public class GameView extends SurfaceView {
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
         score = new HighScore();
         audioController = new AudioController(getContext());
+        audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
     }
 
 
