@@ -102,11 +102,12 @@ public class GameView extends SurfaceView {
             SpriteObj sprite = sprites.get(i);
 
             if(collision_controll.checkCollision(hero_object.getBounds(), sprite.getBounds())){
+                audioController.makeSound(Sound.MONSTER_DIE);                           //Plays soundeffect for dying monster
                 temps.add(new TSprite(temps, this, sprite.getX(), sprite.getY(), bmpBlood));    //Add blood
                 sprites.remove(sprite);                                 //Remove the bad guy when it's hit by hero
                 sprites.add(createSprite(R.drawable.bad1));             //Add a new bad guy
                 score.AddScore(1);                                      //Increase score with 1
-                audioController.makeSound(Sound.MONSTER_DIE);                           //Plays soundeffect for dying monster
+
                 break;
             }
         }
