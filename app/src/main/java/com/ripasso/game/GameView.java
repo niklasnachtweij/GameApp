@@ -9,12 +9,15 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -30,6 +33,7 @@ public class GameView extends SurfaceView {
     private Hero hero_object;
     private AudioController audioController;
     private Block block;
+
     private boolean isPressed;
     private float eventX = 0f;
     private float eventY = 0f;
@@ -68,9 +72,16 @@ public class GameView extends SurfaceView {
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
         score = new HighScore();
         audioController = new AudioController(getContext());
+
         //audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
-        block = new Block(this, 25, this.getMeasuredHeight(), 50, 100);
+
+        //Block, this one is not working correctly.
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+        block = new Block(this, 0, height-210, width, 150);
     }
+
 
 
     //Create and add Sprites to the Sprite arraylist.

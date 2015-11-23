@@ -7,8 +7,8 @@ import android.graphics.Rect;
 
 public class Block extends GameObject{
 
-    int width = 50;
-    int height = 50;
+    private int width;
+    private int height;
     GameView gameView;
 
     public Block(GameView gameView, int x, int y, int width, int height){
