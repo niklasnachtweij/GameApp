@@ -6,15 +6,12 @@ public class MoveHeroThread extends Thread {
     static final long FPS = 10;
     private GameView view;
     private boolean running = false;
+    private Direction direction;
+    private Hero hero;
 
-    //Directions
-    protected final int NORTH = 1;
-    protected final int SOUTH = 2;
-    protected final int WEST = 3;
-    protected final int EAST = 4;
-
-    public MoveHeroThread(GameView view) {
+    public MoveHeroThread(GameView view, Hero hero) {
         this.view = view;
+        this.hero = hero;
     }
 
     public void setRunning(boolean run) {
@@ -27,18 +24,10 @@ public class MoveHeroThread extends Thread {
         long startTime;
         long sleepTime;
         while (running) {
-            Canvas c = null;
+
             startTime = System.currentTimeMillis();
-            try {
-                c = view.getHolder().lockCanvas();
-                synchronized (view.getHolder()) {
-                    view.onDraw(c);
-                }
-            } finally {
-                if (c != null) {
-                    view.getHolder().unlockCanvasAndPost(c);
-                }
-            }
+            hero.move(direction);
+
             sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
             try {
                 if (sleepTime > 0)
@@ -47,5 +36,9 @@ public class MoveHeroThread extends Thread {
                     sleep(10);
             } catch (Exception e) {}
         }
+    }
+
+    public void setDirection(Direction direction){
+        this.direction = direction;
     }
 }

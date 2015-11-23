@@ -11,28 +11,15 @@ public class Hero extends GameObject {
     int[] DIRECTION_TO_ANIMATION_MAP = { 3, 1, 0, 2 };
     private static final int BMP_ROWS = 4;
     private static final int BMP_COLUMNS = 3;
-    private static final int MAX_SPEED = 5;
+    private static final int MAX_SPEED = 7;
     private GameView gameView;
     private Bitmap bmp;
-    private int xSpeed = 5;
-    private int ySpeed = 5;
+    private int xSpeed;
+    private int ySpeed;
     private int currentFrame = 0;
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
     private int width;
     private int height;
-    //Directions
-    protected final int NORTH = 1;
-    protected final int SOUTH = 2;
-    protected final int WEST = 3;
-    protected final int EAST = 4;
+
 
     public Hero(GameView gameView, Bitmap bmp) {
         this.width = bmp.getWidth() / BMP_COLUMNS;
@@ -75,33 +62,41 @@ public class Hero extends GameObject {
         return DIRECTION_TO_ANIMATION_MAP[direction];
     }
 
-    public boolean isCollision(float x2, float y2) {
-        return x2 > x && x2 < x + width && y2 > y && y2 < y + height;
-    }
 
     @Override
     public Rect getBounds(){
         return new Rect((int) x, (int) y, (int)x+this.width, (int)y+this.height);
     }
 
-    public void move(int direction){
-        if(direction>0 && direction <5){
-            switch(direction){
-                case NORTH:
-                    y= y -(float) 5;
-                    break;
-                case SOUTH:
-                    y= y + (float) 5;
-                    break;
-                case WEST:
-                    x= x - (float) 5;
-                    break;
-                case EAST:
-                    x= x + (float) 5;
-                    break;
-                default:
-                    break;
+    public void move(Direction direction){
+
+        switch(direction){
+            case NORTH:
+                y= y -(float) MAX_SPEED;
+                break;
+            case SOUTH:
+                y= y + (float) MAX_SPEED;
+                break;
+            case WEST:
+                x= x - (float) MAX_SPEED;
+                break;
+            case EAST:
+                x= x + (float) MAX_SPEED;
+                break;
+            default:
+                break;
             }
-        }
+    }
+
+
+
+    public int getWidth() {
+        return width;
+    }
+
+
+
+    public int getHeight() {
+        return height;
     }
 }
