@@ -64,7 +64,6 @@ public class GameView extends SurfaceView {
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
         score = new HighScore();
         audioController = new AudioController(getContext());
-
     }
 
 
@@ -98,10 +97,6 @@ public class GameView extends SurfaceView {
         hero_object.onDraw(canvas);
 
 
-
-
-
-
         for (int i = sprites.size() - 1; i >= 0; i--) {
 
             SpriteObj sprite = sprites.get(i);
@@ -130,28 +125,30 @@ public class GameView extends SurfaceView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+
+
                 //Make the Hero walk in different directions.
                 if (hero_object.getX() < event.getX() &&
                         event.getY() < hero_object.getY() + 60 &&
                         event.getY() > hero_object.getY() - 60) {
-                    hero_object.move(hero_object.EAST);
+                    hero_object.move(Direction.EAST);
 
                 } else if (hero_object.getY() < event.getY() &&
                         event.getX() < hero_object.getX() + 60 &&
                         event.getX() > hero_object.getX() &&
                         hero_object.getY() >= this.getY()) {
-                    hero_object.move(hero_object.SOUTH);
+                    hero_object.move(Direction.SOUTH);
 
                 } else if (hero_object.getX() > event.getX() &&
                         event.getY() < hero_object.getY() + 60 &&
                         event.getY() > hero_object.getY() - 60 &&
                         hero_object.getX() >= 0) {
-                    hero_object.move(hero_object.WEST);
+                    hero_object.move(Direction.WEST);
 
                 } else if (hero_object.getY() > event.getY() &&
                         event.getX() < hero_object.getX() + 60 &&
                         event.getX() > hero_object.getX() - 60){
-                    hero_object.move(hero_object.NORTH);
+                    hero_object.move(Direction.NORTH);
                 }
         /*
         if (System.currentTimeMillis() - lastClick > 300) {
