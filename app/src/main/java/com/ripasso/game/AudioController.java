@@ -2,7 +2,6 @@ package com.ripasso.game;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.provider.MediaStore;
 
 import java.util.Random;
 
@@ -14,12 +13,20 @@ public class AudioController {
 
     AudioController(Context ctx){
         this.ctx = ctx;
+        this.mp = new MediaPlayer();
     }
 
     public void makeSound(Sound indata) {
 
+        if(mp.isPlaying()) {
+            mp.stop();
+            mp.release();
+        }
+
         switch(indata) {
+
             case MONSTER_DIE:
+
                 Random rand = new Random();
                 int randomNumber =  rand.nextInt(3);
 
