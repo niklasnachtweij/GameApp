@@ -1,6 +1,5 @@
 package com.ripasso.game;
 
-
 public class HighScore {
 
     private int score;

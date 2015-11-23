@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.util.Log;
 
 public class Block extends GameObject{
 
@@ -30,7 +31,7 @@ public class Block extends GameObject{
         canvas.drawRect(getBounds(), paint);
 
         Paint paintText = new Paint();
-        score = new HighScore();
+        score = gameView.getHighscore();
         paintText.setColor(Color.WHITE);
         paintText.setTextSize(50);
         paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
