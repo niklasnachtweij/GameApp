@@ -30,6 +30,9 @@ public class GameView extends SurfaceView {
     private Hero hero_object;
     private AudioController audioController;
     private Block block;
+    private boolean isPressed;
+    private float eventX = 0f;
+    private float eventY = 0f;
 
     public GameView(Context context) {
         super(context);
@@ -65,8 +68,8 @@ public class GameView extends SurfaceView {
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
         score = new HighScore();
         audioController = new AudioController(getContext());
-        audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
-        block = new Block(this, 30,30,30,30);
+        //audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
+        block = new Block(this, 25, this.getMeasuredHeight(), 50, 100);
     }
 
 
@@ -102,6 +105,35 @@ public class GameView extends SurfaceView {
         hero_object.onDraw(canvas);
 
 
+        //Make the Hero walk in different directions.
+        if (isPressed && hero_object.getX() < eventX &&
+                eventY < hero_object.getY() + 60 &&
+                eventY > hero_object.getY() - 60 &&
+                (hero_object.getX() + hero_object.getWidth()) < (getWidth()-50)) {
+            hero_object.move(Direction.EAST);
+
+        } else if (isPressed && hero_object.getY() < eventY &&
+                eventX < hero_object.getX() + 60 &&
+                eventX > hero_object.getX() &&
+                hero_object.getY() >= this.getY()) {
+            hero_object.move(Direction.SOUTH);
+
+        } else if (isPressed && hero_object.getX() > eventX &&
+                eventY < hero_object.getY() + 60 &&
+                eventY > hero_object.getY() - 60 &&
+                hero_object.getX() >= 0) {
+            hero_object.move(Direction.WEST);
+
+        } else if (isPressed && hero_object.getY() > eventY &&
+                eventX < hero_object.getX() + 60 &&
+                eventX > hero_object.getX() - 60){
+            hero_object.move(Direction.NORTH);
+        }
+
+
+
+
+
         for (int i = sprites.size() - 1; i >= 0; i--) {
 
             SpriteObj sprite = sprites.get(i);
@@ -131,33 +163,15 @@ public class GameView extends SurfaceView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+            eventX = event.getX();
+            eventY = event.getY();
+            if(event.getAction()==MotionEvent.ACTION_DOWN){
+                isPressed = true;
+            } else if(event.getAction()==MotionEvent.ACTION_UP){
+                isPressed = false;
+            }
 
 
-                //Make the Hero walk in different directions.
-                if (hero_object.getX() < event.getX() &&
-                        event.getY() < hero_object.getY() + 60 &&
-                        event.getY() > hero_object.getY() - 60 &&
-                        (hero_object.getX() + hero_object.getWidth()) < (getWidth()-50)
-        ) {
-                    hero_object.move(Direction.EAST);
-
-                } else if (hero_object.getY() < event.getY() &&
-                        event.getX() < hero_object.getX() + 60 &&
-                        event.getX() > hero_object.getX() &&
-                        hero_object.getY() >= this.getY()) {
-                    hero_object.move(Direction.SOUTH);
-
-                } else if (hero_object.getX() > event.getX() &&
-                        event.getY() < hero_object.getY() + 60 &&
-                        event.getY() > hero_object.getY() - 60 &&
-                        hero_object.getX() >= 0) {
-                    hero_object.move(Direction.WEST);
-
-                } else if (hero_object.getY() > event.getY() &&
-                        event.getX() < hero_object.getX() + 60 &&
-                        event.getX() > hero_object.getX() - 60){
-                    hero_object.move(Direction.NORTH);
-                }
         /*
         if (System.currentTimeMillis() - lastClick > 300) {
             lastClick = System.currentTimeMillis();
