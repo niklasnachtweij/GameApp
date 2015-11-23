@@ -29,6 +29,7 @@ public class GameView extends SurfaceView {
     private HighScore score;
     private Hero hero_object;
     private AudioController audioController;
+    private Block block;
 
     public GameView(Context context) {
         super(context);
@@ -65,6 +66,7 @@ public class GameView extends SurfaceView {
         score = new HighScore();
         audioController = new AudioController(getContext());
         audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
+        block = new Block(this, 30,30,30,30);
     }
 
 
@@ -84,6 +86,8 @@ public class GameView extends SurfaceView {
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.rgb(00, 44, 66));
+
+        block.onDraw(canvas);
 
         //Drawing the temp TSprite (Temporary Sprite)
         for (int i = temps.size() - 1; i >= 0; i--) {
