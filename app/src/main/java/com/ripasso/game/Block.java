@@ -36,8 +36,6 @@ public class Block extends GameObject{
         paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         canvas.drawText("Score: " + score.getScore(), 20, 600, paintText);
 
-
-
     }
 
     @Override
