@@ -15,6 +15,7 @@ import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
+import android.os.Vibrator;
 import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -34,6 +35,8 @@ public class GameView extends SurfaceView {
     private Hero hero_object;
     private AudioController audioController;
     private Block block;
+    private Vibrator vibrator;
+    private Context mainContext;
 
     private boolean isPressed;
     private float eventX = 0f;
@@ -41,6 +44,7 @@ public class GameView extends SurfaceView {
 
     public GameView(Context context) {
         super(context);
+        this.mainContext = context;
         gameLoopThread = new GameLoopThread(this);
         getHolder().addCallback(new SurfaceHolder.Callback() {
 
@@ -73,6 +77,8 @@ public class GameView extends SurfaceView {
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
         score = new HighScore();
         audioController = new AudioController(getContext());
+
+        vibrator = (Vibrator) mainContext.getSystemService(Context.VIBRATOR_SERVICE);
 
         audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
 
@@ -157,6 +163,7 @@ public class GameView extends SurfaceView {
 
             if(collision_controll.checkCollision(hero_object.getBounds(), sprite.getBounds())){
                 audioController.makeSound(Sound.MONSTER_DIE);                                   //Plays soundeffect for dying monster
+                vibrator.vibrate(35);                                                           //35ms vibration on impact
                 temps.add(new TSprite(temps, this, sprite.getX(), sprite.getY(), bmpBlood));    //Add blood
                 sprites.remove(sprite);                                                         //Remove the bad guy when it's hit by hero
                 sprites.add(createSprite(R.drawable.bad1));                                     //Add a new bad guy
