@@ -3,13 +3,18 @@ package com.ripasso.game;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -23,6 +28,7 @@ public class GameView extends SurfaceView {
     private Bitmap bmpBlood;
     private HighScore score;
     private Hero hero_object;
+    private AudioController audioController;
 
     public GameView(Context context) {
         super(context);
@@ -57,6 +63,7 @@ public class GameView extends SurfaceView {
         });
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
         score = new HighScore();
+        audioController = new AudioController(getContext());
 
     }
 
@@ -90,6 +97,11 @@ public class GameView extends SurfaceView {
 
         hero_object.onDraw(canvas);
 
+
+
+
+
+
         for (int i = sprites.size() - 1; i >= 0; i--) {
 
             SpriteObj sprite = sprites.get(i);
@@ -99,6 +111,7 @@ public class GameView extends SurfaceView {
                 sprites.remove(sprite);                                 //Remove the bad guy when it's hit by hero
                 sprites.add(createSprite(R.drawable.bad1));             //Add a new bad guy
                 score.AddScore(1);                                      //Increase score with 1
+                audioController.makeSound(Sound.MONSTER_DIE);                           //Plays soundeffect for dying monster
                 break;
             }
         }
