@@ -73,13 +73,18 @@ public class GameView extends SurfaceView {
         score = new HighScore();
         audioController = new AudioController(getContext());
 
-        //audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
+        audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
 
         //Block, this one is not working correctly.
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        /*DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-        block = new Block(this, 0, height-210, width, 150);
+        block = new Block(this, 0, height-210, width, 150);*/
+
+        int width = this.getResources().getDisplayMetrics().widthPixels;
+        int height = this.getResources().getDisplayMetrics().heightPixels;
+        block = new Block(this, 0, height, width-50, 150);
+
     }
 
 
