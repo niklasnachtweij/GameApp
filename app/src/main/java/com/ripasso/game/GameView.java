@@ -40,7 +40,6 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
                 Log.d("GameView.java: ", "SurfaceDestroyed");
-                audioController.playBackgroundMusic(false);
                 boolean retry = true;
                 gameLoopThread.setRunning(false);
                 while (retry) {
@@ -55,7 +54,6 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 Log.d("GameView.java: ", "SurfaceCreated");
-                audioController.playBackgroundMusic(true);
                 createSprites();
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
@@ -104,24 +102,9 @@ public class GameView extends SurfaceView {
     //objects you want. Check collision so that objects doesnt get on top of eachother
     private void createObstacle(int numberObstacles) {
 
-        int number = numberObstacles;
+        ObstacleFactory obsfact = new ObstacleFactory();
+        this.obstacles = obsfact.createObstacle(this, 10);
 
-        while (obstacles.size() < number) {
-
-            for (int i = 0; i < number; i++)
-                obstacles.add(new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet)));
-
-            for (int i = 0; i < obstacles.size(); i++) {
-
-                for (int j = 1; j < obstacles.size() - 1; j++) {
-
-                    if (collision_controll.checkCollision(obstacles.get(i).getBounds(), obstacles.get(j).getBounds())) {
-                        obstacles.remove(i);
-                        obstacles.add(new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet)));
-                    }
-                }
-            }
-        }
     }
 
     @Override
