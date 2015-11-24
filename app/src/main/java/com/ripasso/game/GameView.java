@@ -17,13 +17,13 @@ public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
     private List<SpriteObj> sprites = new ArrayList<SpriteObj>();
     private List<TSprite> temps = new ArrayList<TSprite>();
+    private List<Obstacle> obstacles = new ArrayList<Obstacle>();
     private CollisionControl collision_controll = new CollisionControl();
     private long lastClick;
     private Bitmap bmpBlood;
     private Background background;
     private HighScore score;
     private Hero hero_object;
-    private Obstacle obstacle_object;
     private AudioController audioController;
     private GameMenu gameMenu;
     private Vibrator vibrator;
@@ -47,7 +47,8 @@ public class GameView extends SurfaceView {
                     try {
                         gameLoopThread.join();
                         retry = false;
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                    }
                 }
             }
 
@@ -89,13 +90,25 @@ public class GameView extends SurfaceView {
         sprites.add(createSprite(R.drawable.bad2));
         sprites.add(createSprite(R.drawable.bad3));
         hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
-        obstacle_object = new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet));
+        createObstacle(10); //Fills the list with x obstacles
 
-    }
+}
 
     private SpriteObj createSprite(int resource) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
         return new SpriteObj(this, bmp);
+    }
+
+    private void createObstacle(int numberObstacles) {
+
+        int number = numberObstacles;
+
+        for(int i=0; i<number; i++) {
+
+            obstacles.add(new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet)));
+
+        }
+
     }
 
     @Override
@@ -125,7 +138,10 @@ public class GameView extends SurfaceView {
         }
 
         hero_object.onDraw(canvas);
-        obstacle_object.onDraw(canvas);
+
+        for(Obstacle obstacle : obstacles) {
+            obstacle.onDraw(canvas);
+        }
 
 
         //Make the Hero walk in different directions.
