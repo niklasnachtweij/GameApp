@@ -67,7 +67,7 @@ public class GameView extends SurfaceView {
         vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         background = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.vegtn_hms_srcbed));
 
-        audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
+        //audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
 
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
@@ -129,7 +129,8 @@ public class GameView extends SurfaceView {
         } else if (isPressed && hero_object.getY() < eventY &&
                 eventX < hero_object.getX() + 60 &&
                 eventX > hero_object.getX() &&
-                hero_object.getY() >= this.getY()) {
+                hero_object.getY() >= this.getY() &&
+                hero_object.getY() + hero_object.getHeight() < this.getHeight()-200) {
             hero_object.move(Direction.SOUTH);
 
         } else if (isPressed && hero_object.getX() > eventX &&

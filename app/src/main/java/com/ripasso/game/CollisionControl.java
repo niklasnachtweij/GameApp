@@ -14,5 +14,4 @@ public class CollisionControl {
             return false;
         }
     }
-
 }
