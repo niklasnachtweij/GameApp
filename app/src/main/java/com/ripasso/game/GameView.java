@@ -40,7 +40,7 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
                 Log.d("GameView.java: ", "SurfaceDestroyed");
-                audioController.releaseBackgroundMusic();
+                audioController.playBackgroundMusic(false);
                 boolean retry = true;
                 gameLoopThread.setRunning(false);
                 while (retry) {
@@ -55,6 +55,7 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 Log.d("GameView.java: ", "SurfaceCreated");
+                audioController.playBackgroundMusic(true);
                 createSprites();
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();

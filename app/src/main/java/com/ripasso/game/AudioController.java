@@ -2,6 +2,7 @@ package com.ripasso.game;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
 
 import java.util.Random;
 
@@ -60,9 +61,12 @@ public class AudioController {
     }
 
 
-    public void releaseBackgroundMusic(){
-        backgroundMusic.stop();
-        backgroundMusic.release();
+    public void playBackgroundMusic(boolean play){
+            if(play)
+                backgroundMusic.stop();
+            else
+                backgroundMusic.start();
+        Log.d("AudioController.java", "releaseBackgroundMusic");
     }
 }
 
