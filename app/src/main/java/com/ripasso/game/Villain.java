@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-public class SpriteObj extends GameObject {
+public class Villain extends GameObject {
     // direction = 0 up, 1 left, 2 down, 3 right,
     // animation = 3 back, 1 left, 0 front, 2 right
     int[] DIRECTION_TO_ANIMATION_MAP = { 3, 1, 0, 2 };
@@ -20,7 +20,7 @@ public class SpriteObj extends GameObject {
     private int width;
     private int height;
 
-    public SpriteObj(GameView gameView, Bitmap bmp) {
+    public Villain(GameView gameView, Bitmap bmp) {
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;
         this.gameView = gameView;

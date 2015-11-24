@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -15,11 +14,10 @@ import android.view.SurfaceView;
 
 public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
-    private List<SpriteObj> sprites = new ArrayList<SpriteObj>();
+    private List<Villain> sprites = new ArrayList<Villain>();
     private List<TSprite> temps = new ArrayList<TSprite>();
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
     private CollisionControl collision_controll = new CollisionControl();
-    private long lastClick;
     private Bitmap bmpBlood;
     private Background background;
     private HighScore score;
@@ -57,7 +55,6 @@ public class GameView extends SurfaceView {
                 createSprites();
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
-
             }
 
             @Override
@@ -93,34 +90,20 @@ public class GameView extends SurfaceView {
 
 }
 
-    private SpriteObj createSprite(int resource) {
+    private Villain createSprite(int resource) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
-        return new SpriteObj(this, bmp);
+        return new Villain(this, bmp);
     }
 
     //Creates an arraylist with obstacle objects, taken an number of have many
     //objects you want. Check collision so that objects doesnt get on top of eachother
     private void createObstacle(int numberObstacles) {
-
-        ObstacleFactory obsfact = new ObstacleFactory();
-        this.obstacles = obsfact.createObstacle(this, 10);
-
+        this.obstacles = ObstacleFactory.createObstacle(this, 10);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //canvas.drawColor(Color.rgb(00, 44, 66));
         background.onDraw(canvas);
-        /*  Was trying to paint tiles to a complete background, didn't work...
-            My guess it must be done to canvas, but DrawBitMap can't take a
-            BitMapDrawable as an argument
-
-        BitmapDrawable TileMe = new BitmapDrawable(BitmapFactory.decodeResource(getResources(), R.drawable.sprite_sheet));
-        TileMe.setTileModeX(Shader.TileMode.REPEAT);
-        TileMe.setTileModeY(Shader.TileMode.REPEAT);
-        canvas.DrawBitmap(TileMe, 0, 0, null);
-        */
-
         gameMenu.onDraw(canvas);
 
         //Drawing the temp TSprite (Temporary Sprite)
@@ -129,7 +112,7 @@ public class GameView extends SurfaceView {
         }
 
         //Drawing the Sprite objects
-        for (SpriteObj sprite : sprites) {
+        for (Villain sprite : sprites) {
             sprite.onDraw(canvas);
         }
 
@@ -172,7 +155,7 @@ public class GameView extends SurfaceView {
 
         for (int i = sprites.size() - 1; i >= 0; i--) {
 
-            SpriteObj sprite = sprites.get(i);
+            Villain sprite = sprites.get(i);
 
             if(collision_controll.checkCollision(hero_object.getBounds(), sprite.getBounds())){
                 audioController.makeSound(Sound.MONSTER_DIE);                                   //Plays soundeffect for dying monster
@@ -188,8 +171,6 @@ public class GameView extends SurfaceView {
                 break;
             }
         }
-
-
     }
 
     //Stop the view in the Thread is not null.
@@ -211,37 +192,12 @@ public class GameView extends SurfaceView {
             } else if(event.getAction()==MotionEvent.ACTION_UP){
                 isPressed = false;
             }
-
-
-        /*
-        if (System.currentTimeMillis() - lastClick > 300) {
-            lastClick = System.currentTimeMillis();
-            float x = event.getX();
-            float y = event.getY();
-            synchronized (getHolder()) {
-
-                for (int i = sprites.size() - 1; i >= 0; i--) {
-                    SpriteObj sprite = sprites.get(i);
-
-                    if(collision_controll.checkCollision(hero_object.getBounds(), sprite.getBounds())){
-                        temps.add(new TSprite(temps, this, hero_object.getX(), hero_object.getY(), bmpBlood));    //Add blood
-                        sprites.remove(sprite);                                 //Remove the bad guy when it's hit by hero
-                        sprites.add(createSprite(R.drawable.bad1));             //Add a new bad guy
-                        score.AddScore(1);                                      //Increase score with 1
-                        break;
-                    }
-                }
-            }
-        }
-        */
         return true;
     }
 
     //Sharing is caring, so other classes can see current score for printing purposes
     public HighScore getHighscore() {
-
         return score;
-
     }
 
 }
