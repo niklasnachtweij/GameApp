@@ -24,20 +24,37 @@ public class GameMenu extends GameObject{
 
     @Override
     public void onDraw(Canvas canvas) {
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setStrokeWidth(10);
-        canvas.drawRect(getBounds(), paint);
+        drawMenu(canvas);
+        drawActionButton(canvas);
+        drawHighScore(canvas);
+    }
 
+    private void drawHighScore(Canvas canvas){
         Paint paintText = new Paint();
         score = gameView.getHighscore();
         paintText.setColor(Color.WHITE);
-        paintText.setTextSize(50);
+        paintText.setTextSize(20);
         paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        canvas.drawText("Score: " + score.getScore(), 20, 600, paintText);
-
+        canvas.drawText("Score: " + score.getScore(), 200, 600, paintText);
     }
+
+    private void drawActionButton(Canvas canvas){
+        Paint buttonPaint = new Paint();
+        buttonPaint.setColor(Color.DKGRAY);
+        buttonPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+        buttonPaint.setStrokeWidth(10);
+        Rect rect = new Rect((int)x,(int)y, (int)x+150, (int)y+(this.height));
+        canvas.drawRect(rect, buttonPaint);
+    }
+
+    private void drawMenu(Canvas canvas){
+        Paint paint = new Paint();
+        paint.setColor(Color.LTGRAY);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setStrokeWidth(10);
+        canvas.drawRect(getBounds(), paint);
+    }
+
 
     @Override
     public Rect getBounds() {
