@@ -65,7 +65,7 @@ public class GameView extends SurfaceView {
         audioController = new AudioController(getContext());
 
         vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        background = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.sky_back_layer));
+        background = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.vegtn_hms_srcbed));
 
         audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
 
