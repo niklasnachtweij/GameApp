@@ -39,8 +39,8 @@ public class Obstacle extends GameObject {
     }
 
     @Override
-    public Rect getBounds() {
-        return null;
+    public Rect getBounds(){
+        return new Rect((int) x, (int) y, (int)x+this.width, (int)y+this.height);
     }
 }
 

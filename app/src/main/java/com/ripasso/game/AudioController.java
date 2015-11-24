@@ -2,7 +2,6 @@ package com.ripasso.game;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.util.Log;
 
 import java.util.Random;
 
@@ -37,36 +36,33 @@ public class AudioController {
 
                 else if(randomNumber == 1) {
                     mp = MediaPlayer.create(ctx, R.raw.body_impact_2_with_grunt_);
-                }
-
-                else  {
-                    mp = MediaPlayer.create(ctx, R.raw.body_impact_3_with_grunt_);
-                }
-
-                mp.start();
-
-                break;
-
-            case BACKGROUND_MUSIC:
-
-                backgroundMusic = MediaPlayer.create(ctx, R.raw.zoombies);
-                backgroundMusic.setLooping(true);
-                backgroundMusic.start();
-
-                break;
-
-                default:
-                    break;
-        }
     }
 
+    else  {
+        mp = MediaPlayer.create(ctx, R.raw.body_impact_3_with_grunt_);
+    }
 
-    public void playBackgroundMusic(boolean play){
-            if(play)
-                backgroundMusic.stop();
-            else
-                backgroundMusic.start();
-        Log.d("AudioController.java", "releaseBackgroundMusic");
+    mp.start();
+
+    break;
+
+    case BACKGROUND_MUSIC:
+
+    backgroundMusic = MediaPlayer.create(ctx, R.raw.zoombies);
+    backgroundMusic.setLooping(true);
+    backgroundMusic.start();
+
+    break;
+
+    default:
+            break;
+}
+}
+
+
+public void releaseBackgroundMusic(){
+        backgroundMusic.stop();
+        backgroundMusic.release();
     }
 }
 
