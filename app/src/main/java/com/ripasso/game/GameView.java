@@ -17,7 +17,7 @@ public class GameView extends SurfaceView {
     private List<Villain> sprites = new ArrayList<Villain>();
     private List<TSprite> temps = new ArrayList<TSprite>();
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
-    private CollisionControl collision_controll = new CollisionControl();
+    private CollisionControl collision_control = new CollisionControl();
     private Bitmap bmpBlood;
     private Background background;
     private HighScore score;
@@ -97,8 +97,8 @@ public class GameView extends SurfaceView {
 
     //Creates an arraylist with obstacle objects, taken an number of have many
     //objects you want. Check collision so that objects doesnt get on top of eachother
-    private void createObstacle(int numberObstacles) {
-        this.obstacles = ObstacleFactory.createObstacle(this, 10);
+    private void createObstacle(int numberObs) {
+        this.obstacles = ObstacleFactory.createObstacle(this, numberObs);
     }
 
     @Override
@@ -157,7 +157,7 @@ public class GameView extends SurfaceView {
 
             Villain sprite = sprites.get(i);
 
-            if(collision_controll.checkCollision(hero_object.getBounds(), sprite.getBounds())){
+            if(collision_control.checkCollision(hero_object.getBounds(), sprite.getBounds())){
                 audioController.makeSound(Sound.MONSTER_DIE);                                   //Plays soundeffect for dying monster
                 vibrator.vibrate(35);                                                           //35ms vibration on impact
                 temps.add(new TSprite(temps, this, sprite.getX(), sprite.getY(), bmpBlood));    //Add blood
