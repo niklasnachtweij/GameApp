@@ -19,6 +19,7 @@ public class GameView extends SurfaceView {
     private CollisionControl collision_controll = new CollisionControl();
     private long lastClick;
     private Bitmap bmpBlood;
+    private Background background;
     private HighScore score;
     private Hero hero_object;
     private AudioController audioController;
@@ -64,6 +65,7 @@ public class GameView extends SurfaceView {
         audioController = new AudioController(getContext());
 
         vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+        background = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.sky_back_layer));
 
         audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
 
@@ -90,7 +92,8 @@ public class GameView extends SurfaceView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawColor(Color.rgb(00, 44, 66));
+        //canvas.drawColor(Color.rgb(00, 44, 66));
+        background.onDraw(canvas);
         /*  Was trying to paint tiles to a complete background, didn't work...
             My guess it must be done to canvas, but DrawBitMap can't take a
             BitMapDrawable as an argument
