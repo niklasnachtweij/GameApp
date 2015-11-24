@@ -32,6 +32,8 @@ public class Obstacle extends GameObject {
 
         Rect src = new Rect(0, 0, width, height);
         Rect dst = new Rect((int) x, (int) y, (int)x + width, (int)y + height);
+
+        if(canvas!=null)
         canvas.drawBitmap(bmp, src, dst, null);
 
     }

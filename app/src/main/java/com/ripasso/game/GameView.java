@@ -44,7 +44,8 @@ public class GameView extends SurfaceView {
                     try {
                         gameLoopThread.join();
                         retry = false;
-                    } catch (InterruptedException e) {}
+                    } catch (InterruptedException e) {
+                    }
                 }
             }
 
@@ -84,20 +85,24 @@ public class GameView extends SurfaceView {
         sprites.add(createSprite(R.drawable.bad2));
         sprites.add(createSprite(R.drawable.bad3));
         hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
-        obstacles.add(createObstacle());
-        obstacles.add(createObstacle());
-        obstacles.add(createObstacle());
+        createObstacle(10); //Fills the list with x obstacles
 
-    }
+}
 
     private SpriteObj createSprite(int resource) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
         return new SpriteObj(this, bmp);
     }
 
-    private Obstacle createObstacle() {
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.tablet);
-        return new Obstacle(this, bmp);
+    private void createObstacle(int numberObstacles) {
+
+        int number = numberObstacles;
+
+        for(int i=0; i<number; i++) {
+
+            obstacles.add(new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet)));
+
+        }
 
     }
 
