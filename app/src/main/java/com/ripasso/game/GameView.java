@@ -16,13 +16,14 @@ public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
     private List<SpriteObj> sprites = new ArrayList<SpriteObj>();
     private List<TSprite> temps = new ArrayList<TSprite>();
+    private List<Obstacle> obstacles = new ArrayList<Obstacle>();
     private CollisionControl collision_controll = new CollisionControl();
     private long lastClick;
     private Bitmap bmpBlood;
     private Background background;
     private HighScore score;
     private Hero hero_object;
-    private Obstacle obstacle_object;
+    //private Obstacle obstacle_object;
     private AudioController audioController;
     private GameMenu gameMenu;
     private Vibrator vibrator;
@@ -84,13 +85,22 @@ public class GameView extends SurfaceView {
         sprites.add(createSprite(R.drawable.bad2));
         sprites.add(createSprite(R.drawable.bad3));
         hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
-        obstacle_object = new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet));
+        //obstacle_object = new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet));
+        obstacles.add(createObstacle());
+        obstacles.add(createObstacle());
+        obstacles.add(createObstacle());
 
     }
 
     private SpriteObj createSprite(int resource) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
         return new SpriteObj(this, bmp);
+    }
+
+    private Obstacle createObstacle() {
+        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.tablet);
+        return new Obstacle(this, bmp);
+
     }
 
     @Override
@@ -120,7 +130,10 @@ public class GameView extends SurfaceView {
         }
 
         hero_object.onDraw(canvas);
-        obstacle_object.onDraw(canvas);
+
+        for(Obstacle obstacle : obstacles) {
+            obstacle.onDraw(canvas);
+        }
 
 
         //Make the Hero walk in different directions.
