@@ -3,29 +3,14 @@ package com.ripasso.game;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.graphics.Shader;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.os.AsyncTask;
 import android.os.Vibrator;
-import android.provider.MediaStore;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.ImageView;
 
 public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
@@ -37,7 +22,7 @@ public class GameView extends SurfaceView {
     private HighScore score;
     private Hero hero_object;
     private AudioController audioController;
-    private Block block;
+    private GameMenu gameMenu;
     private Vibrator vibrator;
 
     private boolean isPressed;
@@ -83,15 +68,15 @@ public class GameView extends SurfaceView {
 
         audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
 
-        //Block, this one is not working correctly.
+        //GameMenu, this one is not working correctly.
         /*DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         int width = metrics.widthPixels;
         int height = metrics.heightPixels;
-        block = new Block(this, 0, height-210, width, 150);*/
+        gameMenu = new GameMenu(this, 0, height-210, width, 150);*/
 
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
-        block = new Block(this, 0, height-200, width, 200);
+        gameMenu = new GameMenu(this, 0, height-200, width, 200);
 
     }
 
@@ -123,7 +108,7 @@ public class GameView extends SurfaceView {
         canvas.DrawBitmap(TileMe, 0, 0, null);
         */
 
-        block.onDraw(canvas);
+        gameMenu.onDraw(canvas);
 
         //Drawing the temp TSprite (Temporary Sprite)
         for (int i = temps.size() - 1; i >= 0; i--) {
