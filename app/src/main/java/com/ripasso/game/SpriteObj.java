@@ -51,7 +51,9 @@ public class SpriteObj extends GameObject {
         int srcY = getAnimationRow() * height;
         Rect src = new Rect(srcX, srcY, srcX + width, srcY + height);
         Rect dst = new Rect((int) x, (int) y, (int)x + width, (int)y + height);
-        canvas.drawBitmap(bmp, src, dst, null);
+
+        if(canvas!=null)
+            canvas.drawBitmap(bmp, src, dst, null);
     }
 
     private int getAnimationRow() {

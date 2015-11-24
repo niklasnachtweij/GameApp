@@ -24,9 +24,11 @@ public class GameMenu extends GameObject{
 
     @Override
     public void onDraw(Canvas canvas) {
-        drawMenu(canvas);
-        drawActionButton(canvas);
-        drawHighScore(canvas);
+        if(canvas!=null) {
+            drawMenu(canvas);
+            drawActionButton(canvas);
+            drawHighScore(canvas);
+        }
     }
 
     private void drawHighScore(Canvas canvas){

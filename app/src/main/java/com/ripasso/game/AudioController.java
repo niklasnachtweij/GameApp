@@ -8,8 +8,8 @@ import java.util.Random;
 public class AudioController {
 
     private Context ctx;
-    MediaPlayer mp;
-    MediaPlayer backgroundMusic;
+    private MediaPlayer mp;
+    private MediaPlayer backgroundMusic;
 
     AudioController(Context ctx){
         this.ctx = ctx;
@@ -47,6 +47,7 @@ public class AudioController {
                 break;
 
             case BACKGROUND_MUSIC:
+
                 backgroundMusic = MediaPlayer.create(ctx, R.raw.zoombies);
                 backgroundMusic.setLooping(true);
                 backgroundMusic.start();
@@ -56,6 +57,12 @@ public class AudioController {
                 default:
                     break;
         }
+    }
+
+
+    public void releaseBackgroundMusic(){
+        backgroundMusic.stop();
+        backgroundMusic.release();
     }
 }
 

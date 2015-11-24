@@ -19,6 +19,7 @@ public class Background {
 
         Rect src = new Rect(0, 0, width, height);
         Rect dst = new Rect(0, 0, width, height);
-        canvas.drawBitmap(bmp, src, dst, null);
+        if(canvas!=null)
+            canvas.drawBitmap(bmp, src, dst, null);
     }
 }

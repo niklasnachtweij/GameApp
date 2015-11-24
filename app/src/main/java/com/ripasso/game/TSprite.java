@@ -23,7 +23,8 @@ public class TSprite extends GameObject {
 
     public void onDraw(Canvas canvas) {
         update();
-        canvas.drawBitmap(bmp, x, y, null);
+        if(canvas!=null)
+            canvas.drawBitmap(bmp, x, y, null);
     }
 
     protected void update() {

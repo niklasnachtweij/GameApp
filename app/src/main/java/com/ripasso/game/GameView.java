@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -38,6 +39,8 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
+                Log.d("GameView.java: ", "SurfaceDestroyed");
+                audioController.releaseBackgroundMusic();
                 boolean retry = true;
                 gameLoopThread.setRunning(false);
                 while (retry) {
@@ -50,6 +53,7 @@ public class GameView extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
+                Log.d("GameView.java: ", "SurfaceCreated");
                 createSprites();
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
@@ -59,6 +63,7 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format,
                                        int width, int height) {
+                Log.d("GameView.java: ", "SurfaceChanged");
             }
         });
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
@@ -68,7 +73,7 @@ public class GameView extends SurfaceView {
         vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         background = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.vegtn_hms_srcbed));
 
-        //audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
+        audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
 
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
