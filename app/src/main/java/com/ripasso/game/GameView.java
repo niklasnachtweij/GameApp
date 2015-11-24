@@ -44,8 +44,7 @@ public class GameView extends SurfaceView {
                     try {
                         gameLoopThread.join();
                         retry = false;
-                    } catch (InterruptedException e) {
-                    }
+                    } catch (InterruptedException e) {}
                 }
             }
 
@@ -70,15 +69,9 @@ public class GameView extends SurfaceView {
 
         audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
 
-        //GameMenu, this one is not working correctly.
-        /*DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        int width = metrics.widthPixels;
-        int height = metrics.heightPixels;
-        gameMenu = new GameMenu(this, 0, height-210, width, 150);*/
-
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
-        gameMenu = new GameMenu(this, 0, height-200, width, 200);
+        gameMenu = new GameMenu(this, 0, height-200, width, 200); //Create a GameMenu
 
     }
 
