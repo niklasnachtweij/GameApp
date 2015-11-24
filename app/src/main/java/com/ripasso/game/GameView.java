@@ -23,7 +23,6 @@ public class GameView extends SurfaceView {
     private Background background;
     private HighScore score;
     private Hero hero_object;
-    //private Obstacle obstacle_object;
     private AudioController audioController;
     private GameMenu gameMenu;
     private Vibrator vibrator;
@@ -85,7 +84,6 @@ public class GameView extends SurfaceView {
         sprites.add(createSprite(R.drawable.bad2));
         sprites.add(createSprite(R.drawable.bad3));
         hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
-        //obstacle_object = new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet));
         obstacles.add(createObstacle());
         obstacles.add(createObstacle());
         obstacles.add(createObstacle());
