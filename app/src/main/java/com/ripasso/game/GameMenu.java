@@ -7,14 +7,14 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
 
-public class Block extends GameObject{
+public class GameMenu extends GameObject{
 
     private int width;
     private int height;
     GameView gameView;
     HighScore score;
 
-    public Block(GameView gameView, int x, int y, int width, int height){
+    public GameMenu(GameView gameView, int x, int y, int width, int height){
         this.x = x;
         this.y = y;
         this.width = width;
