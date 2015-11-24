@@ -99,16 +99,28 @@ public class GameView extends SurfaceView {
         return new SpriteObj(this, bmp);
     }
 
+    //Creates an arraylist with obstacle objects, taken an number of have many
+    //objects you want. Check collision so that objects doesnt get on top of eachother
     private void createObstacle(int numberObstacles) {
 
         int number = numberObstacles;
 
-        for(int i=0; i<number; i++) {
+        while (obstacles.size() < number) {
 
-            obstacles.add(new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet)));
+            for (int i = 0; i < number; i++)
+                obstacles.add(new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet)));
 
+            for (int i = 0; i < obstacles.size(); i++) {
+
+                for (int j = 1; j < obstacles.size() - 1; j++) {
+
+                    if (collision_controll.checkCollision(obstacles.get(i).getBounds(), obstacles.get(j).getBounds())) {
+                        obstacles.remove(i);
+                        obstacles.add(new Obstacle(this, BitmapFactory.decodeResource(getResources(), R.drawable.tablet)));
+                    }
+                }
+            }
         }
-
     }
 
     @Override
