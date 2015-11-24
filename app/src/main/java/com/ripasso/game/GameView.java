@@ -24,7 +24,6 @@ public class GameView extends SurfaceView {
     private AudioController audioController;
     private GameMenu gameMenu;
     private Vibrator vibrator;
-    private Context mainContext;
 
     private boolean isPressed;
     private float eventX = 0f;
@@ -32,7 +31,6 @@ public class GameView extends SurfaceView {
 
     public GameView(Context context) {
         super(context);
-        this.mainContext = context;
         gameLoopThread = new GameLoopThread(this);
         getHolder().addCallback(new SurfaceHolder.Callback() {
 
@@ -65,7 +63,7 @@ public class GameView extends SurfaceView {
         score = new HighScore();
         audioController = new AudioController(getContext());
 
-        vibrator = (Vibrator) mainContext.getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
 
         audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
 
