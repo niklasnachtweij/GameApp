@@ -181,15 +181,13 @@ public class GameView extends SurfaceView {
                 sprites.add(createSprite(R.drawable.bad1));                                     //Add a new bad guy
                 score.AddScore(1);                                                              //Increase score with 1
 
-                for(int ii = 10; ii <= score.getScore(); ii++) {
-                    if(ii % 10 == 0) {
-                        sprites.add(createSprite(R.drawable.bad3));
-                    }
-                }
+                if(score.getScore()%10 ==0) //When score increased with 10, add a badguy
+                    sprites.add(createSprite(R.drawable.bad3));
 
                 break;
             }
         }
+
 
     }
 
