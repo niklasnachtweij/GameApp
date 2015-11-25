@@ -15,8 +15,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-public class GameView extends SurfaceView implements Parcelable {
-    private int mData;
+public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
     private List<Villain> sprites = new ArrayList<Villain>();
     private List<Blood> temps = new ArrayList<Blood>();
@@ -199,39 +198,8 @@ public class GameView extends SurfaceView implements Parcelable {
         return true;
     }
 
-    //Sharing is caring, so other classes can see current score for printing purposes
+    //Sharing is caring <3, so other classes can see current score for printing purposes
     public HighScore getHighscore() {
         return score;
     }
-
-    public int describeContents() {
-        return 0;
-    }
-
-    /** save object in parcel */
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(mData);
-    }
-
-    public static final Parcelable.Creator<GameView> CREATOR = new Parcelable.Creator<GameView>() {
-        public GameView createFromParcel(Parcel in) {
-            return new GameView(in);
-        }
-
-        public GameView[] newArray(int size) {
-            return new GameView[][size];
-        }
-    };
-
-    /** recreate object from parcel */
-    private MyParcelable(Parcel in) {
-        mData = in.readInt();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable("key", myObject);
-    }
-
 }

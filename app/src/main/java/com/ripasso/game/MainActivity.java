@@ -2,6 +2,8 @@ package com.ripasso.game;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
