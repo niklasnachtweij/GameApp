@@ -6,6 +6,9 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -25,6 +28,7 @@ public class GameView extends SurfaceView {
     private Background background;
     private HighScore score;
     private Hero hero_object;
+    private SuperVillain superVillain_object;
     private AudioController audioController;
     private GameMenu gameMenu;
     private Vibrator vibrator;
@@ -86,9 +90,10 @@ public class GameView extends SurfaceView {
     //Create and add Sprites to the Sprite arraylist.
     private void createSprites() {
         sprites.add(createSprite(R.drawable.bad1));
-        sprites.add(createSprite(R.drawable.bad2));
         sprites.add(createSprite(R.drawable.bad3));
+        sprites.add(createSprite(R.drawable.bad5));
         hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
+        superVillain_object = new SuperVillain(this, BitmapFactory.decodeResource(getResources(), R.drawable.bad4));
         createObstacle(10); //Fills the list with x obstacles
 
 }
@@ -119,6 +124,7 @@ public class GameView extends SurfaceView {
             sprite.onDraw(canvas);
         }
 
+        superVillain_object.onDraw(canvas);
         hero_object.onDraw(canvas);
 
         for(Obstacle obstacle : obstacles) {
@@ -163,17 +169,38 @@ public class GameView extends SurfaceView {
             if(collision_control.checkCollision(hero_object.getBounds(), sprite.getBounds())){
                 audioController.makeSound(Sound.MONSTER_DIE);                                   //Plays soundeffect for dying monster
                 vibrator.vibrate(35);                                                           //35ms vibration on impact
-                temps.add(new Blood(temps, this, sprite.getX(), sprite.getY(), bmpBlood));    //Add blood
+                temps.add(new Blood(temps, this, sprite.getX(), sprite.getY(), bmpBlood));      //Add blood
                 sprites.remove(sprite);                                                         //Remove the bad guy when it's hit by hero
                 sprites.add(createSprite(R.drawable.bad1));                                     //Add a new bad guy
                 score.AddScore(1);                                                              //Increase score with 1
 
                 if(score.getScore()%10 ==0) //When score increased with 10, add a badguy
                     sprites.add(createSprite(R.drawable.bad3));
+                    superVillain_object.increaseSpeed();
 
                 break;
             }
         }
+
+        //Check collision between our Hero and SuperVillain
+        if(collision_control.checkCollision(hero_object.getBounds(), superVillain_object.getBounds())) {
+            audioController.makeSound(Sound.HERO_DIE);
+
+            gameLoopThread.setRunning(false);
+            Background bg = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.space));
+            bg.onDraw(canvas);
+            audioController.pauseBackgroundMusic();
+            audioController.makeSound(Sound.LAUGH);
+
+            Paint paintText = new Paint();
+            int height = this.getResources().getDisplayMetrics().heightPixels;
+            paintText.setColor(Color.WHITE);
+            paintText.setTextSize(100);
+            paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+            canvas.drawText("Your score: " + score.getScore(), 100, height/2, paintText);
+
+        }
+
     }
 
     //Stop the view in the Thread is not null.
