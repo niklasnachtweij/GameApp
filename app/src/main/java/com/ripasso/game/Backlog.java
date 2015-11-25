@@ -11,7 +11,7 @@ public class Backlog {
 
     2. Collision control between villains, hero and obstacles (Owner Niklas Nachtweij)
 
-    3. Add Super Villian that can kill Hero *Must be different gfx wise than "usual" villain
+    3. Add Super Villian that can kill Hero *Must be different gfx wise than "usual" villain (Owner Mathias Berneland)
 
     4. Add first-screen that explains how the game works
 
