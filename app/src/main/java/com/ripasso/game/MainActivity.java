@@ -32,6 +32,7 @@ public class MainActivity extends Activity {
         super.onPause();
 
         Log.d("MainActivity.java: ", "onPause()");
+
         //Stop view when onPause() is called.
         gameview.StopView();
     }

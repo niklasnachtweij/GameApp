@@ -53,21 +53,18 @@ public class AudioController {
                  }
 
                 mp.start();
-
                 break;
 
             case HERO_DIE:
 
                 mp = MediaPlayer.create(ctx, R.raw.horror_knife_stab_male_scream_001);
                 mp.start();
-
                 break;
 
             case LAUGH:
 
                 mp = MediaPlayer.create(ctx, R.raw.demonic_laugh);
                 mp.start();
-
                 break;
 
             case BACKGROUND_MUSIC:
@@ -77,7 +74,6 @@ public class AudioController {
                     backgroundMusic = MediaPlayer.create(ctx, R.raw.zoombies);
 
                 }
-
                 break;
 
                 default:

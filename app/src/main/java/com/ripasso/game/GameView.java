@@ -9,44 +9,50 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+/*Main game view responsible drawing the game and handling user input events.
+* Mathias Berneland & Niklas Nachtweij.
+* */
+
 public class GameView extends SurfaceView {
-    private GameLoopThread gameLoopThread; //Current game loop
 
-    private List<Villain> sprites = new ArrayList<Villain>(); //List of Villains
-    private List<Blood> temps = new ArrayList<Blood>();
-    private List<Obstacle> obstacles = new ArrayList<Obstacle>();
+    //Main game loop thread
+    private GameLoopThread gameLoopThread;
 
-    private AudioController audioController;
-    private CollisionControl collision_control = new CollisionControl();
-
-    private Bitmap bmpBlood;
-    private Background background;
-    private GameMenu gameMenu;
-    private HighScore score;
-
+    //Canvas game objects
+    private List<Villain> villain_objects;
+    private List<Blood> blood;
+    private List<Obstacle> obstacles;
     private Hero hero_object;
     private SuperVillain superVillain_object;
 
+    //Controllers
+    private AudioController audioController;
+    private CollisionControl collision_control;
     private Vibrator vibrator;
+
+    //Drawables
+    private Background background;
+    private GameMenu gameMenu;
+    private HighScore score;
 
     //TouchEvent variables
     private boolean isPressed;
     private float eventX = 0f;
     private float eventY = 0f;
 
+    //Constructor
     public GameView(Context context) {
         super(context);
 
         gameLoopThread = new GameLoopThread(this);
+
+        //Get callbacks
         getHolder().addCallback(new SurfaceHolder.Callback() {
 
             @Override
@@ -54,9 +60,11 @@ public class GameView extends SurfaceView {
 
                 Log.d("GameView.java: ", "SurfaceDestroyed");
 
-                audioController.pauseBackgroundMusic();
+                //audioController.pauseBackgroundMusic(); THIS LINE IS CAUSING THE APP TO CRASH. BUGG!
+
                 gameLoopThread.setRunning(false);
 
+                //Stop Thread.
                 boolean retry = true;
                 while (retry) {
                     try {
@@ -69,7 +77,9 @@ public class GameView extends SurfaceView {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 Log.d("GameView.java: ", "SurfaceCreated");
-                createSprites();
+
+                initializeGameObjects();
+
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
                 audioController.startBackgroundMusic();
@@ -88,12 +98,17 @@ public class GameView extends SurfaceView {
 
     //Initializing variables.
     private void Initialize(){
-        bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
         score = new HighScore();
         audioController = new AudioController(getContext());
         audioController.makeSound(Sound.BACKGROUND_MUSIC);
         vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         background = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.vegtn_hms_srcbed));
+
+        villain_objects = new ArrayList<Villain>();
+        blood = new ArrayList<Blood>();
+        obstacles = new ArrayList<Obstacle>();
+
+        collision_control = new CollisionControl();
 
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
@@ -102,18 +117,20 @@ public class GameView extends SurfaceView {
 
 
 
-    //Create and add Sprites to the Sprite arraylist.
-    private void createSprites() {
-        sprites.add(createSprite(R.drawable.bad1));
-        sprites.add(createSprite(R.drawable.bad3));
-        sprites.add(createSprite(R.drawable.bad5));
+    //Create and initialize Game objects.
+    private void initializeGameObjects() {
+        villain_objects.add(createVillainObject(R.drawable.bad1));
+        villain_objects.add(createVillainObject(R.drawable.bad3));
+        villain_objects.add(createVillainObject(R.drawable.bad5));
         hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
         superVillain_object = new SuperVillain(this, BitmapFactory.decodeResource(getResources(), R.drawable.bad4));
-        createObstacle(10); //Fills the list with x obstacles
+
+        //Fill the list with an amount obstacles
+        createObstacle(10);
 
 }
 
-    private Villain createSprite(int resource) {
+    private Villain createVillainObject(int resource) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
         return new Villain(this, bmp);
     }
@@ -124,28 +141,36 @@ public class GameView extends SurfaceView {
         this.obstacles = ObstacleFactory.createObstacle(this, numberObs);
     }
 
+    //Draw objects to the canvas.
     @Override
     protected void onDraw(Canvas canvas) {
+
+        //Draw the background
         background.onDraw(canvas);
+
+        //Draw the game menu
         gameMenu.onDraw(canvas);
 
-        //Drawing the temp Blood (Temporary Sprite)
-        for (int i = temps.size() - 1; i >= 0; i--) {
-            temps.get(i).onDraw(canvas);
+        //Draw the blood.
+        for (int i = blood.size() - 1; i >= 0; i--) {
+            blood.get(i).onDraw(canvas);
         }
 
-        //Drawing the Sprite objects
-        for (Villain sprite : sprites) {
+        //Draw villains.
+        for (Villain sprite : villain_objects) {
             sprite.onDraw(canvas);
         }
 
+        //Draw SuperVillain.
         superVillain_object.onDraw(canvas);
+
+        //Draw Hero.
         hero_object.onDraw(canvas);
 
+        //Draw obstacles.
         for(Obstacle obstacle : obstacles) {
             obstacle.onDraw(canvas);
         }
-
 
         //Make the Hero walk in different directions.
         if (isPressed && hero_object.getX() < eventX &&
@@ -173,24 +198,34 @@ public class GameView extends SurfaceView {
             hero_object.move(Direction.NORTH);
         }
 
+        //Check for collisions
+        for (int i = villain_objects.size() - 1; i >= 0; i--) {
 
-
-
-
-        for (int i = sprites.size() - 1; i >= 0; i--) {
-
-            Villain sprite = sprites.get(i);
+            Villain sprite = villain_objects.get(i);
 
             if(collision_control.checkCollision(hero_object.getBounds(), sprite.getBounds())){
-                audioController.makeSound(Sound.MONSTER_DIE);                                   //Plays soundeffect for dying monster
-                vibrator.vibrate(35);                                                           //35ms vibration on impact
-                temps.add(new Blood(temps, this, sprite.getX(), sprite.getY(), bmpBlood));      //Add blood
-                sprites.remove(sprite);                                                         //Remove the bad guy when it's hit by hero
-                sprites.add(createSprite(R.drawable.bad1));                                     //Add a new bad guy
-                score.AddScore(1);                                                              //Increase score with 1
 
-                if(score.getScore()%10 ==0) //When score increased with 10, add a badguy
-                    sprites.add(createSprite(R.drawable.bad3));
+                //Plays soundeffect for dying monster
+                audioController.makeSound(Sound.MONSTER_DIE);
+
+                //35ms vibration on impact
+                vibrator.vibrate(35);
+
+                //Add blood
+                blood.add(new Blood(blood, this, sprite.getX(), sprite.getY(), BitmapFactory.decodeResource(getResources(), R.drawable.blood1)));
+
+                //Remove the bad guy when it's hit by hero
+                villain_objects.remove(sprite);
+
+                //Add a new bad guy
+                villain_objects.add(createVillainObject(R.drawable.bad1));
+
+                //Increase score with 1
+                score.AddScore(1);
+
+                //When score increased with 10, add a badguy and increase SuperVillains speed.
+                if(score.getScore()%10 ==0)
+                    villain_objects.add(createVillainObject(R.drawable.bad3));
                     superVillain_object.increaseSpeed();
 
                 break;
@@ -199,23 +234,26 @@ public class GameView extends SurfaceView {
 
         //Check collision between our Hero and SuperVillain
         if(collision_control.checkCollision(hero_object.getBounds(), superVillain_object.getBounds())) {
-            audioController.makeSound(Sound.HERO_DIE);
 
+            audioController.makeSound(Sound.HERO_DIE);
             gameLoopThread.setRunning(false);
+
+            //Draw a new background.
             Background bg = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.space));
             bg.onDraw(canvas);
+
+            //Stop music.
             audioController.pauseBackgroundMusic();
             audioController.makeSound(Sound.LAUGH);
 
+            //Paint text with the highscore.
             Paint paintText = new Paint();
             int height = this.getResources().getDisplayMetrics().heightPixels;
             paintText.setColor(Color.WHITE);
             paintText.setTextSize(100);
             paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
             canvas.drawText("Your score: " + score.getScore(), 100, height/2, paintText);
-
         }
-
     }
 
     //Stop the view in the Thread is not null.
@@ -224,7 +262,6 @@ public class GameView extends SurfaceView {
             gameLoopThread.setRunning(false);
         }
     }
-
 
     //Listen for touch events
     @Override

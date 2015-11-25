@@ -16,18 +16,29 @@ public class Backlog {
     4. Add first-screen that explains how the game works
 
     5. Add graphical objects like health for hero on screen
-        5.1 Hero should have health wich can be altered
-        5.2 Villian -||-
+
+            5.1 Hero should have health wich can be altered
+            5.2 Villian -||-
 
     6. Game should be able to complete or game over
 
     7.
 
 
-    Bug fixes
+    Bug fixes.
+
+    "Yeah we are not super heros. Pretty damn close but we have some minor bugs."
 
 
-    No bugs!
+
+    1.  When onSurfaceDestroyed() in GameView.java is trying to stop or
+        pause music in audioController.pauseBackgroundMusic(), LINE 63,
+        the app crash. That line is out commented at the moment.
+
+    2.  
+
+
+
 
 
      */
