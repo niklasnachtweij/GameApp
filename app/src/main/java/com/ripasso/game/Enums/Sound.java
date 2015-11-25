@@ -1,10 +1,10 @@
-package com.ripasso.game;
+package com.ripasso.game.Enums;
 
 /*Enum for different Sound.
 * Mathias Berneland & Niklas Nachtweij.
 * */
 
-enum Sound{
+public enum Sound{
     MONSTER_DIE,
     HERO_DIE,
     LAUGH,

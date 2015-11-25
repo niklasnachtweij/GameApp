@@ -1,8 +1,11 @@
-package com.ripasso.game;
+package com.ripasso.game.GameAnimations;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+
+import com.ripasso.game.GameFigures.GameObject;
+import com.ripasso.game.GameViews.GameView_Level1;
 
 import java.util.Random;
 
@@ -12,23 +15,23 @@ import java.util.Random;
 
 public class Obstacle extends GameObject {
 
-    private GameView gameView;
+    private GameView_Level1 gameViewLevel1;
     private Bitmap bmp;
     private int width;
     private int height;
 
     //Constructor
-    public Obstacle(GameView gameview, Bitmap bmp) {
+    public Obstacle(GameView_Level1 gameview, Bitmap bmp) {
 
-        this.gameView = gameview;
+        this.gameViewLevel1 = gameview;
         this.bmp = bmp;
         this.width = bmp.getWidth();
         this.height = bmp.getHeight();
 
         //Place new Obstacle at random position on canvas.
         Random rand = new Random();
-        x = rand.nextInt(gameView.getWidth() - width);
-        y = rand.nextInt(gameView.getHeight() - 200 - height); //200 because because the GameMenu is taking up some space in GameView.
+        x = rand.nextInt(gameViewLevel1.getWidth() - width);
+        y = rand.nextInt(gameViewLevel1.getHeight() - 200 - height); //200 because because the GameMenu is taking up some space in GameView.
     }
 
     //Draw method for drawing this object to canvas.

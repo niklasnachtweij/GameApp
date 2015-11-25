@@ -1,4 +1,4 @@
-package com.ripasso.game;
+package com.ripasso.game.GameFigures;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

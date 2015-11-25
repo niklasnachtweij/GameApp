@@ -1,9 +1,9 @@
-package com.ripasso.game;
+package com.ripasso.game.Enums;
 
 /*Enum with different directions
 * Mathias Berneland & Niklas Nachtweij
 * */
-enum Direction{
+public enum Direction{
 
     NORTH,
     WEST,

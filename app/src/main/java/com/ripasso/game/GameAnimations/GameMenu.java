@@ -1,29 +1,32 @@
-package com.ripasso.game;
+package com.ripasso.game.GameAnimations;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
-import android.util.Log;
+
+import com.ripasso.game.GameFigures.GameObject;
+import com.ripasso.game.GameViews.GameView_Level1;
+import com.ripasso.game.GameLogic.HighScore;
 
 /*Class reponsible for drawing the GameMenu.
 * Mathias Berneland & Niklas Nachtweij
 * */
 
-public class GameMenu extends GameObject{
+public class GameMenu extends GameObject {
 
     private int width; //Width of the menu.
     private int height; //Height of the menu.
-    private GameView gameView;
+    private GameView_Level1 gameViewLevel1;
     private HighScore score; //Current highscore.
 
-    public GameMenu(GameView gameView, int x, int y, int width, int height){
+    public GameMenu(GameView_Level1 gameViewLevel1, int x, int y, int width, int height){
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
-        this.gameView = gameView;
+        this.gameViewLevel1 = gameViewLevel1;
     }
 
     //Draw method for drawing to canvas.
@@ -39,7 +42,7 @@ public class GameMenu extends GameObject{
     //Draw highscore to canvas.
     private void drawHighScore(Canvas canvas){
         Paint paintText = new Paint();
-        score = gameView.getHighscore();
+        score = gameViewLevel1.getHighscore();
         paintText.setColor(Color.WHITE);
         paintText.setTextSize(20);
         paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));

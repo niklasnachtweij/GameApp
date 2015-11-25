@@ -1,4 +1,4 @@
-package com.ripasso.game;
+package com.ripasso.game.GameLogic;
 
 /*Class responsible for High score counts.
 * Mathias Berneland & Niklas Nachtweij.

@@ -1,8 +1,10 @@
-package com.ripasso.game;
+package com.ripasso.game.Controllers;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.util.Log;
+
+import com.ripasso.game.Enums.Sound;
+import com.ripasso.game.R;
 
 import java.util.Random;
 
@@ -19,7 +21,7 @@ public class AudioController {
     private int current_position;
 
     //Constructor
-    AudioController(Context ctx){
+    public AudioController(Context ctx){
         this.ctx = ctx;
         this.mp = new MediaPlayer();
         this.backgroundMusic = new MediaPlayer();

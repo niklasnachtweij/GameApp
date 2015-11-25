@@ -13,7 +13,7 @@
         >
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Activitys.Activity_Level1"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="landscape">

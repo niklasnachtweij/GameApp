@@ -1,4 +1,4 @@
-package com.ripasso.game;
+package com.ripasso.game.Controllers;
 
 import android.graphics.Rect;
 

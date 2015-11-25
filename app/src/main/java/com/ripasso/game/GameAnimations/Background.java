@@ -1,8 +1,10 @@
-package com.ripasso.game;
+package com.ripasso.game.GameAnimations;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+
+import com.ripasso.game.GameViews.GameView_Level1;
 
 /*Class responsible for creating and drawing a background picture.
 * Mathias Berneland & Niklas Nachtweij
@@ -15,7 +17,7 @@ public class Background {
     private int height;
 
     //Constructor
-    public Background(GameView gameView, Bitmap bmp) {
+    public Background(GameView_Level1 gameViewLevel1, Bitmap bmp) {
         this.width = bmp.getWidth();
         this.height = bmp.getHeight();
         this.bmp = bmp;

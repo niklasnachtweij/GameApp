@@ -1,6 +1,11 @@
-package com.ripasso.game;
+package com.ripasso.game.GameAnimations;
 
 import android.graphics.BitmapFactory;
+
+import com.ripasso.game.Controllers.CollisionControl;
+import com.ripasso.game.GameViews.GameView_Level1;
+import com.ripasso.game.R;
+
 import java.util.ArrayList;
 
 /*Class responsible for creating Obstacles.
@@ -10,7 +15,7 @@ import java.util.ArrayList;
 public class ObstacleFactory {
 
     //Create a number of Obstacle that is not intersecting and returning as ArrayList<Obstacle>.
-    public static ArrayList<Obstacle> createObstacle(GameView gameView, int numberObstacles) {
+    public static ArrayList<Obstacle> createObstacle(GameView_Level1 gameViewLevel1, int numberObstacles) {
 
         CollisionControl collision_control = new CollisionControl();
         int number = numberObstacles+1;
@@ -21,7 +26,7 @@ public class ObstacleFactory {
 
             //Fill the arraylist with a given number of Obstacles.
             for (int i = 0; i < number; i++)
-                obstacles.add(new Obstacle(gameView, BitmapFactory.decodeResource(gameView.getResources(), R.drawable.tablet)));
+                obstacles.add(new Obstacle(gameViewLevel1, BitmapFactory.decodeResource(gameViewLevel1.getResources(), R.drawable.tablet)));
 
             //Check if some objects is intersecting, then remove and add a new one.
             for (int i = 0; i < obstacles.size(); i++) {
@@ -29,7 +34,7 @@ public class ObstacleFactory {
 
                     if (collision_control.checkCollision(obstacles.get(i).getBounds(), obstacles.get(j).getBounds())) {
                         obstacles.remove(i);
-                        obstacles.add(new Obstacle(gameView, BitmapFactory.decodeResource(gameView.getResources(), R.drawable.tablet)));
+                        obstacles.add(new Obstacle(gameViewLevel1, BitmapFactory.decodeResource(gameViewLevel1.getResources(), R.drawable.tablet)));
                     }
                 }
             }

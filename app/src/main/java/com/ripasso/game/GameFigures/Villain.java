@@ -1,9 +1,11 @@
-package com.ripasso.game;
+package com.ripasso.game.GameFigures;
 
 import java.util.Random;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+
+import com.ripasso.game.GameViews.GameView_Level1;
 
 /*GameObject class for drawing Villains to a canvas.
 * Mathias Berneland & Niklas Nachtweij
@@ -19,7 +21,7 @@ public class Villain extends GameObject {
     private static final int BMP_COLUMNS = 3; //Columns of the bitmap.
     private static final int MAX_SPEED = 5;
 
-    private GameView gameView;
+    private GameView_Level1 gameViewLevel1;
     private Bitmap bmp;
 
     private int xSpeed;
@@ -30,15 +32,15 @@ public class Villain extends GameObject {
     private int currentFrame = 0;
 
     //Create the Villain at random position at canvas.
-    public Villain(GameView gameView, Bitmap bmp) {
+    public Villain(GameView_Level1 gameViewLevel1, Bitmap bmp) {
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;
-        this.gameView = gameView;
+        this.gameViewLevel1 = gameViewLevel1;
         this.bmp = bmp;
 
         Random rnd = new Random();
-        x = rnd.nextInt(gameView.getWidth() - width);
-        y = rnd.nextInt(gameView.getHeight()-200 - height); //200 because GameMenu is taking up 200 pixels of the canvas.
+        x = rnd.nextInt(gameViewLevel1.getWidth() - width);
+        y = rnd.nextInt(gameViewLevel1.getHeight()-200 - height); //200 because GameMenu is taking up 200 pixels of the canvas.
         xSpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
         ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
     }
@@ -46,13 +48,13 @@ public class Villain extends GameObject {
     //Choose right picture depending on direction and reversing X and Y speed if canvasborder is hit. Increase Xspeed and Yspeed.
     protected void update() {
 
-        if (x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0) {
+        if (x >= gameViewLevel1.getWidth() - width - xSpeed || x + xSpeed <= 0) {
             xSpeed = -xSpeed;
         }
 
         x = x + xSpeed;
 
-        if (y >= gameView.getHeight()-200 - height - ySpeed || y + ySpeed <= 0) {
+        if (y >= gameViewLevel1.getHeight()-200 - height - ySpeed || y + ySpeed <= 0) {
             ySpeed = -ySpeed;
         }
 

@@ -1,4 +1,4 @@
-package com.ripasso.game;
+package com.ripasso.game.GameViews;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +15,27 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.ripasso.game.Controllers.AudioController;
+import com.ripasso.game.Controllers.CollisionControl;
+import com.ripasso.game.Enums.Direction;
+import com.ripasso.game.Enums.Sound;
+import com.ripasso.game.GameAnimations.Background;
+import com.ripasso.game.GameAnimations.Blood;
+import com.ripasso.game.GameAnimations.GameMenu;
+import com.ripasso.game.GameAnimations.Obstacle;
+import com.ripasso.game.GameAnimations.ObstacleFactory;
+import com.ripasso.game.GameFigures.Hero;
+import com.ripasso.game.GameFigures.SuperVillain;
+import com.ripasso.game.GameFigures.Villain;
+import com.ripasso.game.GameLogic.HighScore;
+import com.ripasso.game.GameThreads.GameLoopThread;
+import com.ripasso.game.R;
+
 /*Main game view responsible drawing the game and handling user input events.
 * Mathias Berneland & Niklas Nachtweij.
 * */
 
-public class GameView extends SurfaceView {
+public class GameView_Level1 extends SurfaceView {
 
     //Main game loop thread
     private GameLoopThread gameLoopThread;
@@ -47,7 +63,7 @@ public class GameView extends SurfaceView {
     private float eventY = 0f;
 
     //Constructor
-    public GameView(Context context) {
+    public GameView_Level1(Context context) {
         super(context);
 
         gameLoopThread = new GameLoopThread(this);
@@ -143,7 +159,7 @@ public class GameView extends SurfaceView {
 
     //Draw objects to the canvas.
     @Override
-    protected void onDraw(Canvas canvas) {
+    public void onDraw(Canvas canvas) {
 
         //Draw the background
         background.onDraw(canvas);

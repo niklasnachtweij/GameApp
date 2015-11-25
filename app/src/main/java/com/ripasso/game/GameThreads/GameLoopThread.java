@@ -1,6 +1,8 @@
-package com.ripasso.game;
+package com.ripasso.game.GameThreads;
 
 import android.graphics.Canvas;
+
+import com.ripasso.game.GameViews.GameView_Level1;
 
 /*The main loop Thread class responsible for updating the GameView
 * Mathias Berneland & Niklas Nachtweij
@@ -9,11 +11,11 @@ import android.graphics.Canvas;
 public class GameLoopThread extends Thread {
 
     static final long FPS = 10; //Frames per second.
-    private GameView view;
+    private GameView_Level1 view;
     private boolean running = false;
 
     //Constructor
-    public GameLoopThread(GameView view) {
+    public GameLoopThread(GameView_Level1 view) {
         this.view = view;
     }
 

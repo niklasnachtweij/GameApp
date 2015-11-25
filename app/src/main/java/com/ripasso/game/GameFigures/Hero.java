@@ -1,9 +1,12 @@
-package com.ripasso.game;
+package com.ripasso.game.GameFigures;
 
 import java.util.Random;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+
+import com.ripasso.game.Enums.Direction;
+import com.ripasso.game.GameViews.GameView_Level1;
 
 /*Hero object class responsible for drawing a hero to GameView canvas.
 * Mathias Berneland & Niklas Nachtweij
@@ -16,7 +19,7 @@ public class Hero extends GameObject {
     private static final int BMP_ROWS = 4;
     private static final int BMP_COLUMNS = 3;
     private static final int MAX_SPEED = 30;
-    private GameView gameView;
+    private GameView_Level1 gameViewLevel1;
     private Bitmap bmp;
     private int xSpeed; //Speed in X direction.
     private int ySpeed; //Speed in Y direction.
@@ -25,26 +28,26 @@ public class Hero extends GameObject {
     private int height;
 
 
-    public Hero(GameView gameView, Bitmap bmp) {
+    public Hero(GameView_Level1 gameViewLevel1, Bitmap bmp) {
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;
-        this.gameView = gameView;
+        this.gameViewLevel1 = gameViewLevel1;
         this.bmp = bmp;
 
         Random rnd = new Random();
-        x = (gameView.getWidth() - width)/2 ;
-        y = (gameView.getHeight() - height)/2;
+        x = (gameViewLevel1.getWidth() - width)/2 ;
+        y = (gameViewLevel1.getHeight() - height)/2;
         xSpeed = 0;
         ySpeed = 0;
     }
 
 
     protected void update() {
-        if (x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0) {
+        if (x >= gameViewLevel1.getWidth() - width - xSpeed || x + xSpeed <= 0) {
             xSpeed = -xSpeed;
         }
         x = x + xSpeed;
-        if (y >= gameView.getHeight() - height - ySpeed || y + ySpeed <= 0) {
+        if (y >= gameViewLevel1.getHeight() - height - ySpeed || y + ySpeed <= 0) {
             ySpeed = -ySpeed;
         }
         y = y + ySpeed;
