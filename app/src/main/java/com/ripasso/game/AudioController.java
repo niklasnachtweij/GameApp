@@ -6,6 +6,11 @@ import android.util.Log;
 
 import java.util.Random;
 
+/*
+* Class responsible for play, paus and stop different game sound.
+* Mathias Berneland & Niklas Nachtweij
+* */
+
 public class AudioController {
 
     private Context ctx;
@@ -13,12 +18,14 @@ public class AudioController {
     private MediaPlayer backgroundMusic;
     private int current_position;
 
+    //Constructor
     AudioController(Context ctx){
         this.ctx = ctx;
         this.mp = new MediaPlayer();
         this.backgroundMusic = new MediaPlayer();
     }
 
+    //Making different sound depending on wich enum Sound is put in the method.
     public void makeSound(Sound indata) {
 
         if(mp.isPlaying()) {
@@ -31,7 +38,7 @@ public class AudioController {
             case MONSTER_DIE:
 
                 Random rand = new Random();
-                int randomNumber =  rand.nextInt(3);
+                int randomNumber =  rand.nextInt(3); //Get random number to make different sound.
 
                 if(randomNumber == 0) {
                     mp = MediaPlayer.create(ctx, R.raw.body_impact_1_with_grunt_);
@@ -78,6 +85,7 @@ public class AudioController {
         }
     }
 
+    //Pause background music
     public void pauseBackgroundMusic() {
 
         current_position = backgroundMusic.getCurrentPosition();
@@ -86,6 +94,7 @@ public class AudioController {
 
     }
 
+    //Start background music
     public void startBackgroundMusic() {
 
         if(!backgroundMusic.isPlaying()) {

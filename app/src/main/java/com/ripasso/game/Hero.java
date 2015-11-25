@@ -5,6 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
+/*Hero object class responsible for drawing a hero to GameView canvas.
+* Mathias Berneland & Niklas Nachtweij
+* */
+
 public class Hero extends GameObject {
     // direction = 0 up, 1 left, 2 down, 3 right,
     // animation = 3 back, 1 left, 0 front, 2 right
@@ -14,8 +18,8 @@ public class Hero extends GameObject {
     private static final int MAX_SPEED = 30;
     private GameView gameView;
     private Bitmap bmp;
-    private int xSpeed;
-    private int ySpeed;
+    private int xSpeed; //Speed in X direction.
+    private int ySpeed; //Speed in Y direction.
     private int currentFrame = 0;
     private int width;
     private int height;
@@ -33,6 +37,7 @@ public class Hero extends GameObject {
         xSpeed = 0;
         ySpeed = 0;
     }
+
 
     protected void update() {
         if (x >= gameView.getWidth() - width - xSpeed || x + xSpeed <= 0) {
@@ -58,18 +63,20 @@ public class Hero extends GameObject {
             canvas.drawBitmap(bmp, src, dst, null);
     }
 
+    //Get the right row depending on direction.
     private int getAnimationRow() {
         double dirDouble = (Math.atan2(xSpeed, ySpeed) / (Math.PI / 2) + 2);
         int direction = (int) Math.round(dirDouble) % BMP_ROWS;
         return DIRECTION_TO_ANIMATION_MAP[direction];
     }
 
-
+    //Get bounds as a Rect.
     @Override
     public Rect getBounds(){
         return new Rect((int) x, (int) y, (int)x+this.width, (int)y+this.height);
     }
 
+    //Move hero in different direction.
     public void move(Direction direction){
 
         switch(direction){
@@ -91,13 +98,13 @@ public class Hero extends GameObject {
     }
 
 
-
+    //Get method for width of Hero object.
     public int getWidth() {
         return width;
     }
 
 
-
+    //Get method for width of Hero object.
     public int getHeight() {
         return height;
     }

@@ -19,41 +19,50 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 public class GameView extends SurfaceView {
-    private GameLoopThread gameLoopThread;
-    private List<Villain> sprites = new ArrayList<Villain>();
+    private GameLoopThread gameLoopThread; //Current game loop
+
+    private List<Villain> sprites = new ArrayList<Villain>(); //List of Villains
     private List<Blood> temps = new ArrayList<Blood>();
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
+
+    private AudioController audioController;
     private CollisionControl collision_control = new CollisionControl();
+
     private Bitmap bmpBlood;
     private Background background;
+    private GameMenu gameMenu;
     private HighScore score;
+
     private Hero hero_object;
     private SuperVillain superVillain_object;
-    private AudioController audioController;
-    private GameMenu gameMenu;
+
     private Vibrator vibrator;
 
+    //TouchEvent variables
     private boolean isPressed;
     private float eventX = 0f;
     private float eventY = 0f;
 
     public GameView(Context context) {
         super(context);
+
         gameLoopThread = new GameLoopThread(this);
         getHolder().addCallback(new SurfaceHolder.Callback() {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
+
                 Log.d("GameView.java: ", "SurfaceDestroyed");
-                boolean retry = true;
-                gameLoopThread.setRunning(false);
+
                 audioController.pauseBackgroundMusic();
+                gameLoopThread.setRunning(false);
+
+                boolean retry = true;
                 while (retry) {
                     try {
                         gameLoopThread.join();
                         retry = false;
-                    } catch (InterruptedException e) {
-                    }
+                    } catch (InterruptedException e) {}
                 }
             }
 
@@ -72,6 +81,13 @@ public class GameView extends SurfaceView {
                 Log.d("GameView.java: ", "SurfaceChanged");
             }
         });
+
+        Initialize();
+
+    }
+
+    //Initializing variables.
+    private void Initialize(){
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
         score = new HighScore();
         audioController = new AudioController(getContext());
@@ -81,8 +97,7 @@ public class GameView extends SurfaceView {
 
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
-        gameMenu = new GameMenu(this, 0, height-200, width, 200); //Create a GameMenu
-
+        gameMenu = new GameMenu(this, 0, height-200, width, 200);
     }
 
 
