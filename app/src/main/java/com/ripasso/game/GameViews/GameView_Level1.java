@@ -217,21 +217,21 @@ public class GameView_Level1 extends SurfaceView {
         //Check for collisions
         for (int i = villain_objects.size() - 1; i >= 0; i--) {
 
-            Villain sprite = villain_objects.get(i);
+            Villain villain = villain_objects.get(i);
 
-            if(collision_control.checkCollision(hero_object.getBounds(), sprite.getBounds())){
+            if(collision_control.checkCollision(hero_object.getBounds(), villain.getBounds())){
 
-                //Plays soundeffect for dying monster
+                //Plays sound effect for dying monster
                 audioController.makeSound(Sound.MONSTER_DIE);
 
                 //35ms vibration on impact
                 vibrator.vibrate(35);
 
                 //Add blood
-                blood.add(new Blood(blood, this, sprite.getX(), sprite.getY(), BitmapFactory.decodeResource(getResources(), R.drawable.blood1)));
+                blood.add(new Blood(blood, this, villain.getX(), villain.getY(), BitmapFactory.decodeResource(getResources(), R.drawable.blood1)));
 
                 //Remove the bad guy when it's hit by hero
-                villain_objects.remove(sprite);
+                villain_objects.remove(villain);
 
                 //Add a new bad guy
                 villain_objects.add(createVillainObject(R.drawable.bad1));
