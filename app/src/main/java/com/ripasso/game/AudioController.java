@@ -67,7 +67,6 @@ public class AudioController {
     public void pauseBackgroundMusic() {
 
         current_position = backgroundMusic.getCurrentPosition();
-        Log.d("Background music current position is ", Integer.toString(current_position));
         backgroundMusic.pause();
         backgroundMusic.release();
 
@@ -76,7 +75,6 @@ public class AudioController {
     public void startBackgroundMusic() {
 
         if(!backgroundMusic.isPlaying()) {
-            Log.d("Background music current position is ", Integer.toString(current_position));
             backgroundMusic.seekTo(current_position);
             backgroundMusic.start();
 
