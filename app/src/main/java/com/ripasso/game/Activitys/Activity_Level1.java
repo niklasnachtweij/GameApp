@@ -7,13 +7,14 @@ import android.view.Window;
 
 import com.ripasso.game.GameViews.GameView_Level1;
 
-/*Activity responsible for handling the Game activity. */
+/*Activity responsible for handling the Game activity.
+* Mathias Berneland & Niklas Nachtweij.
+* */
 
 public class Activity_Level1 extends Activity {
 
-    private GameView_Level1 gameview; //
+    private GameView_Level1 gameview;
 
-    /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
