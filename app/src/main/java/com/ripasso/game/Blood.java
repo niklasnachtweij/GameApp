@@ -5,13 +5,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-public class TSprite extends GameObject {
+public class Blood extends GameObject {
     private Bitmap bmp;
     private int life = 15;
-    private List<TSprite> temps;
+    private List<Blood> temps;
 
-    public TSprite(List<TSprite> temps, GameView gameView, float x,
-                   float y, Bitmap bmp) {
+    public Blood(List<Blood> temps, GameView gameView, float x,
+                 float y, Bitmap bmp) {
         this.x = Math.min(Math.max(x - bmp.getWidth() / 2, 0),
                 gameView.getWidth() - bmp.getWidth());
         this.y = Math.min(Math.max(y - bmp.getHeight() / 2, 0),

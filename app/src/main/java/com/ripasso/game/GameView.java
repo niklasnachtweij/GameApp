@@ -15,7 +15,7 @@ import android.view.SurfaceView;
 public class GameView extends SurfaceView {
     private GameLoopThread gameLoopThread;
     private List<Villain> sprites = new ArrayList<Villain>();
-    private List<TSprite> temps = new ArrayList<TSprite>();
+    private List<Blood> temps = new ArrayList<Blood>();
     private List<Obstacle> obstacles = new ArrayList<Obstacle>();
     private CollisionControl collision_control = new CollisionControl();
     private Bitmap bmpBlood;
@@ -106,7 +106,7 @@ public class GameView extends SurfaceView {
         background.onDraw(canvas);
         gameMenu.onDraw(canvas);
 
-        //Drawing the temp TSprite (Temporary Sprite)
+        //Drawing the temp Blood (Temporary Sprite)
         for (int i = temps.size() - 1; i >= 0; i--) {
             temps.get(i).onDraw(canvas);
         }
@@ -160,7 +160,7 @@ public class GameView extends SurfaceView {
             if(collision_control.checkCollision(hero_object.getBounds(), sprite.getBounds())){
                 audioController.makeSound(Sound.MONSTER_DIE);                                   //Plays soundeffect for dying monster
                 vibrator.vibrate(35);                                                           //35ms vibration on impact
-                temps.add(new TSprite(temps, this, sprite.getX(), sprite.getY(), bmpBlood));    //Add blood
+                temps.add(new Blood(temps, this, sprite.getX(), sprite.getY(), bmpBlood));    //Add blood
                 sprites.remove(sprite);                                                         //Remove the bad guy when it's hit by hero
                 sprites.add(createSprite(R.drawable.bad1));                                     //Add a new bad guy
                 score.AddScore(1);                                                              //Increase score with 1
