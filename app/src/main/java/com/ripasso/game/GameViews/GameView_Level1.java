@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.os.Vibrator;
 import android.util.Log;
@@ -142,7 +143,7 @@ public class GameView_Level1 extends SurfaceView {
         superVillain_object = new SuperVillain(this, BitmapFactory.decodeResource(getResources(), R.drawable.bad4));
 
         //Fill the list with an amount obstacles
-        createObstacle(10);
+        createObstacle(5);
 
 }
 
@@ -172,13 +173,20 @@ public class GameView_Level1 extends SurfaceView {
             blood.get(i).onDraw(canvas);
         }
 
-        //Draw villains.
+        //Draw villains
         for (Villain sprite : villain_objects) {
             sprite.onDraw(canvas);
+
+            //COLLISION CONTROL BETWEEN OBSTACLE AND VILLAINS, NOT FULLY WORKING YET.
+            for(Obstacle obstacle : obstacles){
+                if(collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()))
+                    sprite.reverseY_Speed();
+            }
         }
 
         //Draw SuperVillain.
         superVillain_object.onDraw(canvas);
+
 
         //Draw Hero.
         hero_object.onDraw(canvas);

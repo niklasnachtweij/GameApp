@@ -45,6 +45,8 @@ public class Villain extends GameObject {
         ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
     }
 
+
+
     //Choose right picture depending on direction and reversing X and Y speed if canvasborder is hit. Increase Xspeed and Yspeed.
     protected void update() {
 
@@ -86,5 +88,21 @@ public class Villain extends GameObject {
     //This objects bounds as a Rect.
     public Rect getBounds(){
         return new Rect((int) x, (int) y, (int)x+this.width, (int)y+this.height);
+    }
+
+    public void reverseX_Speed(){
+        xSpeed = -xSpeed;
+    }
+
+    public void reverseY_Speed(){
+        ySpeed = -ySpeed;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }

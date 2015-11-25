@@ -91,4 +91,12 @@ public class SuperVillain extends GameObject {
     public void increaseSpeed() {
         this.max_speed =+ 5;
     }
+
+    public void reverseX_Speed(){
+        xSpeed = -xSpeed;
+    }
+
+    public void reverseY_Speed(){
+        ySpeed = -ySpeed;
+    }
 }

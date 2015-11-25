@@ -17,6 +17,7 @@ public class Obstacle extends GameObject {
 
     private GameView_Level1 gameViewLevel1;
     private Bitmap bmp;
+
     private int width;
     private int height;
 
@@ -50,6 +51,14 @@ public class Obstacle extends GameObject {
     @Override
     public Rect getBounds(){
         return new Rect((int) x, (int) y, (int)x+this.width, (int)y+this.height);
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
 
