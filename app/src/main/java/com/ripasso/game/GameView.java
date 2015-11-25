@@ -40,6 +40,7 @@ public class GameView extends SurfaceView {
                 Log.d("GameView.java: ", "SurfaceDestroyed");
                 boolean retry = true;
                 gameLoopThread.setRunning(false);
+                audioController.pauseBackgroundMusic();
                 while (retry) {
                     try {
                         gameLoopThread.join();
@@ -55,6 +56,7 @@ public class GameView extends SurfaceView {
                 createSprites();
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
+                audioController.startBackgroundMusic();
             }
 
             @Override
@@ -66,11 +68,9 @@ public class GameView extends SurfaceView {
         bmpBlood = BitmapFactory.decodeResource(getResources(), R.drawable.blood1);
         score = new HighScore();
         audioController = new AudioController(getContext());
-
+        audioController.makeSound(Sound.BACKGROUND_MUSIC);
         vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
         background = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.vegtn_hms_srcbed));
-
-        audioController.makeSound(Sound.BACKGROUND_MUSIC);          //Starts playing the background music
 
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
