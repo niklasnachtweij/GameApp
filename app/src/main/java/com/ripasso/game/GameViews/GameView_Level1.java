@@ -143,7 +143,7 @@ public class GameView_Level1 extends SurfaceView {
         superVillain_object = new SuperVillain(this, BitmapFactory.decodeResource(getResources(), R.drawable.bad4));
 
         //Fill the list with an amount obstacles
-        createObstacle(5);
+        createObstacle(10);
 
 }
 
@@ -179,8 +179,31 @@ public class GameView_Level1 extends SurfaceView {
 
             //COLLISION CONTROL BETWEEN OBSTACLE AND VILLAINS, NOT FULLY WORKING YET.
             for(Obstacle obstacle : obstacles){
-                if(collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()))
+
+                int obstacle_top = obstacle.getBounds().top; //Ska alltid vara mindre än sprite_bottom, ANNARS kollision
+                int sprite_bottom = sprite.getBounds().bottom;
+
+                int obstacle_bottom = obstacle.getBounds().bottom;
+                int sprite_top = sprite.getBounds().top;
+
+                if((collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
+                        obstacle_top <= sprite_bottom) ||
+                        (collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
+                        obstacle_bottom <= sprite_top))
                     sprite.reverseY_Speed();
+
+                int obstacle_left = obstacle.getBounds().left; //Ska alltid vara mindre än sprite_right ANNARS kollision
+                int sprite_right = sprite.getBounds().right;
+
+                int obstacle_right = obstacle.getBounds().right;
+                int sprite_left = sprite.getBounds().left;
+
+                if((collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
+                        obstacle_left <= sprite_right) ||
+                        (collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds())&&
+                        sprite_left <= obstacle_right))
+                    sprite.reverseX_Speed();
+                //SLUT PÅ BUGGKODEN
             }
         }
 
@@ -270,7 +293,7 @@ public class GameView_Level1 extends SurfaceView {
             audioController.pauseBackgroundMusic();
             audioController.makeSound(Sound.LAUGH);
 
-            //Paint text with the highscore.
+            //Paint text with the highscore. --** THIS HAS TO BE REPLACED BY A NEW ACTIVITY AND VIEW.
             Paint paintText = new Paint();
             int height = this.getResources().getDisplayMetrics().heightPixels;
             paintText.setColor(Color.WHITE);
