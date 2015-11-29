@@ -33,6 +33,9 @@ public class GameLoopThread extends Thread {
         while (running) {
             Canvas c = null;
             startTime = System.currentTimeMillis(); //Get current time
+
+            view.update();
+
             try {
                 c = view.getHolder().lockCanvas();
                 synchronized (view.getHolder()) {

@@ -63,6 +63,8 @@ public class GameView_Level1 extends SurfaceView {
     private float eventX = 0f;
     private float eventY = 0f;
 
+    private Canvas currentCanvas;
+
     //Constructor
     public GameView_Level1(Context context) {
         super(context);
@@ -176,40 +178,10 @@ public class GameView_Level1 extends SurfaceView {
         //Draw villains
         for (Villain sprite : villain_objects) {
             sprite.onDraw(canvas);
-
-            //COLLISION CONTROL BETWEEN OBSTACLE AND VILLAINS, NOT FULLY WORKING YET.
-            for(Obstacle obstacle : obstacles){
-
-                int obstacle_top = obstacle.getBounds().top; //Ska alltid vara mindre än sprite_bottom, ANNARS kollision
-                int sprite_bottom = sprite.getBounds().bottom;
-
-                int obstacle_bottom = obstacle.getBounds().bottom;
-                int sprite_top = sprite.getBounds().top;
-
-                if((collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
-                        obstacle_top <= sprite_bottom) ||
-                        (collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
-                        obstacle_bottom <= sprite_top))
-                    sprite.reverseY_Speed();
-
-                int obstacle_left = obstacle.getBounds().left; //Ska alltid vara mindre än sprite_right ANNARS kollision
-                int sprite_right = sprite.getBounds().right;
-
-                int obstacle_right = obstacle.getBounds().right;
-                int sprite_left = sprite.getBounds().left;
-
-                if((collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
-                        obstacle_left <= sprite_right) ||
-                        (collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds())&&
-                        sprite_left <= obstacle_right))
-                    sprite.reverseX_Speed();
-                //SLUT PÅ BUGGKODEN
-            }
         }
 
         //Draw SuperVillain.
         superVillain_object.onDraw(canvas);
-
 
         //Draw Hero.
         hero_object.onDraw(canvas);
@@ -219,31 +191,15 @@ public class GameView_Level1 extends SurfaceView {
             obstacle.onDraw(canvas);
         }
 
-        //Make the Hero walk in different directions.
-        if (isPressed && hero_object.getX() < eventX &&
-                eventY < hero_object.getY() + 60 &&
-                eventY > hero_object.getY() - 60 &&
-                (hero_object.getX() + hero_object.getWidth()) < (getWidth()-50)) {
-            hero_object.move(Direction.EAST);
+        //Check for collision between Hero and Supervillain
+        checkCollision_Hero_SuperVillain(canvas);
 
-        } else if (isPressed && hero_object.getY() < eventY &&
-                eventX < hero_object.getX() + 60 &&
-                eventX > hero_object.getX() &&
-                hero_object.getY() >= this.getY() &&
-                hero_object.getY() + hero_object.getHeight() < this.getHeight()-200) {
-            hero_object.move(Direction.SOUTH);
 
-        } else if (isPressed && hero_object.getX() > eventX &&
-                eventY < hero_object.getY() + 60 &&
-                eventY > hero_object.getY() - 60 &&
-                hero_object.getX() >= 0) {
-            hero_object.move(Direction.WEST);
 
-        } else if (isPressed && hero_object.getY() > eventY &&
-                eventX < hero_object.getX() + 60 &&
-                eventX > hero_object.getX() - 60){
-            hero_object.move(Direction.NORTH);
-        }
+
+    }
+
+    private void checkCollision_Hero_Villain(){
 
         //Check for collisions
         for (int i = villain_objects.size() - 1; i >= 0; i--) {
@@ -273,11 +229,80 @@ public class GameView_Level1 extends SurfaceView {
                 //When score increased with 10, add a badguy and increase SuperVillains speed.
                 if(score.getScore()%10 ==0)
                     villain_objects.add(createVillainObject(R.drawable.bad3));
-                    superVillain_object.increaseSpeed();
 
-                break;
+                superVillain_object.increaseSpeed();
+
+            break;
             }
         }
+    }
+
+    private void moveHero(){
+        //Make the Hero walk in different directions.
+        if (isPressed && hero_object.getX() < eventX &&
+                eventY < hero_object.getY() + 60 &&
+                eventY > hero_object.getY() - 60 &&
+                (hero_object.getX() + hero_object.getWidth()) < (getWidth()-50)) {
+            hero_object.move(Direction.EAST);
+
+        } else if (isPressed && hero_object.getY() < eventY &&
+                eventX < hero_object.getX() + 60 &&
+                eventX > hero_object.getX() &&
+                hero_object.getY() >= this.getY() &&
+                hero_object.getY() + hero_object.getHeight() < this.getHeight()-200) {
+            hero_object.move(Direction.SOUTH);
+
+        } else if (isPressed && hero_object.getX() > eventX &&
+                eventY < hero_object.getY() + 60 &&
+                eventY > hero_object.getY() - 60 &&
+                hero_object.getX() >= 0) {
+            hero_object.move(Direction.WEST);
+
+        } else if (isPressed && hero_object.getY() > eventY &&
+                eventX < hero_object.getX() + 60 &&
+                eventX > hero_object.getX() - 60){
+            hero_object.move(Direction.NORTH);
+        }
+    }
+
+    //Check collision between Villain objects and Obstacle Objects
+    //UNDER CONSTRUCTION NOT FULLY FUNCTIONAL YET.
+    private void checkCollision_Villain_Obstacle() {
+
+        for (Villain sprite : villain_objects) {
+            for (Obstacle obstacle : obstacles) {
+
+                int obstacle_top = obstacle.getBounds().top; //Ska alltid vara mindre än sprite_bottom, ANNARS kollision
+                int sprite_bottom = sprite.getBounds().bottom;
+
+                int obstacle_bottom = obstacle.getBounds().bottom;
+                int sprite_top = sprite.getBounds().top;
+
+                if ((collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
+                        obstacle_top <= sprite_bottom) ||
+                        (collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
+                                obstacle_bottom <= sprite_top))
+                    sprite.reverseY_Speed();
+
+                int obstacle_left = obstacle.getBounds().left; //Ska alltid vara mindre än sprite_right ANNARS kollision
+                int sprite_right = sprite.getBounds().right;
+
+                int obstacle_right = obstacle.getBounds().right;
+                int sprite_left = sprite.getBounds().left;
+
+                if ((collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
+                        obstacle_left <= sprite_right) ||
+                        (collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
+                                sprite_left <= obstacle_right))
+                    sprite.reverseX_Speed();
+                //SLUT PÅ BUGGKODEN
+            }
+        }
+    }
+
+
+    //Check collision between Hero object and SuperVillain object.
+    private void checkCollision_Hero_SuperVillain(Canvas canvas){
 
         //Check collision between our Hero and SuperVillain
         if(collision_control.checkCollision(hero_object.getBounds(), superVillain_object.getBounds())) {
@@ -285,7 +310,7 @@ public class GameView_Level1 extends SurfaceView {
             audioController.makeSound(Sound.HERO_DIE);
             gameLoopThread.setRunning(false);
 
-            //Draw a new background.
+            //Draw a new background. NOT NICE, CREATE A NEW VIEW AND PUT HIGHSCORE AS AN INTENT.
             Background bg = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.space));
             bg.onDraw(canvas);
 
@@ -301,6 +326,20 @@ public class GameView_Level1 extends SurfaceView {
             paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
             canvas.drawText("Your score: " + score.getScore(), 100, height/2, paintText);
         }
+    }
+
+    //Update
+    public void update(){
+
+        //Move the Hero in different directions.
+        moveHero();
+
+        //Check collsion between Villain and Obstacle
+        checkCollision_Villain_Obstacle();
+
+        //Check for collisions between Hero and regular Villain
+        checkCollision_Hero_Villain();
+
     }
 
     //Stop the view in the Thread is not null.
