@@ -22,12 +22,13 @@ public class Backlog {
 
     6. Game should be able to complete or game over
 
-    7.
+    7. When Hero and SuperVillain is colliding, make a new Activity with a new View start. Put
+        the highscore as an intent to the new activity.
 
 
     Bug fixes.
 
-    "Yeah we are not super heros. Pretty damn close but we have some minor bugs."
+    "Yeah we are not super heros. Pretty damn close but we actually could have some minor bugs."
 
 
 

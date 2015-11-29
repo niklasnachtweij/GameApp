@@ -63,8 +63,6 @@ public class GameView_Level1 extends SurfaceView {
     private float eventX = 0f;
     private float eventY = 0f;
 
-    private Canvas currentCanvas;
-
     //Constructor
     public GameView_Level1(Context context) {
         super(context);
@@ -193,10 +191,6 @@ public class GameView_Level1 extends SurfaceView {
 
         //Check for collision between Hero and Supervillain
         checkCollision_Hero_SuperVillain(canvas);
-
-
-
-
     }
 
     private void checkCollision_Hero_Villain(){
@@ -295,10 +289,9 @@ public class GameView_Level1 extends SurfaceView {
                         (collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
                                 sprite_left <= obstacle_right))
                     sprite.reverseX_Speed();
-                //SLUT PÅ BUGGKODEN
             }
         }
-    }
+    }//SLUT PÅ BUGGKODEN
 
 
     //Check collision between Hero object and SuperVillain object.
