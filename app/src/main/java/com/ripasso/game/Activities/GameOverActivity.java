@@ -51,4 +51,8 @@ public class GameOverActivity extends Activity {
         Log.d("GameOverActivity.java: ", "onResume()");
     }
 
+    //Override onBackPressed to disable back button.
+    @Override
+    public void onBackPressed() {}
+
 }

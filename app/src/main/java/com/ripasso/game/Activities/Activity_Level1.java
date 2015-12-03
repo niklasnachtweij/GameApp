@@ -44,4 +44,8 @@ public class Activity_Level1 extends Activity {
         //Create a new GameView when resuming to the game.
         setContentView(new GameView_Level1(this));
     }
+
+    //Override onBackPressed to disable back button.
+    @Override
+    public void onBackPressed() {}
 }
