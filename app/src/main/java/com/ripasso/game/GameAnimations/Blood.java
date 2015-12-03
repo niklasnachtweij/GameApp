@@ -49,7 +49,4 @@ public class Blood extends GameObject {
     public Rect getBounds(){
         return new Rect(0,0,0,0);
     }
-
-
-
 }
