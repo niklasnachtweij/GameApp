@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Game</string>
     <string name="action_settings">Settings</string>
+    <string name="super_villain_explanation">This is a super villain. The hero has to avoid him no matter what.
+    If he catches Dossian, the hero will die instantly.</string>
+    <string name="game_explanation">This game is taking place in a world far far from here. The hero Dossian is
+    trying to save the world from villains. Help Dossian kill all the villains, but remember to stay alive!</string>
+
 </resources>

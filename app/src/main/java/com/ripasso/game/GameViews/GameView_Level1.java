@@ -3,19 +3,17 @@ package com.ripasso.game.GameViews;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.ripasso.game.Activitys.GameOverActivity;
 import com.ripasso.game.Controllers.AudioController;
 import com.ripasso.game.Controllers.CollisionControl;
 import com.ripasso.game.Enums.Direction;
@@ -75,7 +73,7 @@ public class GameView_Level1 extends SurfaceView {
             @Override
             public void surfaceDestroyed(SurfaceHolder holder) {
 
-                Log.d("GameView.java: ", "SurfaceDestroyed");
+                Log.d("GameView_Level1.java: ", "SurfaceDestroyed");
 
                 //audioController.pauseBackgroundMusic(); THIS LINE IS CAUSING THE APP TO CRASH. BUGG!
 
@@ -93,7 +91,7 @@ public class GameView_Level1 extends SurfaceView {
 
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
-                Log.d("GameView.java: ", "SurfaceCreated");
+                Log.d("GameView_Level1.java: ", "SurfaceCreated");
 
                 initializeGameObjects();
 
@@ -105,7 +103,7 @@ public class GameView_Level1 extends SurfaceView {
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format,
                                        int width, int height) {
-                Log.d("GameView.java: ", "SurfaceChanged");
+                Log.d("GameView_Level1.java: ", "SurfaceChanged");
             }
         });
 
@@ -143,7 +141,7 @@ public class GameView_Level1 extends SurfaceView {
         superVillain_object = new SuperVillain(this, BitmapFactory.decodeResource(getResources(), R.drawable.bad4));
 
         //Fill the list with an amount obstacles
-        createObstacle(10);
+        createObstacle(5);
 
 }
 
@@ -178,9 +176,6 @@ public class GameView_Level1 extends SurfaceView {
             sprite.onDraw(canvas);
         }
 
-        //Draw SuperVillain.
-        superVillain_object.onDraw(canvas);
-
         //Draw Hero.
         hero_object.onDraw(canvas);
 
@@ -188,6 +183,9 @@ public class GameView_Level1 extends SurfaceView {
         for(Obstacle obstacle : obstacles) {
             obstacle.onDraw(canvas);
         }
+
+        //Draw SuperVillain.
+        superVillain_object.onDraw(canvas);
 
         //Check for collision between Hero and Supervillain
         checkCollision_Hero_SuperVillain(canvas);
@@ -301,24 +299,24 @@ public class GameView_Level1 extends SurfaceView {
         if(collision_control.checkCollision(hero_object.getBounds(), superVillain_object.getBounds())) {
 
             audioController.makeSound(Sound.HERO_DIE);
+            audioController.makeSound(Sound.LAUGH);
             gameLoopThread.setRunning(false);
-
-            //Draw a new background. NOT NICE, CREATE A NEW VIEW AND PUT HIGHSCORE AS AN INTENT.
-            Background bg = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.space));
-            bg.onDraw(canvas);
 
             //Stop music.
             audioController.pauseBackgroundMusic();
             audioController.makeSound(Sound.LAUGH);
 
-            //Paint text with the highscore. --** THIS HAS TO BE REPLACED BY A NEW ACTIVITY AND VIEW.
-            Paint paintText = new Paint();
-            int height = this.getResources().getDisplayMetrics().heightPixels;
-            paintText.setColor(Color.WHITE);
-            paintText.setTextSize(100);
-            paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-            canvas.drawText("Your score: " + score.getScore(), 100, height/2, paintText);
+            callGameOver();
         }
+    }
+
+    public void callGameOver(){
+        Intent intent = new Intent(getContext(), GameOverActivity.class);
+        intent.putExtra("score", Integer.toString(score.getScore()));
+
+        gameLoopThread.setRunning(false);
+
+        getContext().startActivity(intent);
     }
 
     //Update

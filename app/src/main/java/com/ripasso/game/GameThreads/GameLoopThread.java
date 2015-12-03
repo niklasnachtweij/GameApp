@@ -30,6 +30,7 @@ public class GameLoopThread extends Thread {
         long ticksPS = 1000 / FPS; //Ticks per second.
         long startTime;
         long sleepTime;
+
         while (running) {
             Canvas c = null;
             startTime = System.currentTimeMillis(); //Get current time
@@ -47,6 +48,7 @@ public class GameLoopThread extends Thread {
                 }
             }
 
+
             //Set sleepTime to the amount of ticks per second minus current time minus the start time.
             sleepTime = ticksPS - (System.currentTimeMillis() - startTime);
             try {
@@ -57,4 +59,5 @@ public class GameLoopThread extends Thread {
             } catch (Exception e) {}
         }
     }
+
 }
