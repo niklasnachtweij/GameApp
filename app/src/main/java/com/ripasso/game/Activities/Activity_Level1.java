@@ -33,7 +33,7 @@ public class Activity_Level1 extends Activity {
 
         Log.d("Activity_Level1.java: ", "onPause()");
 
-        //Stop view when onPause() is called.
+        //Stop view Thread when onPause() is called.
         gameview.StopView();
     }
 

@@ -2,33 +2,68 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BLACK">
+    android:background="@color/DARK_GREY">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal">
+        android:background="@color/BLACK"
+        android:layout_margin="5dp">
 
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="New game"
-            android:id="@+id/new_game_btn"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="60dp"
-            android:background="@color/WHITE"
-            android:onClick="startNewGame"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="How to play"
-            android:id="@+id/how_to_play_btn"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="@color/WHITE"
-            android:onClick="startHowToPlayView"
-             />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMediumInverse"
+                android:text="@string/nice_quote"
+                android:id="@+id/quoteTextview"
+                android:textColor="@color/WHITE"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:textStyle="italic"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <Button
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/new_game"
+                    android:id="@+id/new_game_btn"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/DARK_PURPLE"
+                    android:onClick="startNewGame"
+                    android:textColor="@color/WHITE"/>
+
+                <Button
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/how_to_play"
+                    android:id="@+id/how_to_play_btn"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/DARK_PURPLE"
+                    android:onClick="startHowToPlayView"
+                    android:textColor="@color/WHITE"
+                     />
+
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>

@@ -2,46 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/BLACK">
+    android:background="@color/DARK_GREY">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:background="@color/BLACK"
+        android:layout_margin="5dp">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></LinearLayout>
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="@string/game_explanation"
-            android:id="@+id/game_explanation_text"
-            android:textColor="@color/WHITE"
-            android:layout_margin="20dp"/>
-    </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/game_explanation"
+                android:id="@+id/game_explanation_text"
+                android:textColor="@color/WHITE"
+                android:layout_margin="20dp"/>
+        </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:src="@drawable/bad4n"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/super_villain_explaination"
-            android:text="@string/super_villain_explanation"
-            android:textColor="@color/WHITE"
-            android:layout_marginTop="20dp"
-        />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:src="@drawable/bad4n"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/super_villain_explaination"
+                android:text="@string/super_villain_explanation"
+                android:textColor="@color/WHITE"
+                android:layout_marginTop="20dp"
+            />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

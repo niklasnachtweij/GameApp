@@ -354,8 +354,7 @@ public class GameView_Level1 extends SurfaceView {
         return true;
     }
 
-    //Sharing is caring <3, so other classes can see current score for printing purposes
-    public HighScore getHighscore() {
+    public HighScore getHighScore(){
         return score;
     }
 }

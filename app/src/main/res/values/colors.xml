@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="BLACK">#000000</color>
     <color name="WHITE">#FFFFFF</color>
+    <color name="DARK_RED">#CB6262</color>
+    <color name="DARK_GREY">#868686</color>
+    <color name="DARK_PURPLE">#7704C3</color>
 </resources>

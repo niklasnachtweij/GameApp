@@ -42,7 +42,7 @@ public class GameMenu extends GameObject {
     //Draw highscore to canvas.
     private void drawHighScore(Canvas canvas){
         Paint paintText = new Paint();
-        score = gameViewLevel1.getHighscore();
+        score = gameViewLevel1.getHighScore();
         paintText.setColor(Color.WHITE);
         paintText.setTextSize(20);
         paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
