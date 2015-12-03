@@ -1,4 +1,4 @@
-package com.ripasso.game.Activitys;
+package com.ripasso.game.Activities;
 
 
 import android.app.Activity;

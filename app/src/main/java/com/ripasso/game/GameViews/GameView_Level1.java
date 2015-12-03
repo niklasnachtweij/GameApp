@@ -13,7 +13,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.ripasso.game.Activitys.GameOverActivity;
+import com.ripasso.game.Activities.GameOverActivity;
 import com.ripasso.game.Controllers.AudioController;
 import com.ripasso.game.Controllers.CollisionControl;
 import com.ripasso.game.Enums.Direction;
