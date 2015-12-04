@@ -50,5 +50,9 @@ public class NewGameActivity extends Activity {
         startActivity(intent);
     }
 
+    //Override onBackPressed to disable back button.
+    @Override
+    public void onBackPressed() {}
+
 
 }
