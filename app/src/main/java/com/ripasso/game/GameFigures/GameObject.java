@@ -12,7 +12,9 @@ public abstract class GameObject {
 
     protected float x; //X position.
     protected float y; //Y position.
-    protected Bitmap bmp;
+    protected Bitmap bmp; // The bitmap of the object
+
+    protected int health; // Object's health
 
     //Abstract onDraw method for drawing to canvas.
     public abstract void onDraw(Canvas canvas);
@@ -48,6 +50,29 @@ public abstract class GameObject {
     //Get bitmap.
     public Bitmap getBmp() {
         return bmp;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+
+    //Increase object's health.
+    public void increaseHealth(int health){
+        this.health += health;
+    }
+
+    //Decrease object's health.
+    public void decreaseHealth(int health){
+        this.health -= health;
+
+        //If health is negative, set health to 0.
+        if(this.health<0)
+            this.health = 0;
     }
 
 }

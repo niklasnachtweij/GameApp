@@ -38,6 +38,9 @@ public class Villain extends GameObject {
         this.gameViewLevel1 = gameViewLevel1;
         this.bmp = bmp;
 
+        //Set the Health of the Villain
+        this.setHealth(20);
+
         Random rnd = new Random();
         x = rnd.nextInt(gameViewLevel1.getWidth() - width);
         y = rnd.nextInt(gameViewLevel1.getHeight()-200 - height); //200 because GameMenu is taking up 200 pixels of the canvas.

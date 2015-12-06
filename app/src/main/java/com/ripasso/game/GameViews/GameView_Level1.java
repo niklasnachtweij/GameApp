@@ -106,7 +106,6 @@ public class GameView_Level1 extends SurfaceView {
                 Log.d("GameView_Level1.java: ", "SurfaceChanged");
             }
         });
-
         Initialize();
 
     }
@@ -200,23 +199,27 @@ public class GameView_Level1 extends SurfaceView {
 
             if(collision_control.checkCollision(hero_object.getBounds(), villain.getBounds())){
 
-                //Plays sound effect for dying monster
-                audioController.makeSound(Sound.MONSTER_DIE);
+                villain.decreaseHealth(1);
 
-                //35ms vibration on impact
-                vibrator.vibrate(35);
+                if(villain.getHealth() == 0) {
+                    //Plays sound effect for dying monster
+                    audioController.makeSound(Sound.MONSTER_DIE);
 
-                //Add blood
-                blood.add(new Blood(blood, this, villain.getX(), villain.getY(), BitmapFactory.decodeResource(getResources(), R.drawable.blood1)));
+                    //35ms vibration on impact
+                    vibrator.vibrate(35);
 
-                //Remove the bad guy when it's hit by hero
-                villain_objects.remove(villain);
+                    //Add blood
+                    blood.add(new Blood(blood, this, villain.getX(), villain.getY(), BitmapFactory.decodeResource(getResources(), R.drawable.blood1)));
 
-                //Add a new bad guy
-                villain_objects.add(createVillainObject(R.drawable.bad1));
+                    //Remove the bad guy when it's hit by hero
+                    villain_objects.remove(villain);
 
-                //Increase score with 1
-                score.AddScore(1);
+                    //Add a new bad guy
+                    villain_objects.add(createVillainObject(R.drawable.bad1));
+
+                    //Increase score with 1
+                    score.AddScore(1);
+                }
 
                 //When score increased with 10, add a badguy and increase SuperVillains speed.
                 if(score.getScore()%10 ==0)
@@ -298,15 +301,22 @@ public class GameView_Level1 extends SurfaceView {
         //Check collision between our Hero and SuperVillain
         if(collision_control.checkCollision(hero_object.getBounds(), superVillain_object.getBounds())) {
 
-            audioController.makeSound(Sound.HERO_DIE);
-            audioController.makeSound(Sound.LAUGH);
-            gameLoopThread.setRunning(false);
+            //Decrease Hero's health when impact.
+            hero_object.decreaseHealth(1);
 
-            //Stop music.
-            audioController.pauseBackgroundMusic();
-            audioController.makeSound(Sound.LAUGH);
+            //If health is 0, kill Hero.
+            if(hero_object.getHealth() == 0) {
+                audioController.makeSound(Sound.HERO_DIE);
+                audioController.makeSound(Sound.LAUGH);
+                gameLoopThread.setRunning(false);
 
-            callGameOver();
+                //Stop music.
+                audioController.pauseBackgroundMusic();
+                audioController.makeSound(Sound.LAUGH);
+
+                //Game over
+                callGameOver();
+            }
         }
     }
 
@@ -325,7 +335,7 @@ public class GameView_Level1 extends SurfaceView {
         //Move the Hero in different directions.
         moveHero();
 
-        //Check collsion between Villain and Obstacle
+        //Check collision between Villain and Obstacle
         checkCollision_Villain_Obstacle();
 
         //Check for collisions between Hero and regular Villain
@@ -356,5 +366,9 @@ public class GameView_Level1 extends SurfaceView {
 
     public HighScore getHighScore(){
         return score;
+    }
+
+    public Hero getHeroObj(){
+        return hero_object;
     }
 }

@@ -34,6 +34,9 @@ public class Hero extends GameObject {
         this.gameViewLevel1 = gameViewLevel1;
         this.bmp = bmp;
 
+        //Set Hero's health.
+        this.setHealth(70);
+
         Random rnd = new Random();
         x = (gameViewLevel1.getWidth() - width)/2 ;
         y = (gameViewLevel1.getHeight() - height)/2;

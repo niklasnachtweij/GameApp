@@ -7,6 +7,7 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 
 import com.ripasso.game.GameFigures.GameObject;
+import com.ripasso.game.GameFigures.Hero;
 import com.ripasso.game.GameViews.GameView_Level1;
 import com.ripasso.game.GameLogic.HighScore;
 
@@ -36,6 +37,7 @@ public class GameMenu extends GameObject {
             drawMenu(canvas);
             drawActionButton(canvas);
             drawHighScore(canvas);
+            drawHerosHealth(canvas);
         }
     }
 
@@ -47,6 +49,16 @@ public class GameMenu extends GameObject {
         paintText.setTextSize(20);
         paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         canvas.drawText("Score: " + score.getScore(), 200, 600, paintText);
+    }
+
+
+    private void drawHerosHealth(Canvas canvas){
+        Paint paintText = new Paint();
+        Hero tmp_hero = gameViewLevel1.getHeroObj();
+        paintText.setColor(Color.WHITE);
+        paintText.setTextSize(20);
+        paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
+        canvas.drawText("Health: " + tmp_hero.getHealth(), 400, 600, paintText);
     }
 
     //Draw the action button to canvas.
