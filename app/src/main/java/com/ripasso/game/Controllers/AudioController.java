@@ -95,6 +95,7 @@ public class AudioController {
             case HIT_PUNCH:
 
                 mp = MediaPlayer.create(ctx, R.raw.solarplexis_hit);
+
                 mp.start();
                 break;
 
