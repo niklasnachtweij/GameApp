@@ -32,7 +32,7 @@ public class Obstacle extends GameObject {
         //Place new Obstacle at random position on canvas.
         Random rand = new Random();
         x = rand.nextInt(gameViewLevel1.getWidth() - width);
-        y = rand.nextInt(gameViewLevel1.getHeight() - 200 - height); //200 because because the GameMenu is taking up some space in GameView.
+        y = rand.nextInt(gameViewLevel1.getHeight() - 50 - height); //200 because because the GameMenu is taking up some space in GameView.
     }
 
     //Draw method for drawing this object to canvas.

@@ -22,6 +22,11 @@ public class NewGameActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.newgame_layout);
 
+        //Get rid of the top banner.
+        this.findViewById(android.R.id.content).getRootView().setSystemUiVisibility(
+                this.findViewById(android.R.id.content).getRootView().SYSTEM_UI_FLAG_IMMERSIVE |
+                        this.findViewById(android.R.id.content).getRootView().SYSTEM_UI_FLAG_FULLSCREEN);
+
         Log.d("NewGameActivity.java: ", "onCreate()");
     }
 

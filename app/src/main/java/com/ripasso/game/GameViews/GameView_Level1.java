@@ -26,6 +26,7 @@ import com.ripasso.game.GameAnimations.LifeMushroom;
 import com.ripasso.game.GameAnimations.LifeMushroomFactory;
 import com.ripasso.game.GameAnimations.Obstacle;
 import com.ripasso.game.GameAnimations.ObstacleFactory;
+import com.ripasso.game.GameAnimations.SuperVillainFactory;
 import com.ripasso.game.GameFigures.Hero;
 import com.ripasso.game.GameFigures.SuperVillain;
 import com.ripasso.game.GameFigures.Villain;
@@ -49,6 +50,7 @@ public class GameView_Level1 extends SurfaceView {
     private Hero hero_object;
     private SuperVillain superVillain_object;
     private List<LifeMushroom> life_mushrooms;
+    private List<SuperVillain> super_villains;
 
     //Controllers
     private AudioController audioController;
@@ -99,6 +101,9 @@ public class GameView_Level1 extends SurfaceView {
 
                 initializeGameObjects();
 
+                //Get rid of top panel.
+                setSystemUiVisibility(SYSTEM_UI_FLAG_IMMERSIVE | SYSTEM_UI_FLAG_FULLSCREEN);
+
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
                 audioController.startBackgroundMusic();
@@ -126,12 +131,13 @@ public class GameView_Level1 extends SurfaceView {
         blood = new ArrayList<Blood>();
         obstacles = new ArrayList<Obstacle>();
         life_mushrooms = new ArrayList<LifeMushroom>();
+        super_villains = new ArrayList<SuperVillain>();
 
         collision_control = new CollisionControl();
 
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
-        gameMenu = new GameMenu(this, 0, height-200, width, 200);
+        gameMenu = new GameMenu(this, 0, height-50, width, 50);
     }
 
 
@@ -142,7 +148,10 @@ public class GameView_Level1 extends SurfaceView {
         villain_objects.add(createVillainObject(R.drawable.bad3));
         villain_objects.add(createVillainObject(R.drawable.bad5));
         hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
-        superVillain_object = new SuperVillain(this, BitmapFactory.decodeResource(getResources(), R.drawable.bad4));
+        //superVillain_object = new SuperVillain(this, BitmapFactory.decodeResource(getResources(), R.drawable.bad4));
+
+        //Create SuperVillains
+        createSuperVillains(2);
 
         //Fill the list with an amount obstacles
         createObstacle(5);
@@ -151,6 +160,10 @@ public class GameView_Level1 extends SurfaceView {
     private Villain createVillainObject(int resource) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
         return new Villain(this, bmp);
+    }
+
+    private void createSuperVillains(int amount){
+        super_villains = SuperVillainFactory.createSuperVillains(this, amount);
     }
 
     //Creates an arraylist with obstacle objects, taken an number of have many
@@ -192,8 +205,9 @@ public class GameView_Level1 extends SurfaceView {
         //Draw Hero.
         hero_object.onDraw(canvas);
 
-        //Draw SuperVillain.
-        superVillain_object.onDraw(canvas);
+        //Draw SuperVillains.
+        for (SuperVillain tmp : super_villains)
+            tmp.onDraw(canvas);
     }
 
     private void checkCollision_Hero_Villain(){
@@ -249,7 +263,7 @@ public class GameView_Level1 extends SurfaceView {
                 eventX < hero_object.getX() + 60 &&
                 eventX > hero_object.getX() &&
                 hero_object.getY() >= this.getY() &&
-                hero_object.getY() + hero_object.getHeight() < this.getHeight()-200) {
+                hero_object.getY() + hero_object.getHeight() < this.getHeight()-hero_object.getHeight()) {
             hero_object.move(Direction.SOUTH);
 
         } else if (isPressed && hero_object.getX() > eventX &&
@@ -269,29 +283,28 @@ public class GameView_Level1 extends SurfaceView {
     //Check collision between Hero object and SuperVillain object.
     private void checkCollision_Hero_SuperVillain(){
 
-        //Check collision between our Hero and SuperVillain
-        if(collision_control.checkCollision(hero_object.getBounds(), superVillain_object.getBounds())) {
+        for(SuperVillain tmp : super_villains) {
+            //Check collision between our Hero and SuperVillain
+            if (collision_control.checkCollision(hero_object.getBounds(), tmp.getBounds())) {
 
-            //Decrease Hero's health when impact.
-            hero_object.decreaseHealth(1);
+                //Decrease Hero's health when impact.
+                hero_object.decreaseHealth(5);
 
-            //If health is 0, kill Hero.
-            if(hero_object.getHealth() == 0) {
-                audioController.makeSound(Sound.HERO_DIE);
-                audioController.makeSound(Sound.LAUGH);
-                gameLoopThread.setRunning(false);
+                //If health is 0, kill Hero.
+                if (hero_object.getHealth() == 0) {
+                    audioController.makeSound(Sound.LAUGH);
 
-                //Stop music.
-                audioController.pauseBackgroundMusic();
-                audioController.makeSound(Sound.LAUGH);
-
-                //Game over
-                callGameOver();
+                    //Game over
+                    callGameOver();
+                }
             }
         }
     }
 
     public void callGameOver(){
+        audioController.makeSound(Sound.HERO_DIE);
+        gameLoopThread.setRunning(false);
+
         Intent intent = new Intent(getContext(), GameOverActivity.class);
         intent.putExtra("score", Integer.toString(score.getScore()));
 
@@ -317,24 +330,47 @@ public class GameView_Level1 extends SurfaceView {
 
         //Check for collision between Hero and Supervillain
         checkCollision_Hero_SuperVillain();
+
+        //Check for collision between Hero and Obstacle
+        checkCollision_Obstacle_Hero();
     }
 
     //Check for collision between LifeMushroom and Hero.
     private void checkCollision_Hero_LifeMushroom(){
 
-        for(LifeMushroom tmp : life_mushrooms)
+        for(LifeMushroom tmp : life_mushrooms) {
 
-                if(collision_control.checkCollision(tmp.getBounds(), hero_object.getBounds())){
-                    //Increase Hero's health.
-                    hero_object.increaseHealth(15);
-                    //Remove the mushroom.
-                    life_mushrooms.remove(tmp);
-                }
+            if (collision_control.checkCollision(tmp.getBounds(), hero_object.getBounds())) {
+                //Increase Hero's health.
+                hero_object.increaseHealth(1);
+                //Remove the mushroom.
+                life_mushrooms.remove(tmp);
+            }
+        }
     }
+
+    private void checkCollision_Obstacle_Hero(){
+
+        //Check for collision between Lava pool and Hero.
+
+        for(Obstacle tmp : obstacles) {
+
+            if (collision_control.checkCollision(tmp.getBounds(), hero_object.getBounds())) {
+                //Increase Hero's health.
+                hero_object.decreaseHealth(1);
+            }
+        }
+
+        //If health 0, Game over!
+        if(hero_object.getHealth() == 0){
+            callGameOver();
+        }
+    }
+
 
     //Create a life giving mushroom at a random moment.
     private void addRandomLifeMushroom(){
-        if(life_mushrooms.size() == 0 && RandomGenerator.getRandomInt(100)==5) {
+        if(life_mushrooms.size() == 0 && RandomGenerator.getRandomInt(1000)==5) {
             life_mushrooms.add(LifeMushroomFactory.createLifeMushroom(this,
                     BitmapFactory.decodeResource(getResources(), R.drawable.up_mushroom_smb)));
         }

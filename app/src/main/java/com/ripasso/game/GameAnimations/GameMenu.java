@@ -35,7 +35,6 @@ public class GameMenu extends GameObject {
     public void onDraw(Canvas canvas) {
         if(canvas!=null) {
             drawMenu(canvas);
-            drawActionButton(canvas);
             drawHighScore(canvas);
             drawHerosHealth(canvas);
         }
@@ -46,9 +45,9 @@ public class GameMenu extends GameObject {
         Paint paintText = new Paint();
         score = gameViewLevel1.getHighScore();
         paintText.setColor(Color.WHITE);
-        paintText.setTextSize(20);
+        paintText.setTextSize(30);
         paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        canvas.drawText("Score: " + score.getScore(), 200, 600, paintText);
+        canvas.drawText("Score: " + score.getScore(), 50, 700, paintText);
     }
 
 
@@ -56,25 +55,16 @@ public class GameMenu extends GameObject {
         Paint paintText = new Paint();
         Hero tmp_hero = gameViewLevel1.getHeroObj();
         paintText.setColor(Color.WHITE);
-        paintText.setTextSize(20);
+        paintText.setTextSize(30);
         paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
-        canvas.drawText("Health: " + tmp_hero.getHealth(), 400, 600, paintText);
+        canvas.drawText("Health: " + tmp_hero.getHealth(), 250, 700, paintText);
     }
 
-    //Draw the action button to canvas.
-    private void drawActionButton(Canvas canvas){
-        Paint buttonPaint = new Paint();
-        buttonPaint.setColor(Color.DKGRAY);
-        buttonPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-        buttonPaint.setStrokeWidth(10);
-        Rect rect = new Rect((int)x,(int)y, (int)x+150, (int)y+(this.height));
-        canvas.drawRect(rect, buttonPaint);
-    }
 
     //Draw the menu to canvas.
     private void drawMenu(Canvas canvas){
         Paint paint = new Paint();
-        paint.setColor(Color.LTGRAY);
+        paint.setColor(Color.BLACK);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setStrokeWidth(10);
         canvas.drawRect(getBounds(), paint);

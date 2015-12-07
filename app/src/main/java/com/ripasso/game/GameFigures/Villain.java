@@ -43,7 +43,7 @@ public class Villain extends GameObject {
 
         Random rnd = new Random();
         x = rnd.nextInt(gameViewLevel1.getWidth() - width);
-        y = rnd.nextInt(gameViewLevel1.getHeight()-200 - height); //200 because GameMenu is taking up 200 pixels of the canvas.
+        y = rnd.nextInt(gameViewLevel1.getHeight()-50 - height); //200 because GameMenu is taking up 200 pixels of the canvas.
         xSpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
         ySpeed = rnd.nextInt(MAX_SPEED * 2) - MAX_SPEED;
     }
@@ -59,7 +59,7 @@ public class Villain extends GameObject {
 
         x = x + xSpeed;
 
-        if (y >= gameViewLevel1.getHeight()-200 - height - ySpeed || y + ySpeed <= 0) {
+        if (y >= gameViewLevel1.getHeight()-50 - height - ySpeed || y + ySpeed <= 0) {
             ySpeed = -ySpeed;
         }
 

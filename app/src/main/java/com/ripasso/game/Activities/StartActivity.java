@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 
 import com.ripasso.game.R;
@@ -20,6 +21,11 @@ public class StartActivity extends Activity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.start_layout);
+
+        //Get rid of the top banner.
+        this.findViewById(android.R.id.content).getRootView().setSystemUiVisibility(
+                this.findViewById(android.R.id.content).getRootView().SYSTEM_UI_FLAG_IMMERSIVE |
+                this.findViewById(android.R.id.content).getRootView().SYSTEM_UI_FLAG_FULLSCREEN);
 
         Log.d("StartActivity.java: ", "onCreate()");
 

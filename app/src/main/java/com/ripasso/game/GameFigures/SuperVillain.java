@@ -37,7 +37,7 @@ public class SuperVillain extends GameObject {
         //Create the SuperVillain at random position at canvas.
         Random rnd = new Random();
         x = rnd.nextInt(gameViewLevel1.getWidth() - width);
-        y = rnd.nextInt(gameViewLevel1.getHeight() - 200 - height);
+        y = rnd.nextInt(gameViewLevel1.getHeight() - 50 - height);
         xSpeed = max_speed;
         ySpeed = max_speed;
     }
@@ -51,7 +51,7 @@ public class SuperVillain extends GameObject {
 
         x = x + xSpeed;
 
-        if (y >= gameViewLevel1.getHeight() - 200 - height - ySpeed || y + ySpeed <= 0) {
+        if (y >= gameViewLevel1.getHeight() - 50 - height - ySpeed || y + ySpeed <= 0) {
             ySpeed = -ySpeed;
         }
 
