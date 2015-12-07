@@ -170,6 +170,12 @@ public class GameView_Level1 extends SurfaceView {
         //Draw the game menu
         gameMenu.onDraw(canvas);
 
+        //Draw obstacles.
+        for(Obstacle obstacle : obstacles) {
+            obstacle.onDraw(canvas);
+        }
+
+
         for(LifeMushroom tmp : life_mushrooms){
             tmp.onDraw(canvas);
         }
@@ -187,16 +193,8 @@ public class GameView_Level1 extends SurfaceView {
         //Draw Hero.
         hero_object.onDraw(canvas);
 
-        //Draw obstacles.
-        for(Obstacle obstacle : obstacles) {
-            obstacle.onDraw(canvas);
-        }
-
         //Draw SuperVillain.
         superVillain_object.onDraw(canvas);
-
-        //Check for collision between Hero and Supervillain
-        checkCollision_Hero_SuperVillain(canvas);
     }
 
     private void checkCollision_Hero_Villain(){
@@ -235,8 +233,6 @@ public class GameView_Level1 extends SurfaceView {
                     villain_objects.add(createVillainObject(R.drawable.bad3));
 
                 }
-
-
             break;
             }
         }
@@ -272,7 +268,7 @@ public class GameView_Level1 extends SurfaceView {
 
 
     //Check collision between Hero object and SuperVillain object.
-    private void checkCollision_Hero_SuperVillain(Canvas canvas){
+    private void checkCollision_Hero_SuperVillain(){
 
         //Check collision between our Hero and SuperVillain
         if(collision_control.checkCollision(hero_object.getBounds(), superVillain_object.getBounds())) {
@@ -319,6 +315,9 @@ public class GameView_Level1 extends SurfaceView {
 
         //Check collision between life mushroom and hero.
         checkCollision_Hero_LifeMushroom();
+
+        //Check for collision between Hero and Supervillain
+        checkCollision_Hero_SuperVillain();
     }
 
     //Check for collision between LifeMushroom and Hero.
@@ -336,7 +335,7 @@ public class GameView_Level1 extends SurfaceView {
 
     //Create a life giving mushroom at a random moment.
     private void addRandomLifeMushroom(){
-        if(life_mushrooms.size() == 0 && RandomGenerator.getRandomInt(10000)==5) {
+        if(life_mushrooms.size() == 0 && RandomGenerator.getRandomInt(100)==5) {
             life_mushrooms.add(LifeMushroomFactory.createLifeMushroom(this,
                     BitmapFactory.decodeResource(getResources(), R.drawable.up_mushroom_smb)));
         }
