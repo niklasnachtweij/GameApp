@@ -75,6 +75,7 @@ public class AudioController {
 
                     mp.stop();
                     mp.release();
+
                 }
 
                 mp = MediaPlayer.create(ctx, R.raw.horror_knife_stab_male_scream_001);
