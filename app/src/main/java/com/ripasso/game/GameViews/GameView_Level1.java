@@ -120,7 +120,7 @@ public class GameView_Level1 extends SurfaceView {
         audioController = new AudioController(getContext());
         audioController.makeSound(Sound.BACKGROUND_MUSIC);
         vibrator = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-        background = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.vegtn_hms_srcbed));
+        background = new Background(this, BitmapFactory.decodeResource(getResources(), R.drawable.lavabg));
 
         villain_objects = new ArrayList<Villain>();
         blood = new ArrayList<Blood>();
