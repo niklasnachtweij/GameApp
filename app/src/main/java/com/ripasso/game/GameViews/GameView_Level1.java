@@ -270,40 +270,6 @@ public class GameView_Level1 extends SurfaceView {
         }
     }
 
-    //Check collision between Villain objects and Obstacle Objects
-    //UNDER CONSTRUCTION NOT FULLY FUNCTIONAL YET.
-    private void checkCollision_Villain_Obstacle() {
-
-        for (Villain sprite : villain_objects) {
-            for (Obstacle obstacle : obstacles) {
-
-                int obstacle_top = obstacle.getBounds().top; //Ska alltid vara mindre än sprite_bottom, ANNARS kollision
-                int sprite_bottom = sprite.getBounds().bottom;
-
-                int obstacle_bottom = obstacle.getBounds().bottom;
-                int sprite_top = sprite.getBounds().top;
-
-                if ((collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
-                        obstacle_top <= sprite_bottom) ||
-                        (collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
-                                obstacle_bottom <= sprite_top))
-                    sprite.reverseY_Speed();
-
-                int obstacle_left = obstacle.getBounds().left; //Ska alltid vara mindre än sprite_right ANNARS kollision
-                int sprite_right = sprite.getBounds().right;
-
-                int obstacle_right = obstacle.getBounds().right;
-                int sprite_left = sprite.getBounds().left;
-
-                if ((collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
-                        obstacle_left <= sprite_right) ||
-                        (collision_control.checkCollision(sprite.getBounds(), obstacle.getBounds()) &&
-                                sprite_left <= obstacle_right))
-                    sprite.reverseX_Speed();
-            }
-        }
-    }//SLUT PÅ BUGGKODEN
-
 
     //Check collision between Hero object and SuperVillain object.
     private void checkCollision_Hero_SuperVillain(Canvas canvas){
@@ -345,9 +311,6 @@ public class GameView_Level1 extends SurfaceView {
         //Move the Hero in different directions.
         moveHero();
 
-        //Check collision between Villain and Obstacle
-        checkCollision_Villain_Obstacle();
-
         //Check for collisions between Hero and regular Villain
         checkCollision_Hero_Villain();
 
@@ -356,7 +319,6 @@ public class GameView_Level1 extends SurfaceView {
 
         //Check collision between life mushroom and hero.
         checkCollision_Hero_LifeMushroom();
-
     }
 
     //Check for collision between LifeMushroom and Hero.
