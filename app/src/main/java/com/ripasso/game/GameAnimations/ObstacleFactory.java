@@ -26,7 +26,7 @@ public class ObstacleFactory {
 
             //Fill the arraylist with a given number of Obstacles.
             for (int i = 0; i < number; i++)
-                obstacles.add(new Obstacle(gameViewLevel1, BitmapFactory.decodeResource(gameViewLevel1.getResources(), R.drawable.tablet)));
+                obstacles.add(new Obstacle(gameViewLevel1, BitmapFactory.decodeResource(gameViewLevel1.getResources(), R.drawable.lavapuddle)));
 
             //Check if some objects is intersecting, then remove and add a new one.
             for (int i = 0; i < obstacles.size(); i++) {
@@ -34,7 +34,7 @@ public class ObstacleFactory {
 
                     if (collision_control.checkCollision(obstacles.get(i).getBounds(), obstacles.get(j).getBounds())) {
                         obstacles.remove(i);
-                        obstacles.add(new Obstacle(gameViewLevel1, BitmapFactory.decodeResource(gameViewLevel1.getResources(), R.drawable.tablet)));
+                        obstacles.add(new Obstacle(gameViewLevel1, BitmapFactory.decodeResource(gameViewLevel1.getResources(), R.drawable.lavapuddle)));
                     }
                 }
             }

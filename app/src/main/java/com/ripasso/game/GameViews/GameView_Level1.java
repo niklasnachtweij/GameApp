@@ -146,8 +146,7 @@ public class GameView_Level1 extends SurfaceView {
 
         //Fill the list with an amount obstacles
         createObstacle(5);
-
-}
+    }
 
     private Villain createVillainObject(int resource) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
