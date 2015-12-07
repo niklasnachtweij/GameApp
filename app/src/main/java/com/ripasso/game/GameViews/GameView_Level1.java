@@ -229,11 +229,12 @@ public class GameView_Level1 extends SurfaceView {
 
                     //Increase score with 1
                     score.AddScore(1);
-                }
 
                 //When score increased with 10, add a badguy and increase SuperVillains speed.
                 if(score.getScore()%10 ==0)
                     villain_objects.add(createVillainObject(R.drawable.bad3));
+
+                }
 
 
             break;
