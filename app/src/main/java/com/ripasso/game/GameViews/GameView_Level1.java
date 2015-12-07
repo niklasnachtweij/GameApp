@@ -336,7 +336,7 @@ public class GameView_Level1 extends SurfaceView {
 
     //Create a life giving mushroom at a random moment.
     private void addRandomLifeMushroom(){
-        if(life_mushrooms.size() == 0 && RandomGenerator.getRandomInt(10000)==5) {
+        if(life_mushrooms.size() == 0 && RandomGenerator.getRandomInt(100)==5) {
             life_mushrooms.add(LifeMushroomFactory.createLifeMushroom(this,
                     BitmapFactory.decodeResource(getResources(), R.drawable.up_mushroom_smb)));
         }
