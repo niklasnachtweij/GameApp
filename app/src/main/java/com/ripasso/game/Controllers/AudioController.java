@@ -69,6 +69,12 @@ public class AudioController {
                 mp.start();
                 break;
 
+            case HIT_PUNCH:
+
+                mp = MediaPlayer.create(ctx, R.raw.solarplexis_hit);
+                mp.start();
+                break;
+
             case BACKGROUND_MUSIC:
 
                 if(backgroundMusic!=null) {
@@ -76,11 +82,6 @@ public class AudioController {
                     backgroundMusic = MediaPlayer.create(ctx, R.raw.zoombies);
 
                 }
-                break;
-
-            case HIT_PUNCH:
-                    mp = MediaPlayer.create(ctx, R.raw.solarplexis_hit);
-                    mp.start();
                 break;
 
                 default:
