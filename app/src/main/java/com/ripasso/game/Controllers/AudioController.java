@@ -96,15 +96,17 @@ public class AudioController {
 
             case HIT_PUNCH:
 
-                if(mp2.isPlaying()) {
+                if(!mp2.isPlaying()) {
 
-                    mp2.stop();
-                    mp2.release();
+                    mp2 = MediaPlayer.create(ctx, R.raw.solarplexis_hit);
+                    mp2.start();
+                    break;
+
                 }
 
-                mp2 = MediaPlayer.create(ctx, R.raw.solarplexis_hit);
-                mp2.start();
-                break;
+                else {}
+
+
 
             case BACKGROUND_MUSIC:
 
