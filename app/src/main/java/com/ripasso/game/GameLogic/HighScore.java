@@ -7,7 +7,7 @@ package com.ripasso.game.GameLogic;
 public class HighScore {
 
     private int score; //Current score
-    private int DEFAULT_SCORE = 1; //Default score
+    private int DEFAULT_SCORE = 0; //Default score
 
     //Constructor
     public HighScore(){

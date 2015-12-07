@@ -235,7 +235,6 @@ public class GameView_Level1 extends SurfaceView {
                 if(score.getScore()%10 ==0)
                     villain_objects.add(createVillainObject(R.drawable.bad3));
 
-                superVillain_object.increaseSpeed();
 
             break;
             }
