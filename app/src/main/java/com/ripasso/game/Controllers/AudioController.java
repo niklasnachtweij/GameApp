@@ -30,14 +30,23 @@ public class AudioController {
     //Making different sound depending on wich enum Sound is put in the method.
     public void makeSound(Sound indata) {
 
-        if(mp.isPlaying()) {
+        /*if(mp.isPlaying()) {
+
             mp.stop();
             mp.release();
-        }
+
+        }*/
 
         switch(indata) {
 
             case MONSTER_DIE:
+
+                if(mp.isPlaying()) {
+
+                    mp.stop();
+                    mp.release();
+
+                }
 
                 Random rand = new Random();
                 int randomNumber =  rand.nextInt(3); //Get random number to make different sound.
@@ -59,11 +68,25 @@ public class AudioController {
 
             case HERO_DIE:
 
+                if(mp.isPlaying()) {
+
+                    mp.stop();
+                    mp.release();
+
+                }
+
                 mp = MediaPlayer.create(ctx, R.raw.horror_knife_stab_male_scream_001);
                 mp.start();
                 break;
 
             case LAUGH:
+
+                if(mp.isPlaying()) {
+
+                    mp.stop();
+                    mp.release();
+
+                }
 
                 mp = MediaPlayer.create(ctx, R.raw.demonic_laugh);
                 mp.start();
@@ -76,6 +99,13 @@ public class AudioController {
                 break;
 
             case BACKGROUND_MUSIC:
+
+                if(mp.isPlaying()) {
+
+                    mp.stop();
+                    mp.release();
+
+                }
 
                 if(backgroundMusic!=null) {
 
