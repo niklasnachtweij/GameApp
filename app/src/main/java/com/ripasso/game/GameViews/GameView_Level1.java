@@ -16,11 +16,14 @@ import android.view.SurfaceView;
 import com.ripasso.game.Activities.GameOverActivity;
 import com.ripasso.game.Controllers.AudioController;
 import com.ripasso.game.Controllers.CollisionControl;
+import com.ripasso.game.Controllers.RandomGenerator;
 import com.ripasso.game.Enums.Direction;
 import com.ripasso.game.Enums.Sound;
 import com.ripasso.game.GameAnimations.Background;
 import com.ripasso.game.GameAnimations.Blood;
 import com.ripasso.game.GameAnimations.GameMenu;
+import com.ripasso.game.GameAnimations.LifeMushroom;
+import com.ripasso.game.GameAnimations.LifeMushroomFactory;
 import com.ripasso.game.GameAnimations.Obstacle;
 import com.ripasso.game.GameAnimations.ObstacleFactory;
 import com.ripasso.game.GameFigures.Hero;
@@ -45,6 +48,7 @@ public class GameView_Level1 extends SurfaceView {
     private List<Obstacle> obstacles;
     private Hero hero_object;
     private SuperVillain superVillain_object;
+    private List<LifeMushroom> life_mushrooms;
 
     //Controllers
     private AudioController audioController;
@@ -121,6 +125,7 @@ public class GameView_Level1 extends SurfaceView {
         villain_objects = new ArrayList<Villain>();
         blood = new ArrayList<Blood>();
         obstacles = new ArrayList<Obstacle>();
+        life_mushrooms = new ArrayList<LifeMushroom>();
 
         collision_control = new CollisionControl();
 
@@ -164,6 +169,10 @@ public class GameView_Level1 extends SurfaceView {
 
         //Draw the game menu
         gameMenu.onDraw(canvas);
+
+        for(LifeMushroom tmp : life_mushrooms){
+            tmp.onDraw(canvas);
+        }
 
         //Draw the blood.
         for (int i = blood.size() - 1; i >= 0; i--) {
@@ -342,6 +351,33 @@ public class GameView_Level1 extends SurfaceView {
         //Check for collisions between Hero and regular Villain
         checkCollision_Hero_Villain();
 
+        //Create a random mushroom
+        addRandomLifeMushroom();
+
+        //Check collision between life mushroom and hero.
+        checkCollision_Hero_LifeMushroom();
+
+    }
+
+    //Check for collision between LifeMushroom and Hero.
+    private void checkCollision_Hero_LifeMushroom(){
+
+        for(LifeMushroom tmp : life_mushrooms)
+
+                if(collision_control.checkCollision(tmp.getBounds(), hero_object.getBounds())){
+                    //Increase Hero's health.
+                    hero_object.increaseHealth(15);
+                    //Remove the mushroom.
+                    life_mushrooms.remove(tmp);
+                }
+    }
+
+    //Create a life giving mushroom at a random moment.
+    private void addRandomLifeMushroom(){
+        if(life_mushrooms.size() == 0 && RandomGenerator.getRandomInt(10000)==5) {
+            life_mushrooms.add(LifeMushroomFactory.createLifeMushroom(this,
+                    BitmapFactory.decodeResource(getResources(), R.drawable.up_mushroom_smb)));
+        }
     }
 
     //Stop the view in the Thread is not null.
