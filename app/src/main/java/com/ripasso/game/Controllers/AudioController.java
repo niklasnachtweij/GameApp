@@ -2,6 +2,7 @@ package com.ripasso.game.Controllers;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.media.RemoteController;
 
 import com.ripasso.game.Enums.Sound;
 import com.ripasso.game.R;
@@ -17,6 +18,7 @@ public class AudioController {
 
     private Context ctx;
     private MediaPlayer mp;
+    private MediaPlayer mp2;
     private MediaPlayer backgroundMusic;
     private int current_position;
 
@@ -24,6 +26,7 @@ public class AudioController {
     public AudioController(Context ctx){
         this.ctx = ctx;
         this.mp = new MediaPlayer();
+        this.mp2 = new MediaPlayer();
         this.backgroundMusic = new MediaPlayer();
     }
 
@@ -94,18 +97,18 @@ public class AudioController {
 
             case HIT_PUNCH:
 
-                mp = MediaPlayer.create(ctx, R.raw.solarplexis_hit);
-                mp.start();
+                if(mp2.isPlaying()) {
+
+                    mp2.stop();
+                    mp2.release();
+
+                }
+
+                mp2 = MediaPlayer.create(ctx, R.raw.solarplexis_hit);
+                mp2.start();
                 break;
 
             case BACKGROUND_MUSIC:
-
-                if(mp.isPlaying()) {
-
-                    mp.stop();
-                    mp.release();
-
-                }
 
                 if(backgroundMusic!=null) {
 
