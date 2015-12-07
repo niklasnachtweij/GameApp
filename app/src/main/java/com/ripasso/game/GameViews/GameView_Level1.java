@@ -200,6 +200,7 @@ public class GameView_Level1 extends SurfaceView {
             if(collision_control.checkCollision(hero_object.getBounds(), villain.getBounds())){
 
                 villain.decreaseHealth(1);
+                audioController.makeSound(Sound.HIT_PUNCH);
 
                 if(villain.getHealth() == 0) {
                     //Plays sound effect for dying monster

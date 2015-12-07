@@ -8,5 +8,6 @@ public enum Sound{
     MONSTER_DIE,
     HERO_DIE,
     LAUGH,
-    BACKGROUND_MUSIC
+    BACKGROUND_MUSIC,
+    HIT_PUNCH
 }
