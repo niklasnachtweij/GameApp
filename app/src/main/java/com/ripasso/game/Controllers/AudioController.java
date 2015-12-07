@@ -100,7 +100,6 @@ public class AudioController {
 
                     mp2.stop();
                     mp2.release();
-
                 }
 
                 mp2 = MediaPlayer.create(ctx, R.raw.solarplexis_hit);
