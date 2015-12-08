@@ -55,6 +55,10 @@ public class GameMenu extends GameObject {
         Paint paintText = new Paint();
         Hero tmp_hero = gameViewLevel1.getHeroObj();
         paintText.setColor(Color.WHITE);
+
+        if(tmp_hero.getHealth() < 20)
+            paintText.setColor(Color.RED);
+
         paintText.setTextSize(30);
         paintText.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
         canvas.drawText("Health: " + tmp_hero.getHealth(), 250, 700, paintText);

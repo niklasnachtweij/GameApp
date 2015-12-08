@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMediumInverse"
+                android:textSize="25sp"
                 android:text="@string/nice_quote"
                 android:id="@+id/quoteTextview"
                 android:textColor="@color/WHITE"
@@ -76,6 +76,7 @@
 
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
+
+
 </LinearLayout>
