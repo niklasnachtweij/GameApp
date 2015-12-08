@@ -2,9 +2,12 @@ package com.ripasso.game.Activities;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -17,13 +20,15 @@ import com.ripasso.game.R;
 public class GameOverActivity extends Activity {
 
     private TextView highscore_text;
-    private TextView chuck_norris_quote;
+    private Vibrator vibrator;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.gameover_layout);
+
+        this.vibrator = (Vibrator) getBaseContext().getSystemService(Context.VIBRATOR_SERVICE);
 
         //Get rid of the top banner.
         this.findViewById(android.R.id.content).getRootView().setSystemUiVisibility(
@@ -34,7 +39,6 @@ public class GameOverActivity extends Activity {
 
         //Initialize TextView variable.
         this.highscore_text = (TextView) findViewById(R.id.score_textview);
-        this.chuck_norris_quote = (TextView) findViewById(R.id.chuck_norris_quote);
 
         //Get message from intent.
         Intent extras = getIntent();
@@ -64,5 +68,19 @@ public class GameOverActivity extends Activity {
     //Override onBackPressed to disable back button.
     @Override
     public void onBackPressed() {}
+
+    public void backToNewGameActivity(View v){
+        vibrator.vibrate(200);
+        Intent intent = new Intent(GameOverActivity.this, NewGameActivity.class);
+        startActivity(intent);
+    }
+
+    //Start new game
+    public void restartNewGame(View v){
+        vibrator.vibrate(200);
+        Intent intent = new Intent(GameOverActivity.this, Activity_Level1.class);
+        startActivity(intent);
+    }
+
 
 }

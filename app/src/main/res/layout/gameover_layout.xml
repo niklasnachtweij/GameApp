@@ -14,7 +14,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_gravity="center_horizontal">
 
             <TextView
@@ -43,28 +43,59 @@
                 android:paddingTop="20dp"
                 android:id="@+id/score_text"
                 android:textColor="@color/WHITE"
-                android:layout_gravity="center_horizontal" />
+                android:layout_gravity="center" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text=""
-            android:id="@+id/score_textview"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/WHITE"
-            android:textSize="70dp"
-            android:paddingTop="20dp"
-            android:layout_margin="5dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text=""
+                android:id="@+id/score_textview"
+                android:layout_gravity="center"
+                android:textColor="@color/WHITE"
+                android:textSize="50sp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:id="@+id/chuck_norris_quote"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/WHITE"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal">
+
+
+            <Button
+                    android:id="@+id/tryagain_btn"
+                    android:text="@string/try_again_btn"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/buttonshape"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="restartNewGame"
+                    android:layout_marginRight="15dp"/>
+
+            <Button
+                android:id="@+id/back_to_main_btn"
+                android:text="@string/back_to_main_btn"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttonshape"
+                android:layout_gravity="center_horizontal"
+                android:onClick="backToNewGameActivity"/>
+        </LinearLayout>
+
 
     </LinearLayout>
 </LinearLayout>

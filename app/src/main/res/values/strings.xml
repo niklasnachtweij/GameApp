@@ -10,6 +10,8 @@
     <string name = "nice_quote">\"The past is already written, the inc is dry.\"</string>
     <string name = "chuck_norris_btn">Extras</string>
     <string name = "generate_quote_btn">Do you feel lucky?</string>
+    <string name = "try_again_btn">Try again</string>
+    <string name = "back_to_main_btn">Return to menu</string>
 
     <string-array
         name="chuck_norris_quotes">

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/DARK_GREY">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:background="@color/BLACK">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="180dp"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/quote_text"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/WHITE"
+                    android:textStyle="bold|italic"
+                    android:layout_margin="10dp"
+                    android:paddingTop="70dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal">
+
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:text="@string/generate_quote_btn"
+                android:id="@+id/generate_quote_btn"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/LOGO_PURPLE"
+                android:onClick="generateQuote"
+                android:textColor="@color/WHITE"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
