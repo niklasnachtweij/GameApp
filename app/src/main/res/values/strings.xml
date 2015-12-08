@@ -1,10 +1,9 @@
 <resources>
     <string name="app_name">Game of Thrives</string>
     <string name="action_settings">Settings</string>
-    <string name="super_villain_explanation">This is a super villain. The hero has to avoid him no matter what.
-    If he catches Dossian, the hero will die instantly.</string>
-    <string name="game_explanation">This game is taking place in a world far far from here. The hero Dossian is
-    trying to save the world from villains. Help Dossian kill all the villains, but remember to stay alive!</string>
+    <string name="super_villain_explanation">This is Chuck Norris. He\'s unbeatable and can clone himself. If he catches you, you will be seriously damaged.</string>
+    <string name="game_explanation">This game is taking place in a world far far from here. The hero Gandalf is
+    trying to save the world from villains. Help him kill all the villains, but remember to stay alive.</string>
     <string name="new_game">New game</string>
     <string name="how_to_play">How to play</string>
     <string name = "nice_quote">\"The past is already written, the inc is dry.\"</string>
@@ -12,6 +11,18 @@
     <string name = "generate_quote_btn">Do you feel lucky?</string>
     <string name = "try_again_btn">Try again</string>
     <string name = "back_to_main_btn">Return to menu</string>
+    <string name = "story_text">Story</string>
+    <string name = "object_text">Game objects</string>
+    <string name = "how_to_play_text">How to play</string>
+
+
+
+    <string name = "hero_text">This is you, Gandalf the destroyer!</string>
+    <string name = "villain_explanation">Villains that you have to kill to save the world. You might have to
+    punch them several times.</string>
+    <string name = "life_mushroom_explanation">This is your chance to increase health and can be your savior.</string>
+    <string name = "obstacle_explanation">These lava puddles will harm you if you come to close. Stay away!</string>
+
 
     <string-array
         name="chuck_norris_quotes">
