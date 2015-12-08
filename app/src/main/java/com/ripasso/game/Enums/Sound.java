@@ -6,7 +6,7 @@ package com.ripasso.game.Enums;
 
 public enum Sound{
     MONSTER_DIE,
-    HERO_DIE,
+    HERO_HIT,
     LAUGH,
     BACKGROUND_MUSIC,
     HIT_PUNCH

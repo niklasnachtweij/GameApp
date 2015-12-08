@@ -305,6 +305,9 @@ public class GameView_Level1 extends SurfaceView {
                 hero_object.decreaseHealth(5);
                 audioController.makeSound(Sound.HIT_PUNCH);
 
+                //Play sound hit by Super Villain
+                audioController.makeSound(Sound.HERO_HIT);
+
                 //If health is 0, kill Hero.
                 if (hero_object.getHealth() == 0) {
                     audioController.makeSound(Sound.LAUGH);

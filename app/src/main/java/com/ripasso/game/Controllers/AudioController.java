@@ -69,16 +69,16 @@ public class AudioController {
                 mp.start();
                 break;
 
-            case HERO_DIE:
+            case HERO_HIT:
 
-                if(mp.isPlaying()) {
+                if(!mp2.isPlaying()) {
 
-                    mp.stop();
-                    mp.release();
+                    mp2.stop();
+                    mp2.release();
                 }
 
-                mp = MediaPlayer.create(ctx, R.raw.horror_knife_stab_male_scream_001);
-                mp.start();
+                mp2 = MediaPlayer.create(ctx, R.raw.horror_knife_stab_male_scream_001);
+                mp2.start();
                 break;
 
             case LAUGH:
