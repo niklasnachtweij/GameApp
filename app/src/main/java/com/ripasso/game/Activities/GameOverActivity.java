@@ -16,7 +16,8 @@ import com.ripasso.game.R;
 
 public class GameOverActivity extends Activity {
 
-    TextView highscore_text;
+    private TextView highscore_text;
+    private TextView chuck_norris_quote;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class GameOverActivity extends Activity {
 
         //Initialize TextView variable.
         this.highscore_text = (TextView) findViewById(R.id.score_textview);
+        this.chuck_norris_quote = (TextView) findViewById(R.id.chuck_norris_quote);
 
         //Get message from intent.
         Intent extras = getIntent();
@@ -43,6 +45,9 @@ public class GameOverActivity extends Activity {
         }
     }
 
+    private void generateChuckNorrisQuote(){
+
+    }
 
     public void onPause(){
         super.onPause();

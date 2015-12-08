@@ -9,5 +9,6 @@ public enum Sound{
     HERO_HIT,
     LAUGH,
     BACKGROUND_MUSIC,
-    HIT_PUNCH
+    HIT_PUNCH,
+    WALK_ON_LAVA
 }

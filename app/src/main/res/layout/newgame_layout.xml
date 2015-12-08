@@ -62,6 +62,18 @@
                     android:textColor="@color/WHITE"
                      />
 
+                <Button
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chuck_norris_btn"
+                    android:id="@+id/chuck_norris_btn"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/LOGO_PURPLE"
+                    android:onClick="startChuckNorrisQuotes"
+                    android:textColor="@color/WHITE"
+                    />
+
             </LinearLayout>
         </LinearLayout>
 

@@ -2,8 +2,10 @@ package com.ripasso.game.Activities;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +18,8 @@ import com.ripasso.game.R;
 
 public class NewGameActivity extends Activity {
 
+    private Vibrator vibrator;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,8 @@ public class NewGameActivity extends Activity {
         this.findViewById(android.R.id.content).getRootView().setSystemUiVisibility(
                 this.findViewById(android.R.id.content).getRootView().SYSTEM_UI_FLAG_IMMERSIVE |
                         this.findViewById(android.R.id.content).getRootView().SYSTEM_UI_FLAG_FULLSCREEN);
+
+        this.vibrator = (Vibrator) getBaseContext().getSystemService(Context.VIBRATOR_SERVICE);
 
         Log.d("NewGameActivity.java: ", "onCreate()");
     }
@@ -45,13 +51,21 @@ public class NewGameActivity extends Activity {
 
     //Start HowToPlay activity
     public void startHowToPlayView(View v){
+        vibrator.vibrate(200);
         Intent intent = new Intent(NewGameActivity.this, HowToPlayActivity.class);
         startActivity(intent);
     }
 
     //Start new game activity
     public void startNewGame(View v){
+        vibrator.vibrate(200);
         Intent intent = new Intent(NewGameActivity.this, Activity_Level1.class);
+        startActivity(intent);
+    }
+
+    public void startChuckNorrisQuotes(View v){
+        vibrator.vibrate(200);
+        Intent intent = new Intent(NewGameActivity.this, ChuckNorrisActivity.class);
         startActivity(intent);
     }
 

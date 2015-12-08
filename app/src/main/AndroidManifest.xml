@@ -48,6 +48,13 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".Activities.ChuckNorrisActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape">
+        </activity>
+
 
 
     </application>

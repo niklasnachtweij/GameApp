@@ -8,5 +8,57 @@
     <string name="new_game">New game</string>
     <string name="how_to_play">How to play</string>
     <string name = "nice_quote">\"The past is already written, the inc is dry.\"</string>
+    <string name = "chuck_norris_btn">Extras</string>
+    <string name = "generate_quote_btn">Do you feel lucky?</string>
+
+    <string-array
+        name="chuck_norris_quotes">
+        <item>\"When Alexander Bell invented the telephone he had 3 missed calls from Chuck Norris.\"</item>
+        <item>\"There used to be a street named after Chuck Norris, but it was changed because nobody crosses Chuck Norris and lives.\"</item>
+        <item>\"Chuck Norris has already been to Mars. That\'s why there are no signs of life.\"</item>
+        <item>\"Chuck Norris died 20 years ago, Death just hasn\'t built up the courage to tell him yet.\"</item>
+        <item>\"Fear of spiders is aracnaphobia, fear of tight spaces is chlaustraphobia, fear of Chuck Norris is called Logic.\"</item>
+        <item>\"Chuck Norris and Superman once fought each other on a bet. The loser had to start wearing his underwear on the outside of his pants.\"</item>
+        <item>\"Some magicans can walk on water, Chuck Norris can swim through land.\"</item>
+        <item>\"Chuck Norris counted to infinity - twice.\"</item>
+        <item>\"Chuck Norris once urinated in a semi truck\'s gas tank as a joke... That truck is now known as Optimus Prime.\"</item>
+        <item>\"When the Boogeyman goes to sleep every night, he checks his closet for Chuck Norris.\"</item>
+        <item>\"Death once had a near-Chuck Norris experience.\"</item>
+        <item>\"Chuck Norris can slam a revolving door.\"</item>
+        <item>\"Chuck Norris doesn\'t flush the toilet, he scares the shit out of it.\"</item>
+        <item>\"Chuck Norris can cut through a hot knife with butter.\"</item>
+        <item>\"Chuck Norris once kicked a horse in the chin. Its decendants are known today as Giraffes.\"</item>
+        <item>\"Chuck Norris can win a game of Connect Four in only three moves.\"</item>
+        <item>\"Chuck Norris will never have a heart attack. His heart isn\'t nearly foolish enough to attack him.\"</item>
+        <item>\"Chuck Norris once got bit by a rattle snake. After three days of pain and agony the rattle snake died\"</item>
+        <item>\"There is no theory of evolution. Just a list of animals Chuck Norris allows to live.\"</item>
+        <item>\"When Chuck Norris does a pushup, he isn\'t lifting himself up, he\'s pushing the Earth down.\"</item>
+        <item>\"Chuck Norris doesn’t wear a watch. HE decides what time it is.\"</item>
+        <item>\"Chuck Norris can light a fire by rubbing two ice-cubes together.\"</item>
+        <item>\"Chuck Norris doesn\'t read books. He stares them down until he gets the information he wants.\"</item>
+        <item>\"The Dead Sea was formerly known as The Living Sea. Until it met Chuck Norris.\"</item>
+        <item>\"When Chuck Norris goes to the beach, he puts on sunscreen to protect the sun from him.\"</item>
+        <item>\"Chuck Norris made a Happy Meal cry.\"</item>
+        <item>\"Some people wear Superman pajamas. Superman wears Chuck Norris pajamas.\"</item>
+        <item>\"If you spell Chuck Norris in Scrabble, you win. Forever.\"</item>
+        <item>\"Chuck Norris once drowned a fish underwater.\"</item>
+        <item>\"Chuck Norris hand is the only hand that can beat a Royal Flush.\"</item>
+        <item>\"Chuck Norris played Russian Roulette with a fully loaded gun and won.\"</item>
+        <item>\"Chuck Norris is the only man to ever defeat a brick wall in a game of tennis.\"</item>
+        <item>\"Chuck Norris was in all 6 Star Wars movies... As The Force.\"</item>
+        <item>\"When someone fires a gun at Chuck Norris, the bullets dodge him.\"</item>
+        <item>\"Chuck Norris destroyed the periodic table because the only element Chuck Norris recognizes is the element of suprise.\"</item>
+        <item>\"Chuck Norris can set ants on fire with a magnifying glass. At night.\"</item>
+        <item>\"Chuck Norris jumped off a building once. The ground didn\'t make it...\"</item>
+        <item>\"Chuck Norris once visited the Bermuda Triangle. No one has heard from the Triangle since.\"</item>
+        <item>\"When Chuck Norris was born he slapped the doctor to test his reflexes.\"</item>
+        <item>\"Contrary to popular belief, Chuck Norris cannot fly. He just jumps and chooses when to come down.\"</item>
+        <item>\"Chuck Norris can do a wheelie on a unicycle.\"</item>
+        <item>\"Chuck Norris ordered a Big Mac at Burger King, and got one.\"</item>
+        <item>\"Chuck Norris can divide by zero.\"</item>
+        <item>\"Chuck Norris was to star in Mission:Impossible but they recasted because they would\'ve had to change the name of the movie to Mission:Accomplished\"</item>
+        <item>\"When Chuck Norris pokes you on facebook your PC explodes.\"</item>
+        <item>\"Chuck Norris doesn\'t need a GPS. Chuck Norris decides where he is.\"</item>
+    </string-array>
 
 </resources>

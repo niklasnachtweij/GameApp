@@ -81,9 +81,8 @@ public class GameView_Level1 extends SurfaceView {
 
                 Log.d("GameView_Level1.java: ", "SurfaceDestroyed");
 
-                //audioController.pauseBackgroundMusic(); THIS LINE IS CAUSING THE APP TO CRASH. BUGG!
-
-                gameLoopThread.setRunning(false);
+                //Stop the background music
+                audioController.stopBackgroundMusic();
 
                 //Stop Thread.
                 boolean retry = true;
@@ -319,11 +318,9 @@ public class GameView_Level1 extends SurfaceView {
 
     public void callGameOver(){
         audioController.makeSound(Sound.LAUGH);
-        gameLoopThread.setRunning(false);
 
         Intent intent = new Intent(getContext(), GameOverActivity.class);
         intent.putExtra("score", Integer.toString(score.getScore()));
-
         gameLoopThread.setRunning(false);
 
         getContext().startActivity(intent);
@@ -372,6 +369,10 @@ public class GameView_Level1 extends SurfaceView {
         for(Obstacle tmp : obstacles) {
 
             if (collision_control.checkCollision(tmp.getBounds(), hero_object.getBounds())) {
+
+                //Make lava sound
+                audioController.makeSound(Sound.WALK_ON_LAVA);
+
                 //Increase Hero's health.
                 hero_object.decreaseHealth(1);
                 heroBounce();

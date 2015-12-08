@@ -106,6 +106,13 @@ public class AudioController {
 
                 break;
 
+            case WALK_ON_LAVA:
+                if(!mp2.isPlaying()) {
+
+                    mp2 = MediaPlayer.create(ctx, R.raw.fireball);
+                    mp2.start();
+                }
+
 
             case BACKGROUND_MUSIC:
 
@@ -137,6 +144,14 @@ public class AudioController {
             backgroundMusic.seekTo(current_position);
             backgroundMusic.start();
 
+        }
+    }
+
+    //Stop the background music
+    public void stopBackgroundMusic(){
+        if(backgroundMusic.isPlaying()) {
+            backgroundMusic.stop();
+            backgroundMusic.release();
         }
     }
 }
