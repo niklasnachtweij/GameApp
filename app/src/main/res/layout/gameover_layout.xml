@@ -15,7 +15,8 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -25,7 +26,6 @@
                 android:id="@+id/gameover_text"
                 android:layout_gravity="center_horizontal"
                 android:textSize="60dp"
-                android:paddingTop="20dp"
                 android:textColor="@color/WHITE"/>
 
         </LinearLayout>
@@ -40,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Your score"
-                android:paddingTop="20dp"
                 android:id="@+id/score_text"
                 android:textColor="@color/WHITE"
                 android:layout_gravity="center" />
@@ -49,7 +48,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -60,15 +60,14 @@
                 android:layout_gravity="center"
                 android:textColor="@color/WHITE"
                 android:textSize="50sp"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp" />
         </LinearLayout>
 
-
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
 
@@ -98,4 +97,5 @@
 
 
     </LinearLayout>
+
 </LinearLayout>

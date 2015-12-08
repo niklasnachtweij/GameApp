@@ -309,6 +309,7 @@ public class GameView_Level1 extends SurfaceView {
 
                 //If health is 0, kill Hero.
                 if (hero_object.getHealth() == 0) {
+                    audioController.makeSound(Sound.LAUGH);
                     //Game over
                     callGameOver();
                 }
@@ -317,12 +318,9 @@ public class GameView_Level1 extends SurfaceView {
     }
 
     public void callGameOver(){
-        audioController.makeSound(Sound.LAUGH);
-
         Intent intent = new Intent(getContext(), GameOverActivity.class);
         intent.putExtra("score", Integer.toString(score.getScore()));
         gameLoopThread.setRunning(false);
-
         getContext().startActivity(intent);
     }
 
@@ -381,6 +379,7 @@ public class GameView_Level1 extends SurfaceView {
 
         //If health 0, Game over!
         if(hero_object.getHealth() == 0){
+            audioController.makeSound(Sound.HERO_HIT);
             callGameOver();
         }
     }
