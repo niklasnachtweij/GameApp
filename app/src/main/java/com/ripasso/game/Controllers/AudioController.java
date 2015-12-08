@@ -100,11 +100,11 @@ public class AudioController {
 
                     mp2 = MediaPlayer.create(ctx, R.raw.solarplexis_hit);
                     mp2.start();
-                    break;
+
 
                 }
 
-                else {}
+                break;
 
 
             case BACKGROUND_MUSIC:

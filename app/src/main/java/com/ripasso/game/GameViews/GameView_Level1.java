@@ -148,7 +148,6 @@ public class GameView_Level1 extends SurfaceView {
         villain_objects.add(createVillainObject(R.drawable.bad3));
         villain_objects.add(createVillainObject(R.drawable.bad5));
         hero_object = new Hero(this, BitmapFactory.decodeResource(getResources(), R.drawable.good6));
-        //superVillain_object = new SuperVillain(this, BitmapFactory.decodeResource(getResources(), R.drawable.bad4));
 
         //Create SuperVillains
         createSuperVillains(2);
@@ -157,13 +156,15 @@ public class GameView_Level1 extends SurfaceView {
         createObstacle(5);
     }
 
+    //Create Villain objects
     private Villain createVillainObject(int resource) {
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), resource);
         return new Villain(this, bmp);
     }
 
+    //Create SuperVillains
     private void createSuperVillains(int amount){
-        super_villains = SuperVillainFactory.createSuperVillains(this, amount);
+        this.super_villains = SuperVillainFactory.createSuperVillains(this, amount);
     }
 
     //Creates an arraylist with obstacle objects, taken an number of have many
@@ -221,6 +222,7 @@ public class GameView_Level1 extends SurfaceView {
 
                 villain.decreaseHealth(1);
                 audioController.makeSound(Sound.HIT_PUNCH);
+                heroBounce();
 
                 if(villain.getHealth() == 0) {
                     //Plays sound effect for dying monster
@@ -257,26 +259,38 @@ public class GameView_Level1 extends SurfaceView {
                 eventY < hero_object.getY() + 60 &&
                 eventY > hero_object.getY() - 60 &&
                 (hero_object.getX() + hero_object.getWidth()) < (getWidth()-50)) {
-            hero_object.move(Direction.EAST);
+            hero_object.move(Direction.EAST, 30);
 
         } else if (isPressed && hero_object.getY() < eventY &&
                 eventX < hero_object.getX() + 60 &&
                 eventX > hero_object.getX() &&
                 hero_object.getY() >= this.getY() &&
                 hero_object.getY() + hero_object.getHeight() < this.getHeight()-hero_object.getHeight()) {
-            hero_object.move(Direction.SOUTH);
+            hero_object.move(Direction.SOUTH,30);
 
         } else if (isPressed && hero_object.getX() > eventX &&
                 eventY < hero_object.getY() + 60 &&
                 eventY > hero_object.getY() - 60 &&
                 hero_object.getX() >= 0) {
-            hero_object.move(Direction.WEST);
+            hero_object.move(Direction.WEST, 30);
 
         } else if (isPressed && hero_object.getY() > eventY &&
                 eventX < hero_object.getX() + 60 &&
                 eventX > hero_object.getX() - 60){
-            hero_object.move(Direction.NORTH);
+            hero_object.move(Direction.NORTH, 30);
         }
+    }
+
+    //Make the Hero bounce if he's hiting something.
+    private void heroBounce(){
+        if(hero_object.getX() + hero_object.getWidth() + 50 < this.getWidth() &&
+                hero_object.getX() > 50 &&
+                hero_object.getY()+hero_object.getHeight()+50 < this.getHeight() &&
+                hero_object.getY() > 50) {
+
+                hero_object.move(Direction.values()[RandomGenerator.getRandomInt(3)], 50);
+        }
+
     }
 
 
@@ -289,6 +303,7 @@ public class GameView_Level1 extends SurfaceView {
 
                 //Decrease Hero's health when impact.
                 hero_object.decreaseHealth(5);
+                audioController.makeSound(Sound.HIT_PUNCH);
 
                 //Play sound hit by Super Villain
                 audioController.makeSound(Sound.HERO_HIT);
@@ -359,6 +374,7 @@ public class GameView_Level1 extends SurfaceView {
             if (collision_control.checkCollision(tmp.getBounds(), hero_object.getBounds())) {
                 //Increase Hero's health.
                 hero_object.decreaseHealth(1);
+                heroBounce();
             }
         }
 

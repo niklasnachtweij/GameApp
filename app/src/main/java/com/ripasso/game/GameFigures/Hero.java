@@ -18,7 +18,6 @@ public class Hero extends GameObject {
     int[] DIRECTION_TO_ANIMATION_MAP = { 3, 1, 0, 2 };
     private static final int BMP_ROWS = 4;
     private static final int BMP_COLUMNS = 3;
-    private static final int MAX_SPEED = 30;
     private GameView_Level1 gameViewLevel1;
     private Bitmap bmp;
     private int xSpeed; //Speed in X direction.
@@ -83,20 +82,20 @@ public class Hero extends GameObject {
     }
 
     //Move hero in different direction.
-    public void move(Direction direction){
+    public void move(Direction direction, int speed){
 
         switch(direction){
             case NORTH:
-                y= y -(float) MAX_SPEED;
+                y= y -(float) speed;
                 break;
             case SOUTH:
-                y= y + (float) MAX_SPEED;
+                y= y + (float) speed;
                 break;
             case WEST:
-                x= x - (float) MAX_SPEED;
+                x= x - (float) speed;
                 break;
             case EAST:
-                x= x + (float) MAX_SPEED;
+                x= x + (float) speed;
                 break;
             default:
                 break;
