@@ -152,7 +152,7 @@ public class GameView_Level1 extends SurfaceView {
         createSuperVillains(2);
 
         //Fill the list with an amount obstacles
-        createObstacle(5);
+        createObstacle(10);
     }
 
     //Create Villain objects
