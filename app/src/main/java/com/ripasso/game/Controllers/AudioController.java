@@ -10,7 +10,8 @@ import com.ripasso.game.R;
 import java.util.Random;
 
 /*
-* Class responsible for play, paus and stop different game sound.
+* Class responsible for play, pause and stop different game sound. This class is using a sounds with free licence
+* from FreeSFX (http://www.freesfx.co.uk).
 * Mathias Berneland & Niklas Nachtweij
 * */
 

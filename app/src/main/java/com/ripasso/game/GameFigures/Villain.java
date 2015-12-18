@@ -7,7 +7,8 @@ import android.graphics.Rect;
 
 import com.ripasso.game.GameViews.GameView_Level1;
 
-/*GameObject class for drawing Villains to a canvas.
+/*GameObject class for drawing Villains to a canvas. It also uses free animations from Famitsu
+* (http://www.famitsu.com/freegame/tool/chibi/index2.html).
 * Mathias Berneland & Niklas Nachtweij
 * */
 

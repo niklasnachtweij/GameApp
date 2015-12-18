@@ -9,6 +9,7 @@ import com.ripasso.game.GameViews.GameView_Level1;
 import java.util.Random;
 
 /*Super villain class also called "Boss". Not 'The Boss', it's Bruce Springsteen but just a boss in the game.
+* It also uses free animations from Famitsu (http://www.famitsu.com/freegame/tool/chibi/index2.html).
 * Mathias Berneland & Niklas Nachtweij
 * */
 

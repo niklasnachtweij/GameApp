@@ -8,7 +8,8 @@ import android.graphics.Rect;
 import com.ripasso.game.Enums.Direction;
 import com.ripasso.game.GameViews.GameView_Level1;
 
-/*Hero object class responsible for drawing a hero to GameView canvas.
+/*Hero object class responsible for drawing a hero to GameView canvas. It also uses free animations from Famitsu
+* (http://www.famitsu.com/freegame/tool/chibi/index2.html)
 * Mathias Berneland & Niklas Nachtweij
 * */
 

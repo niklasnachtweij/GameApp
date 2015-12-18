@@ -7,7 +7,9 @@ import android.view.Window;
 
 import com.ripasso.game.GameViews.GameView_Level1;
 
-/*Activity responsible for handling the Game activity.
+/*Activity responsible for handling the Game activity. This class is using a sounds with free licence
+* from FreeSFX (http://www.freesfx.co.uk). It also uses free animations from Famitsu
+* (http://www.famitsu.com/freegame/tool/chibi/index2.html)
 * Mathias Berneland & Niklas Nachtweij.
 * */
 
