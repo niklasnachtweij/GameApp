@@ -22,6 +22,7 @@ public class GameMenu extends GameObject {
     private GameView_Level1 gameViewLevel1;
     private HighScore score; //Current highscore.
 
+    //Constructor
     public GameMenu(GameView_Level1 gameViewLevel1, int x, int y, int width, int height){
         this.x = x;
         this.y = y;
@@ -50,12 +51,13 @@ public class GameMenu extends GameObject {
         canvas.drawText("Score: " + score.getScore(), 50, 700, paintText);
     }
 
-
+    //Draw the Heros health at the menu.
     private void drawHerosHealth(Canvas canvas){
         Paint paintText = new Paint();
         Hero tmp_hero = gameViewLevel1.getHeroObj();
         paintText.setColor(Color.WHITE);
 
+        //If the health is below 20, make the text red.
         if(tmp_hero.getHealth() < 20)
             paintText.setColor(Color.RED);
 

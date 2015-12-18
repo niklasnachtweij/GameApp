@@ -103,8 +103,11 @@ public class GameView_Level1 extends SurfaceView {
                 //Get rid of top panel.
                 setSystemUiVisibility(SYSTEM_UI_FLAG_IMMERSIVE | SYSTEM_UI_FLAG_FULLSCREEN);
 
+                //Start the gameloop
                 gameLoopThread.setRunning(true);
                 gameLoopThread.start();
+
+                //Start background music
                 audioController.startBackgroundMusic();
             }
 
@@ -114,6 +117,7 @@ public class GameView_Level1 extends SurfaceView {
                 Log.d("GameView_Level1.java: ", "SurfaceChanged");
             }
         });
+        //Initialize fields
         Initialize();
 
     }
@@ -134,8 +138,10 @@ public class GameView_Level1 extends SurfaceView {
 
         collision_control = new CollisionControl();
 
+        //Get height and width for the canvas.
         int width = this.getResources().getDisplayMetrics().widthPixels;
         int height = this.getResources().getDisplayMetrics().heightPixels;
+
         gameMenu = new GameMenu(this, 0, height-50, width, 50);
     }
 
@@ -167,7 +173,7 @@ public class GameView_Level1 extends SurfaceView {
     }
 
     //Creates an arraylist with obstacle objects, taken an number of have many
-    //objects you want. Check collision so that objects doesnt get on top of eachother
+    //objects you want. Check collision so that objects doesnt get on top of eachother.
     private void createObstacle(int numberObs) {
         this.obstacles = ObstacleFactory.createObstacle(this, numberObs);
     }
@@ -187,7 +193,7 @@ public class GameView_Level1 extends SurfaceView {
             obstacle.onDraw(canvas);
         }
 
-
+        //Draw LifeMushroom objects.
         for(LifeMushroom tmp : life_mushrooms){
             tmp.onDraw(canvas);
         }
@@ -210,6 +216,7 @@ public class GameView_Level1 extends SurfaceView {
             tmp.onDraw(canvas);
     }
 
+    //Check collision between hero and villains.
     private void checkCollision_Hero_Villain(){
 
         //Check for collisions
@@ -252,8 +259,8 @@ public class GameView_Level1 extends SurfaceView {
         }
     }
 
+    //Make the Hero walk in different directions.
     private void moveHero(){
-        //Make the Hero walk in different directions.
         if (isPressed && hero_object.getX() < eventX &&
                 eventY < hero_object.getY() + 60 &&
                 eventY > hero_object.getY() - 60 &&
@@ -289,7 +296,6 @@ public class GameView_Level1 extends SurfaceView {
 
                 hero_object.move(Direction.values()[RandomGenerator.getRandomInt(3)], 50);
         }
-
     }
 
 
@@ -317,14 +323,17 @@ public class GameView_Level1 extends SurfaceView {
         }
     }
 
+    //Method for Game Over.
     public void callGameOver(){
         Intent intent = new Intent(getContext(), GameOverActivity.class);
         intent.putExtra("score", Integer.toString(score.getScore()));
+        //Stop looping thread.
         gameLoopThread.setRunning(false);
+        //Start a new activity.
         getContext().startActivity(intent);
     }
 
-    //Update
+    //Update, is called from GameLoop thread.
     public void update(){
 
         //Move the Hero in different directions.
@@ -353,7 +362,7 @@ public class GameView_Level1 extends SurfaceView {
 
             if (collision_control.checkCollision(tmp.getBounds(), hero_object.getBounds())) {
                 //Increase Hero's health.
-                hero_object.increaseHealth(1);
+                hero_object.increaseHealth(20);
                 //Remove the mushroom.
                 life_mushrooms.remove(tmp);
             }
@@ -414,10 +423,12 @@ public class GameView_Level1 extends SurfaceView {
         return true;
     }
 
+    //Get for Highscore.
     public HighScore getHighScore(){
         return score;
     }
 
+    //Get for Hero object.
     public Hero getHeroObj(){
         return hero_object;
     }

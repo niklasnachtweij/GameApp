@@ -27,6 +27,7 @@ public class Hero extends GameObject {
     private int height;
 
 
+    //Constructor
     public Hero(GameView_Level1 gameViewLevel1, Bitmap bmp) {
         this.width = bmp.getWidth() / BMP_COLUMNS;
         this.height = bmp.getHeight() / BMP_ROWS;

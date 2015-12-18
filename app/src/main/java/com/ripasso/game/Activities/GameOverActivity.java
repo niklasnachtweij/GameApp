@@ -49,10 +49,6 @@ public class GameOverActivity extends Activity {
         }
     }
 
-    private void generateChuckNorrisQuote(){
-
-    }
-
     public void onPause(){
         super.onPause();
         Log.d("GameOverActivity.java: ", "onPause()");
@@ -69,7 +65,9 @@ public class GameOverActivity extends Activity {
     @Override
     public void onBackPressed() {}
 
+    //Listener for clicks on Return button.
     public void backToNewGameActivity(View v){
+        //Vibrate when Clicked
         vibrator.vibrate(200);
         Intent intent = new Intent(GameOverActivity.this, NewGameActivity.class);
         startActivity(intent);
@@ -77,6 +75,7 @@ public class GameOverActivity extends Activity {
 
     //Start new game
     public void restartNewGame(View v){
+        //Vibrate
         vibrator.vibrate(200);
         Intent intent = new Intent(GameOverActivity.this, Activity_Level1.class);
         startActivity(intent);

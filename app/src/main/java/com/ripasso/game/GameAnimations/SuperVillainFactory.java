@@ -9,8 +9,14 @@ import com.ripasso.game.R;
 
 import java.util.ArrayList;
 
+/*
+* This is a factory class for SuperVillain objects.
+* Mathias Berneland & Niklas Nachtweij
+* */
+
 public class SuperVillainFactory {
 
+    //Create and return an amount of SuperVillains.
     public static ArrayList<SuperVillain> createSuperVillains(GameView_Level1 gameview, int amount){
 
         ArrayList<SuperVillain> tmp_list = new ArrayList<SuperVillain>();

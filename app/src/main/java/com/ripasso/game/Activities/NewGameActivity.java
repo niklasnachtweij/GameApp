@@ -12,7 +12,7 @@ import android.view.Window;
 
 import com.ripasso.game.R;
 
-/*Class for new game activities.
+/*Class for new game activities, the main menu class.
 * Mathias Berneland & Niklas Nachtweij.
 * */
 
@@ -51,6 +51,7 @@ public class NewGameActivity extends Activity {
 
     //Start HowToPlay activity
     public void startHowToPlayView(View v){
+        //Vibrate
         vibrator.vibrate(200);
         Intent intent = new Intent(NewGameActivity.this, HowToPlayActivity.class);
         startActivity(intent);
@@ -58,12 +59,14 @@ public class NewGameActivity extends Activity {
 
     //Start new game activity
     public void startNewGame(View v){
+        //Vibrate
         vibrator.vibrate(200);
         Intent intent = new Intent(NewGameActivity.this, Activity_Level1.class);
         startActivity(intent);
     }
 
     public void startChuckNorrisQuotes(View v){
+        //Vibrate
         vibrator.vibrate(200);
         Intent intent = new Intent(NewGameActivity.this, ChuckNorrisActivity.class);
         startActivity(intent);

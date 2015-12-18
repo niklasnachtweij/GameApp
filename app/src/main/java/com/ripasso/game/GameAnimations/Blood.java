@@ -21,6 +21,7 @@ public class Blood extends GameObject {
     //Constructor
     public Blood(List<Blood> temps, GameView_Level1 gameViewLevel1, float x,
                  float y, Bitmap bmp) {
+        //Make the blood appear at right place at the screen.
         this.x = Math.min(Math.max(x - bmp.getWidth() / 2, 0),
                 gameViewLevel1.getWidth() - bmp.getWidth());
         this.y = Math.min(Math.max(y - bmp.getHeight() / 2, 0),

@@ -53,10 +53,12 @@ public class Obstacle extends GameObject {
         return new Rect((int) x, (int) y, (int)x+this.width, (int)y+this.height);
     }
 
+    //Width of the object.
     public int getWidth() {
         return width;
     }
 
+    //Height of the object.
     public int getHeight() {
         return height;
     }

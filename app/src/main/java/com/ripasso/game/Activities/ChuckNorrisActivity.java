@@ -14,6 +14,10 @@ import android.widget.TextView;
 import com.ripasso.game.Controllers.ChuckNorrisQuoteGenerator;
 import com.ripasso.game.R;
 
+/*This activity is responsible for the Chuck Norris activity.
+* Mathias Berneland & Niklas Nachtweij.
+* */
+
 public class ChuckNorrisActivity extends Activity {
 
     private TextView quote_text;
@@ -31,6 +35,7 @@ public class ChuckNorrisActivity extends Activity {
                 this.findViewById(android.R.id.content).getRootView().SYSTEM_UI_FLAG_IMMERSIVE |
                         this.findViewById(android.R.id.content).getRootView().SYSTEM_UI_FLAG_FULLSCREEN);
 
+        //Initiate fields.
         this.vibrator = (Vibrator) getBaseContext().getSystemService(Context.VIBRATOR_SERVICE);
         this.quote_text = (TextView) findViewById(R.id.quote_text);
         this.quote_btn = (Button) findViewById(R.id.generate_quote_btn);
@@ -50,7 +55,9 @@ public class ChuckNorrisActivity extends Activity {
         Log.d("ChuckNorris.java: ", "onResume()");
     }
 
+    //When generating a quote, vibrate and change text at the TextView.
     public void generateQuote(View v){
+        //Vibrate
         vibrator.vibrate(200);
         quote_text.setText(ChuckNorrisQuoteGenerator.generateQuote(this));
         quote_btn.setText("Hell yeah, you can't stop!");

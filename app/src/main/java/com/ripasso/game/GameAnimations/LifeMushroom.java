@@ -10,9 +10,12 @@ import com.ripasso.game.GameViews.GameView_Level1;
 
 import java.util.Random;
 
+/*
+* This class is a life giving mushroom extending from GameObject for drawing mushrooms at the canvas.
+* Mathias Berneland & Niklas Nachtweij
+* */
+
 public class LifeMushroom extends GameObject {
-
-
 
     private GameView_Level1 gameViewLevel1;
     private Bitmap bmp;
@@ -52,10 +55,12 @@ public class LifeMushroom extends GameObject {
         return new Rect((int) x, (int) y, (int)x+this.width, (int)y+this.height);
     }
 
+    //Width of object.
     public int getWidth() {
         return width;
     }
 
+    //Height of object.
     public int getHeight() {
         return height;
     }

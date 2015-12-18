@@ -8,7 +8,7 @@ import com.ripasso.game.R;
 
 import java.util.ArrayList;
 
-/*Class responsible for creating Obstacles.
+/*This is a factory class for creating obstacles.
 * Mathias Berneland & Niklas Nachtweij.
 * */
 

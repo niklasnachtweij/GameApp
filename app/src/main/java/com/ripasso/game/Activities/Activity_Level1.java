@@ -41,6 +41,7 @@ public class Activity_Level1 extends Activity {
     protected void onResume() {
         super.onResume();
 
+        Log.d("Activity_Level1.java: ", "onResume()");
         //Create a new GameView when resuming to the game.
         setContentView(new GameView_Level1(this));
     }

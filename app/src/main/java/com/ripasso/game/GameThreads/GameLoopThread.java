@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 
 import com.ripasso.game.GameViews.GameView_Level1;
 
-/*The main loop Thread class responsible for updating the GameView
+/*The main loop Thread class responsible for updating the GameView.
 * Mathias Berneland & Niklas Nachtweij
 * */
 
